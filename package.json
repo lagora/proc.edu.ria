@@ -1,0 +1,30 @@
+{
+  "name": "proc.edu.ria",
+  "version": "1.0.0",
+  "description": "a procedural city",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-lagora:lagora/proc.edu.ria.git"
+  },
+  "author": "franck @lagora",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-es2015-webpack": "^6.4.0",
+    "babel-runtime": "^6.6.1",
+    "css-loader": "^0.23.1",
+    "glob": "^7.0.3",
+    "gulp": "^3.9.1",
+    "gulp-watch": "^4.3.5",
+    "style-loader": "^0.13.1",
+    "three": "^0.75.0",
+    "webpack": "^1.12.14"
+  }
+}
