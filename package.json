@@ -12,7 +12,10 @@
   },
   "author": "franck @lagora",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "sha512": "0.0.1",
+    "three-orbit-controls": "^72.0.0"
+  },
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",

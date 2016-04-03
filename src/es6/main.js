@@ -1,62 +1,88 @@
+// import THREE from '../../node_modules/three/three.js'
 import { THREE, scene, camera, renderer } from './init.js'
-// import rules from './rules.js'
+var OrbitControls = require('three-orbit-controls')(THREE)
+import cfg from './config.js'
+import ProceduriaBuilder from './ProceduriaBuilder.js'
 
-var seed = `31d6cfe0d16ae931`
-var functionsByRules = [{}]
-for (var i = 0x0; i < 0xf; i++) {
-  functionsByRules[0][i] = (i) => 0xa < i
-}
-console.log('functionsByRules', functionsByRules)
-
-var rules = (data) => {
-  if (1 < data.length) {
-    let r = []
-    for (var i = 0; i < data.length; i++) {
-      r.push(rules(data.substring(i, i+1)))
-    }
-    return r
-  } else {
-    // console.log('data', data);
-    return data;
+var builder = new ProceduriaBuilder(cfg.seed, {
+  progress: function (percent) {
+    console.log('progress', percent)
+    document.getElementById('loading-info').textContent = `${percent} %`
   }
+})
+// var geometry = new THREE.BoxGeometry( 1, 1, 1 )
+// var material = new THREE.MeshLambertMaterial( { color: 0xffffff } )
+// var cube = new THREE.Mesh( geometry, material )
+// scene.add( cube )
+
+var HemisphereLight = new THREE.HemisphereLight( 0x777777, 0xcccccc, 0.5 )
+scene.add( HemisphereLight )
+
+if (cfg.debug) {
+  var HemisphereLightHelper = new THREE.HemisphereLightHelper(HemisphereLight, 4)
+  scene.add( HemisphereLightHelper)
 }
-var done = rules(seed)
-console.log('done', done)
 
-var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-var material = new THREE.MeshLambertMaterial( { color: 0xffffff } )
-var cube = new THREE.Mesh( geometry, material )
-scene.add( cube )
+var DirectionalLight = new THREE.DirectionalLight( 0xffffbb, 0.5 )
+DirectionalLight.position.set( 0, 1, 0.75 )
+scene.add( DirectionalLight )
 
-var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 )
-scene.add( light )
+if (cfg.debug) {
+  var DirectionalLightHelper = new THREE.DirectionalLightHelper( DirectionalLight, cfg.size + 1 )
+  scene.add( DirectionalLightHelper )
+}
 
-var lightHelper = new THREE.HemisphereLightHelper(light, 4)
+var spotLight = new THREE.SpotLight( 0xffffff )
+spotLight.position.set( 10, 100, 10 )
+if (cfg.debug) {
+  var spotLightHelper = new THREE.SpotLightHelper( spotLight )
+  scene.add( spotLightHelper )
+}
 
-var size = 5
-var step = 1
-var gridHelper = new THREE.GridHelper( size, step )
-scene.add( gridHelper )
+spotLight.castShadow = true
+let shadowMapSize = 4096
+spotLight.shadowMapWidth = shadowMapSize
+spotLight.shadowMapHeight = shadowMapSize
 
-camera.position.x = 5
-camera.position.y = 5
-camera.position.z = 5
-camera.lookAt(new THREE.Vector3())
-// camera.rotation.x = -0.55;
-// camera.position.y = 5;
-// camera.position.z = 5;
+spotLight.shadowCameraNear = cfg.near
+spotLight.shadowCameraFar = cfg.far
+spotLight.shadowCameraFov = cfg.fov / 2
+
+scene.add( spotLight );
+
+
+window.camereReset = () => {
+  let sizeToUse = 'size'
+  var distance = cfg[sizeToUse] * 1.5
+  camera.position.x = distance
+  camera.position.y = distance
+  camera.position.z = distance
+  camera.lookAt( { x: cfg[sizeToUse], y: cfg[sizeToUse], z: cfg[sizeToUse] })
+}
+window.camereReset()
+
+window.controls = new OrbitControls(camera, renderer.domElement)
+window.controls.autoRotate = cfg.autoRotate
 
 document.body.appendChild( renderer.domElement )
+document.getElementById('reset').addEventListener('click', () => {
+  builder.reset()
+})
 var angle = 0
+builder.make()
+// document.querySelector('.editor').classList.remove('off')
+document.getElementById('loading-info').classList.add('off')
 function render() {
-  // cube.rotation.x += 0.01;
-  // cube.rotation.y += 0.01;
-  // var rad = angle * (Math.PI / 180);
-  // camera.position.x = cube.position.x + Math.sin(rad) * cfg.zoom;
-  // camera.position.y = cube.position.z + Math.cos(rad) * cfg.zoom;
-  camera.lookAt(new THREE.Vector3())
+  if (window.controls.autoRotate) controls.update()
+  // builder.update()
+  // camera.lookAt(new THREE.Vector3())
 
-  lightHelper.update()
+  if (cfg.debug) {
+    HemisphereLightHelper.update()
+    DirectionalLightHelper.update()
+  }
+
+  camera.lookAt(builder.getPositionAsVector3())
 	requestAnimationFrame( render )
 	renderer.render( scene, camera )
   angle += 0.25

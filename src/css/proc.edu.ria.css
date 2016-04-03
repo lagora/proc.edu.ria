@@ -1,5 +1,25 @@
 body {
   margin: 0;
+  /*background-color: #000;
+  transition: background-color 1s linear;*/
+}
+#loading-info {
+  text-align: center;
+  margin: 25%;
+}
+.off {
+  display: none;
+}
+.on {
+  display: block;
+}
+canvas {
+  /*box-shadow: 4px 4px 4px #333;*/
+  float: left;
+}
+.editor {
+  float: left;
+  border: 1px solid #ccc;
 }
 li {
   list-style: none;

@@ -3,7 +3,11 @@ module.exports = {
   entry: [
     // './src/css/proc.edu.ria.css',
     './node_modules/three/three.js',
+    './node_modules/three/examples/js/controls/OrbitControls.js',
+    './node_modules/sha512/lib/sha512.js',
     './src/es6/config.js',
+    './src/es6/init.js',
+    './src/es6/ProceduriaBuilder.js',
     './src/es6/main.js'
   ],
   output: {
