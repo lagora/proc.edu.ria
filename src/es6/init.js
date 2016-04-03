@@ -7,14 +7,16 @@ var renderer = new THREE.WebGLRenderer()
 renderer.shadowMapEnabled = true
 scene.up = new THREE.Vector3(0, 0, 1)
 
-var size = cfg.size + 1
-var step = 1
-var gridHelper = new THREE.GridHelper( size , step )
-if (cfg.debug)  console.info(
-  'init',
-  'gridHelper:', 'size:', size
-)
-scene.add( gridHelper )
+if (cfg.debug) {
+  var size = cfg.size + 1
+  var step = 1
+  var gridHelper = new THREE.GridHelper( size , step )
+  if (cfg.debug)  console.info(
+    'init',
+    'gridHelper:', 'size:', size
+  )
+  scene.add( gridHelper )
+}
 
 renderer.setSize( cfg.w * cfg.zoom, cfg.h * cfg.zoom )
 

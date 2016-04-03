@@ -5751,7 +5751,7 @@
 	var config = {
 	  debug: !!(queryParams && queryParams.debug) || false,
 	  wireframe: !!(queryParams && queryParams.wireframe) || false,
-	  autoRotate: !!(queryParams && queryParams.autoRotate) || true,
+	  autoRotate: !!(queryParams && queryParams.autoRotate) || false,
 	  w: queryParams && queryParams.w || 720,
 	  h: queryParams && queryParams.h || 480,
 	  fov: queryParams && queryParams.fov || 75,
@@ -5813,11 +5813,13 @@
 	renderer.shadowMapEnabled = true;
 	scene.up = new _three2.default.Vector3(0, 0, 1);
 
-	var size = _config2.default.size + 1;
-	var step = 1;
-	var gridHelper = new _three2.default.GridHelper(size, step);
-	if (_config2.default.debug) console.info('init', 'gridHelper:', 'size:', size);
-	scene.add(gridHelper);
+	if (_config2.default.debug) {
+	  var size = _config2.default.size + 1;
+	  var step = 1;
+	  var gridHelper = new _three2.default.GridHelper(size, step);
+	  if (_config2.default.debug) console.info('init', 'gridHelper:', 'size:', size);
+	  scene.add(gridHelper);
+	}
 
 	renderer.setSize(_config2.default.w * _config2.default.zoom, _config2.default.h * _config2.default.zoom);
 
@@ -6132,7 +6134,7 @@
 	// document.querySelector('.editor').classList.remove('off')
 	document.getElementById('loading-info').classList.add('off');
 	function render() {
-	  if (window.controls.autoRotate) controls.update();
+	  // if (cfg.autoRotate && window.controls.autoRotate) controls.update()
 	  // builder.update()
 	  // camera.lookAt(new THREE.Vector3())
 

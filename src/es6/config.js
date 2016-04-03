@@ -12,7 +12,7 @@ if (rawQueryData.length) {
 const config = {
   debug: !!(queryParams && queryParams.debug) || false,
   wireframe: !!(queryParams && queryParams.wireframe) || false,
-  autoRotate: !!(queryParams && queryParams.autoRotate) || true,
+  autoRotate: !!(queryParams && queryParams.autoRotate) || false,
   w: queryParams && queryParams.w || 720,
   h: queryParams && queryParams.h || 480,
   fov: queryParams && queryParams.fov || 75,

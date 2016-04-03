@@ -73,7 +73,7 @@ builder.make()
 // document.querySelector('.editor').classList.remove('off')
 document.getElementById('loading-info').classList.add('off')
 function render() {
-  if (window.controls.autoRotate) controls.update()
+  // if (cfg.autoRotate && window.controls.autoRotate) controls.update()
   // builder.update()
   // camera.lookAt(new THREE.Vector3())
 
