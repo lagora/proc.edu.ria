@@ -6134,7 +6134,7 @@
 	// document.querySelector('.editor').classList.remove('off')
 	document.getElementById('loading-info').classList.add('off');
 	function render() {
-	  // if (cfg.autoRotate && window.controls.autoRotate) controls.update()
+	  if (_config2.default.autoRotate && window.controls.autoRotate) controls.update();
 	  // builder.update()
 	  // camera.lookAt(new THREE.Vector3())
 
