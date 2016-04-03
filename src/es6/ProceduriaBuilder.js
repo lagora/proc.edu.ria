@@ -18,7 +18,7 @@ class ProceduriaBuilder {
     let isHalf = 0.5 === size.x || 0.5 === size.y || 0.5 === size.z
     let isFull = 1 === size.x && 1 === size.y && 1 === size.z
     let c = isFull ? 0xffffff: isQuarter ? 0x777777:0x999999
-    let subSegment = isFull ? 1:10
+    let subSegment = isFull ? 1:2
     let geometry = new THREE.BoxGeometry(
       size.x, size.y, size.z,
       subSegment, subSegment, subSegment
@@ -35,6 +35,7 @@ class ProceduriaBuilder {
     // let material = new THREE.MeshDepthMaterial( { wireframe: cfg.wireframe } )
     // let material = new THREE.LineBasicMaterial( { fog: true })
     let cube = new THREE.Mesh( geometry, material )
+    // if (cfg.debug)  console.info(cube.geometry, cube.faces)
     cube.castShadow = true
     cube.receiveShadow = true
 

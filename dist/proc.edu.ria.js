@@ -5757,18 +5757,19 @@
 	  fov: queryParams && queryParams.fov || 75,
 	  near: queryParams && queryParams.near || 0.1,
 	  far: queryParams && queryParams.far || 1000,
-	  zoom: queryParams && queryParams.zoom || 1,
+	  zoom: queryParams && queryParams.zoom || 2,
 	  levelMax: queryParams && queryParams.levelMax || 0,
-	  size: parseInt(queryParams && queryParams.size || 4)
+	  size: parseInt(queryParams && queryParams.size || 4),
+	  originalSeed: queryParams && queryParams.seed || 'proc.edu.ria'
 	};
 	var maxSeedLength = 512 / 4;
 	var maxSize = 32;
 	config.size = maxSize < config.size ? maxSize : config.size;
 	config.cubicSize = Math.pow(config.size, 3);
 	var mkSha = function mkSha(string) {
-	  return (0, _sha2.default)(string || Math.random().toString()).toString('hex');
+	  return (0, _sha2.default)(string).toString('hex');
 	};
-	config.rawSeed = mkSha();
+	config.rawSeed = mkSha(config.originalSeed);
 	while (config.rawSeed.length < config.cubicSize) {
 	  var rest = config.cubicSize - config.rawSeed.length;
 	  if (config.debug) console.info('filling up to ' + rest + ' hex chars with seed generated from rawSeed');
@@ -5863,7 +5864,7 @@
 	      var isHalf = 0.5 === size.x || 0.5 === size.y || 0.5 === size.z;
 	      var isFull = 1 === size.x && 1 === size.y && 1 === size.z;
 	      var c = isFull ? 0xffffff : isQuarter ? 0x777777 : 0x999999;
-	      var subSegment = isFull ? 1 : 10;
+	      var subSegment = isFull ? 1 : 2;
 	      var geometry = new _init.THREE.BoxGeometry(size.x, size.y, size.z, subSegment, subSegment, subSegment);
 	      // let material = new THREE.MeshLambertMaterial( { color: c } )
 	      // let material = new THREE.MeshNormalMaterial( { wireframe: cfg.wireframe } )
@@ -5877,6 +5878,7 @@
 	      // let material = new THREE.MeshDepthMaterial( { wireframe: cfg.wireframe } )
 	      // let material = new THREE.LineBasicMaterial( { fog: true })
 	      var cube = new _init.THREE.Mesh(geometry, material);
+	      // if (cfg.debug)  console.info(cube.geometry, cube.faces)
 	      cube.castShadow = true;
 	      cube.receiveShadow = true;
 

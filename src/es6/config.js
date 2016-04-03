@@ -18,16 +18,17 @@ const config = {
   fov: queryParams && queryParams.fov || 75,
   near: queryParams && queryParams.near || 0.1,
   far: queryParams && queryParams.far || 1000,
-  zoom: queryParams && queryParams.zoom || 1,
+  zoom: queryParams && queryParams.zoom || 2,
   levelMax: queryParams && queryParams.levelMax || 0,
   size: parseInt(queryParams && queryParams.size || 4),
+  originalSeed: queryParams && queryParams.seed || 'proc.edu.ria'
 }
 let maxSeedLength = 512/4
 let maxSize = 32
 config.size = maxSize < config.size ? maxSize:config.size
 config.cubicSize = Math.pow(config.size, 3)
-var mkSha = (string) => sha512(string || Math.random().toString()).toString('hex')
-config.rawSeed = mkSha()
+var mkSha = (string) => sha512(string).toString('hex')
+config.rawSeed = mkSha(config.originalSeed)
 while (config.rawSeed.length < config.cubicSize) {
   let rest = config.cubicSize - config.rawSeed.length
   if (config.debug) console.info(`filling up to ${rest} hex chars with seed generated from rawSeed`)
