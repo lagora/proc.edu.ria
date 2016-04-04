@@ -2,7 +2,7 @@ var path = require('path');
 module.exports = {
   entry: [
     // './src/css/proc.edu.ria.css',
-    './node_modules/three/three.js',
+    './node_modules/three/src/Three.js',
     './node_modules/three/examples/js/controls/OrbitControls.js',
     './node_modules/sha512/lib/sha512.js',
     './src/es6/config.js',
