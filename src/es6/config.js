@@ -37,10 +37,12 @@ while (config.rawSeed.length < config.cubicSize) {
 
 let sizeToUse = 'cubicSize'
 config.seed = config.rawSeed.substr(0, config.cubicSize).substr(0, config[sizeToUse])
-if (config.debug) console.info('config:', config)
-console.info('size', config.size)
-console.info('cubicSize', config.cubicSize)
-console.info('rawSeed', config.rawSeed.length, config.rawSeed)
-console.info('seed', config.seed.length, config.seed)
+if (config.debug) {
+  console.info('config:', config)
+  console.info('size', config.size)
+  console.info('cubicSize', config.cubicSize)
+  console.info('rawSeed', config.rawSeed.length, config.rawSeed)
+  console.info('seed', config.seed.length, config.seed)
+}
 
 export default config
