@@ -41,12 +41,12 @@ if (cfg.debug) {
 
 spotLight.castShadow = true
 let shadowMapSize = 4096
-spotLight.shadowMapWidth = shadowMapSize
-spotLight.shadowMapHeight = shadowMapSize
+spotLight.shadow.mapSize.width = shadowMapSize
+spotLight.shadow.mapSize.height = shadowMapSize
 
-spotLight.shadowCameraNear = cfg.near
-spotLight.shadowCameraFar = cfg.far
-spotLight.shadowCameraFov = cfg.fov / 2
+spotLight.shadow.camera.near = cfg.near
+spotLight.shadow.camera.far = cfg.far
+spotLight.shadow.camera.fov = cfg.fov / 2
 
 scene.add( spotLight );
 
@@ -69,9 +69,9 @@ document.getElementById('reset').addEventListener('click', () => {
   builder.reset()
 })
 var angle = 0
-builder.make()
 // document.querySelector('.editor').classList.remove('off')
 document.getElementById('loading-info').classList.add('off')
+
 function render() {
   if (cfg.autoRotate && window.controls.autoRotate) controls.update()
   // builder.update()
@@ -83,9 +83,10 @@ function render() {
   }
 
   camera.lookAt(builder.getPositionAsVector3())
-	requestAnimationFrame( render )
-	renderer.render( scene, camera )
+  requestAnimationFrame( render )
+  renderer.render( scene, camera )
   angle += 0.25
 }
-
 render()
+
+builder.make()

@@ -4,7 +4,7 @@ import cfg from './config.js'
 var scene = new THREE.Scene()
 var camera = new THREE.PerspectiveCamera( cfg.fov, cfg.w / cfg.h, cfg.near, cfg.far )
 var renderer = new THREE.WebGLRenderer()
-renderer.shadowMapEnabled = true
+renderer.shadowMap.enabled = true
 scene.up = new THREE.Vector3(0, 0, 1)
 
 if (cfg.debug) {

@@ -9,7 +9,9 @@ if (rawQueryData.length) {
   rawQueryData.map((chunk) => queryParams[chunk[0]] = chunk[1]);
 }
 
+let dev = !!(queryParams && queryParams.dev) || false;
 const config = {
+  dev: dev,
   debug: !!(queryParams && queryParams.debug) || false,
   wireframe: !!(queryParams && queryParams.wireframe) || false,
   autoRotate: !!(queryParams && queryParams.autoRotate) || false,
@@ -21,7 +23,7 @@ const config = {
   zoom: queryParams && queryParams.zoom || 2,
   levelMax: queryParams && queryParams.levelMax || 0,
   size: parseInt(queryParams && queryParams.size || 4),
-  originalSeed: queryParams && queryParams.seed || 'proc.edu.ria'
+  originalSeed: queryParams && queryParams.seed || dev ? Math.random().toString():'proc.edu.ria'
 }
 let maxSeedLength = 512/4
 let maxSize = 32
