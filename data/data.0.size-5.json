@@ -1,0 +1,2127 @@
+[
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 0,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 1,
+    "subSeed": "4",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 2,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 3,
+    "subSeed": "9",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 4,
+    "subSeed": "4",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 5,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 6,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 7,
+    "subSeed": "1",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 8,
+    "subSeed": "f",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 9,
+    "subSeed": "f",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 10,
+    "subSeed": "5",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 11,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 12,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 13,
+    "subSeed": "4",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 14,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 15,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 16,
+    "subSeed": "d",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 17,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 18,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 19,
+    "subSeed": "d",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 20,
+    "subSeed": "5",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 21,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 22,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 23,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 24,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 25,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 26,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 27,
+    "subSeed": "9",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 28,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 29,
+    "subSeed": "5",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 30,
+    "subSeed": "4",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 31,
+    "subSeed": "9",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 32,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 33,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 34,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 35,
+    "subSeed": "f",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 36,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 37,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 38,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 39,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 40,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 41,
+    "subSeed": "5",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 42,
+    "subSeed": "1",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 43,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 44,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 45,
+    "subSeed": "f",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 46,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 47,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 48,
+    "subSeed": "1",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 49,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 50,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 51,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 52,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 53,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 54,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 55,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 56,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 57,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 58,
+    "subSeed": "d",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 59,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 60,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 61,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 62,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 63,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 64,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 65,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 66,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 67,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 68,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 69,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 70,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 71,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 72,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 73,
+    "subSeed": "5",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 74,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 75,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 76,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 77,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 78,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 79,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 80,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 81,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 82,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 83,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 84,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 85,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 86,
+    "subSeed": "3",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 87,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 88,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 89,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 90,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 91,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 92,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 93,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 94,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 95,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 96,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 97,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 98,
+    "subSeed": "9",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 99,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 100,
+    "subSeed": "9",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 101,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 102,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 103,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 104,
+    "subSeed": "b",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 105,
+    "subSeed": "f",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 106,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 107,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 108,
+    "subSeed": "c",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 0.5,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 109,
+    "subSeed": "7",
+    "position": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 110,
+    "subSeed": "4",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 111,
+    "subSeed": "5",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 112,
+    "subSeed": "d",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 113,
+    "subSeed": "d",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 114,
+    "subSeed": "d",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 115,
+    "subSeed": "6",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 116,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 117,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 118,
+    "subSeed": "f",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 119,
+    "subSeed": "a",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 1,
+      "z": 1
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 120,
+    "subSeed": "8",
+    "position": {
+      "x": 0,
+      "y": 0.5,
+      "z": 0.5
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 121,
+    "subSeed": "0",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 122,
+    "subSeed": "2",
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0
+    },
+    "size": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 123,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  },
+  {
+    "type": "raw",
+    "level": 0,
+    "levelSize": 5,
+    "index": 124,
+    "subSeed": "e",
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.5
+    },
+    "size": {
+      "x": 1,
+      "y": 1,
+      "z": 0.5
+    }
+  }
+]

@@ -9,10 +9,11 @@ if (rawQueryData.length) {
   rawQueryData.map((chunk) => queryParams[chunk[0]] = chunk[1]);
 }
 
-let dev = !!(queryParams && queryParams.dev) || false;
+let dev = !!(queryParams && queryParams.dev) || false
+let debug = !!(queryParams && queryParams.debug) || false
 const config = {
   dev: dev,
-  debug: !!(queryParams && queryParams.debug) || false,
+  debug: debug,
   wireframe: !!(queryParams && queryParams.wireframe) || false,
   autoRotate: !!(queryParams && queryParams.autoRotate) || false,
   w: queryParams && queryParams.w || 720,
@@ -46,6 +47,8 @@ if (config.debug) {
   console.info('rawSeed', config.rawSeed.length, config.rawSeed)
   console.info('seed', config.seed.length, config.seed)
 }
+
+config.ws = new WebSocket("ws://localhost:8081")
 
 
 export default config

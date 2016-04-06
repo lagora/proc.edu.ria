@@ -1791,6 +1791,7 @@
 	}());
 
 
+<<<<<<< c15c3f83ec444638daf5060e93f28289a2afa32d
 	/**
 	 * Abstract buffered block algorithm template.
 	 *
@@ -1811,6 +1812,14 @@
 	      this._data = new WordArray();
 	      this._nDataBytes = 0;
 	    },
+=======
+	var builder = new _ProceduriaBuilder2.default(_config2.default.seed, {
+	  progress: function progress(percent) {
+	    console.log('progress', percent);
+	    document.getElementById('loading-info').textContent = percent + ' %';
+	  }
+	});
+>>>>>>> wip: client/server
 
 	    /**
 	     * Adds new data to this block algorithm's buffer.
@@ -1926,9 +1935,13 @@
 	    // Apply config defaults
 	    this.cfg = this.cfg.extend(cfg);
 
+<<<<<<< c15c3f83ec444638daf5060e93f28289a2afa32d
 	    // Set initial values
 	    this.reset();
 	  },
+=======
+	// builder.make()
+>>>>>>> wip: client/server
 
 	  reset: function () {
 	    // Reset data buffer

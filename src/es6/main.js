@@ -2,18 +2,14 @@
 import { THREE, scene, camera, renderer } from './init.js'
 var OrbitControls = require('three-orbit-controls')(THREE)
 import cfg from './config.js'
-import ProceduriaBuilder from './ProceduriaBuilder.js'
-
-var builder = new ProceduriaBuilder(cfg.seed, {
-  progress: function (percent) {
-    console.log('progress', percent)
-    document.getElementById('loading-info').textContent = `${percent} %`
-  }
-})
-// var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-// var material = new THREE.MeshLambertMaterial( { color: 0xffffff } )
-// var cube = new THREE.Mesh( geometry, material )
-// scene.add( cube )
+// import ProceduriaBuilder from './ProceduriaBuilder.js'
+//
+// var builder = new ProceduriaBuilder(cfg.seed, {
+//   progress: function (percent) {
+//     console.log('progress', percent)
+//     document.getElementById('loading-info').textContent = `${percent} %`
+//   }
+// })
 
 var HemisphereLight = new THREE.HemisphereLight( 0x777777, 0xcccccc, 0.5 )
 scene.add( HemisphereLight )
@@ -89,4 +85,4 @@ function render() {
 }
 render()
 
-builder.make()
+// builder.make()
