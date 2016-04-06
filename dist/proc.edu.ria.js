@@ -7363,10 +7363,6 @@
 	    document.getElementById('loading-info').textContent = percent + ' %';
 	  }
 	});
-	// var geometry = new THREE.BoxGeometry( 1, 1, 1 )
-	// var material = new THREE.MeshLambertMaterial( { color: 0xffffff } )
-	// var cube = new THREE.Mesh( geometry, material )
-	// scene.add( cube )
 
 	var HemisphereLight = new _init.THREE.HemisphereLight(0x777777, 0xcccccc, 0.5);
 	_init.scene.add(HemisphereLight);
@@ -7441,7 +7437,7 @@
 	}
 	render();
 
-	builder.make();
+	// builder.make()
 
 /***/ },
 /* 17 */

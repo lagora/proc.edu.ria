@@ -14,8 +14,14 @@
   "author": "franck @lagora",
   "license": "MIT",
   "dependencies": {
+    "async-waterfall": "^0.1.5",
+    "fs-extra": "^0.26.7",
+    "html-loader": "^0.4.3",
+    "json-loader": "^0.5.4",
+    "rethinkdbdash": "^2.2.18",
     "sha512": "0.0.1",
-    "three-orbit-controls": "^72.0.0"
+    "three-orbit-controls": "^72.0.0",
+    "websocket.io": "^0.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.4",
