@@ -65,6 +65,10 @@
 
 	var _sha2 = _interopRequireDefault(_sha);
 
+	var _rule0Es = __webpack_require__(68);
+
+	var _rule0Es2 = _interopRequireDefault(_rule0Es);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	console.info('Proc.Edu.Ria');
@@ -78,8 +82,8 @@
 	var seedSource = 'proc.edu.ria';
 	var rawSeed = mkSeed(seedSource);
 
-	while (rawSeed.length < cubicSize.length) {
-	  var remaining = cubicSize.length - rawSeed.length;
+	while (rawSeed.length < cubicSize) {
+	  var remaining = cubicSize - rawSeed.length;
 	  console.info('Filling up seed: ' + remaining + '/' + cubicSize);
 	  rawSeed += mkSeed(rawSeed).substr(0, remaining);
 	}
@@ -108,14 +112,14 @@
 	var rulesIndex = _fsExtra2.default.readJsonSync(rulesIndexFilename);
 	//console.info('rules:', rulesIndex)
 
-	var rules = [];
+	var rulesSettings = [];
 	var data = [];
 
 	var scan = function scan(max, step, callback) {
 	  var i = 0;
-	  for (var x = 0; x < max.length; x += step) {
-	    for (var y = 0; y < max.length; y += step) {
-	      for (var z = 0; z < max.length; z += step) {
+	  for (var x = 0; x < max; x += step) {
+	    for (var y = 0; y < max; y += step) {
+	      for (var z = 0; z < max; z += step) {
 	        console.log('scan', i, x, y, z);
 	        callback(i, x, y, z);
 	        i++;
@@ -136,36 +140,34 @@
 	    process.exit(1);
 	  } else {
 	    var _rule = _fsExtra2.default.readJsonSync(ruleFilename);
-	    while (rules.length < _rule.index) {
-	      rules.push({});
+	    while (rulesSettings.length < _rule.index) {
+	      rulesSettings.push({});
 	    }
 	    _rule.cfg = cfg;
 	    _rule.method = methods[_rule.method];
-	    rules.push(_rule);
+	    rulesSettings.push(_rule);
 	  }
 	});
 
 	//console.info('rules:', rules)
 
-	rules[0].method(cfg.unit, cfg.unit, function (i, x, y, z) {});
-
-	/*
-	let index = 0
-	waterfall([
-	  (next) => {
-	    let rule = rules[index]
-	    let callback = (i, x, y, z) => {
-	console.log('callback', i, x, y, z)
-	      console.info(i, x, y, z)
+	var index = 0;
+	(0, _asyncWaterfall2.default)([function (next) {
+	  var data_0 = [];
+	  (0, _rule0Es2.default)(data_0, rulesSettings[index], next);
+	  data.concat(data_0);
+	  var dumpFilename = './data/data.0.size-' + cfg.size + '.json';
+	  _fsExtra2.default.writeJSON('' + dumpFilename, data_0, function (err) {
+	    if (err) {
+	      console.error('ERROR: while trying to write dump ' + dumpFilename, err);
+	    } else {
+	      console.info('OK: dump ' + dumpFilename);
 	    }
-	    rule.method(rule.cfg.unit, rule.cfg.unit, callback)
-	    index++
-	    next(null, data)
-	  }
-	], (err, results) => {
-	  console.log('err', err, 'results', results)
-	})
-	*/
+	  });
+	}], function (err, results) {
+	  data = results;
+	  console.log('err', err, 'data', data);
+	});
 
 /***/ },
 /* 2 */
@@ -6675,6 +6677,46 @@
 
 	module.exports = HMAC
 
+
+/***/ },
+/* 68 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var scan = function scan(max, step, callback) {
+	  var i = 0;
+	  for (var x = 0; x < max; x += step) {
+	    for (var y = 0; y < max; y += step) {
+	      for (var z = 0; z < max; z += step) {
+	        // console.log('scan', i, x, y, z)
+	        callback(i, x, y, z);
+	        i++;
+	      }
+	    }
+	  }
+	};
+
+	var rule_0 = function rule_0(data, rule, next) {
+	  scan(rule.cfg.size, 1, function (index, x, z) {
+	    var type = 'raw';
+	    var level = 0;
+	    var levelSize = rule.cfg.size;
+	    var subSeed = rule.cfg.seed[index];
+	    var _rule$data$subSeed = rule.data[subSeed];
+	    var position = _rule$data$subSeed.position;
+	    var size = _rule$data$subSeed.size;
+
+	    data.push({ type: type, level: level, levelSize: levelSize, index: index, subSeed: subSeed, position: position, size: size });
+	  });
+	  next(null, data);
+	};
+
+	exports.default = rule_0;
 
 /***/ }
 /******/ ]);

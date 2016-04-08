@@ -5,6 +5,10 @@
   "main": "index.html",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --watch",
+    "gen": "node dist/generator.js",
+    "watch-gen": "webpack --config webpack.config.generator.js --watch",
+    "arch": "node dist/archiver.js",
+    "watch-arch": "webpack --config webpack.config.archiver.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,6 +18,12 @@
   "author": "franck @lagora",
   "license": "MIT",
   "dependencies": {
+    "async-waterfall": "^0.1.5",
+    "babel": "^6.5.2",
+    "babel-core": "^6.7.6",
+    "babel-loader": "^6.2.4",
+    "fs-extra": "^0.26.7",
+    "rethinkdb": "^2.3.0",
     "sha512": "0.0.1",
     "three-orbit-controls": "^72.0.0"
   },

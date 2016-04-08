@@ -2,6 +2,7 @@ console.info('Proc.Edu.Ria')
 import fs from 'fs-extra'
 import waterfall from 'async-waterfall'
 import sha512 from 'sha512'
+import rule_0 from './rules/rule.0.es6.js'
 
 var size = 5
 var cubicSize = Math.pow(size, 3)
@@ -9,8 +10,8 @@ var mkSeed = (str) => sha512(str).toString('hex')
 var seedSource = 'proc.edu.ria'
 var rawSeed = mkSeed(seedSource)
 
-while (rawSeed.length < cubicSize.length) {
-  let remaining = cubicSize.length - rawSeed.length
+while (rawSeed.length < cubicSize) {
+  let remaining = cubicSize - rawSeed.length
   console.info(`Filling up seed: ${remaining}/${cubicSize}`)
   rawSeed += mkSeed(rawSeed).substr(0, remaining)
 }
@@ -39,14 +40,14 @@ if (!rulesIndexFound) {
 var rulesIndex = fs.readJsonSync(rulesIndexFilename)
 //console.info('rules:', rulesIndex)
 
-var rules = []
+var rulesSettings = []
 var data = []
 
 var scan = (max, step, callback) => {
   let i = 0
-  for (var x = 0; x < max.length; x += step) {
-    for (let y = 0; y < max.length; y += step) {
-      for (let z = 0; z < max.length; z += step) {
+  for (var x = 0; x < max; x += step) {
+    for (let y = 0; y < max; y += step) {
+      for (let z = 0; z < max; z += step) {
         console.log('scan', i, x, y, z)
         callback(i, x, y, z)
         i++
@@ -67,35 +68,34 @@ rulesIndex.files.forEach((rule) => {
     process.exit(1)
   } else {
     let rule = fs.readJsonSync(ruleFilename)
-    while (rules.length < rule.index) {
-      rules.push({})
+    while (rulesSettings.length < rule.index) {
+      rulesSettings.push({})
     }
     rule.cfg = cfg
     rule.method = methods[rule.method]
-    rules.push(rule)
+    rulesSettings.push(rule)
   }
 })
 
 //console.info('rules:', rules)
 
-rules[0].method(cfg.unit, cfg.unit, (i, x,y, z) => {
 
-})
-
-/*
 let index = 0
 waterfall([
   (next) => {
-    let rule = rules[index]
-    let callback = (i, x, y, z) => {
-console.log('callback', i, x, y, z)
-      console.info(i, x, y, z)
-    }
-    rule.method(rule.cfg.unit, rule.cfg.unit, callback)
-    index++
-    next(null, data)
+    let data_0 = []
+    rule_0(data_0, rulesSettings[index], next)
+    data.concat(data_0)
+    let dumpFilename = `./data/data.0.size-${cfg.size}.json`
+    fs.writeJSON(`${dumpFilename}`, data_0, (err) => {
+      if (err) {
+        console.error(`ERROR: while trying to write dump ${dumpFilename}`, err)
+      } else {
+        console.info(`OK: dump ${dumpFilename}`)
+      }
+    })
   }
 ], (err, results) => {
-  console.log('err', err, 'results', results)
+  data = results
+  console.log('err', err, 'data', data)
 })
-*/

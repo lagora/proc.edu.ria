@@ -1,0 +1,128 @@
+2016-04-09T00:32:52.465111778 0.173865s notice: Recursively removing directory /home/fox/dev/proc.edu.ria/rethinkdb_data/tmp
+2016-04-09T00:32:52.498932632 0.207675s notice: Initializing directory /home/fox/dev/proc.edu.ria/rethinkdb_data
+2016-04-09T00:32:52.499111355 0.207852s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/fox/dev/proc.edu.ria/rethinkdb_data' did not already exist or is empty.)
+2016-04-09T00:32:52.499161138 0.207902s notice: Running rethinkdb 2.3.0~0wily (GCC 5.2.1)...
+2016-04-09T00:32:52.508536922 0.217282s notice: Running on Linux 4.2.0-27-generic i686
+2016-04-09T00:32:52.508644320 0.217385s notice: Loading data from directory /home/fox/dev/proc.edu.ria/rethinkdb_data
+2016-04-09T00:32:52.838972727 0.547715s info: Automatically using cache size of 553 MB
+2016-04-09T00:32:52.840539972 0.549282s notice: Listening for intracluster connections on port 29015
+2016-04-09T00:32:52.847280491 0.556023s notice: Listening for client driver connections on port 28015
+2016-04-09T00:32:52.847635768 0.556377s notice: Listening for administrative HTTP connections on port 8080
+2016-04-09T00:32:52.847639556 0.556380s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-04-09T00:32:52.847645182 0.556386s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-04-09T00:32:52.847647996 0.556389s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-04-09T00:32:52.847653116 0.556394s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-04-09T00:32:52.847657457 0.556398s notice: Server ready, "fox_Aspire_S3_s4j" a4ca044d-2bf2-42da-94df-ff0e9aadf8b5
+2016-04-09T00:57:07.280354509 1454.989097s info: Table afa3df99-f66c-4364-9049-e3868d5dd7fa: Starting a new Raft election for term 1.
+2016-04-09T00:57:07.280941500 1454.989684s info: Table afa3df99-f66c-4364-9049-e3868d5dd7fa: Added replica on this server.
+2016-04-09T00:57:07.331516903 1455.040258s info: Table afa3df99-f66c-4364-9049-e3868d5dd7fa: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T00:58:40.647204715 1548.355946s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/afa3df99-f66c-4364-9049-e3868d5dd7fa
+2016-04-09T00:58:40.647220358 1548.355961s info: Table afa3df99-f66c-4364-9049-e3868d5dd7fa: Deleted the table.
+2016-04-09T00:58:41.347136131 1549.055878s info: Table e1971547-149e-4a71-8142-bfd5f0446528: Starting a new Raft election for term 1.
+2016-04-09T00:58:41.347460220 1549.056201s info: Table e1971547-149e-4a71-8142-bfd5f0446528: Added replica on this server.
+2016-04-09T00:58:41.413128453 1549.121871s info: Table e1971547-149e-4a71-8142-bfd5f0446528: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:01:12.489005519 1700.197747s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/e1971547-149e-4a71-8142-bfd5f0446528
+2016-04-09T01:01:12.489020127 1700.197761s info: Table e1971547-149e-4a71-8142-bfd5f0446528: Deleted the table.
+2016-04-09T01:01:13.298588208 1701.007330s info: Table ac923208-3323-469d-a411-ec8e99c5b80a: Starting a new Raft election for term 1.
+2016-04-09T01:01:13.298847332 1701.007589s info: Table ac923208-3323-469d-a411-ec8e99c5b80a: Added replica on this server.
+2016-04-09T01:01:13.363659000 1701.072401s info: Table ac923208-3323-469d-a411-ec8e99c5b80a: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:05:26.243646063 1953.952387s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/ac923208-3323-469d-a411-ec8e99c5b80a
+2016-04-09T01:05:26.243656340 1953.952397s info: Table ac923208-3323-469d-a411-ec8e99c5b80a: Deleted the table.
+2016-04-09T01:05:27.032861434 1954.741604s info: Table f532abf3-34ba-4cec-ab1e-245bdf620088: Starting a new Raft election for term 1.
+2016-04-09T01:05:27.033281775 1954.742023s info: Table f532abf3-34ba-4cec-ab1e-245bdf620088: Added replica on this server.
+2016-04-09T01:05:27.084990846 1954.793733s info: Table f532abf3-34ba-4cec-ab1e-245bdf620088: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:06:08.755446985 1996.464189s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/f532abf3-34ba-4cec-ab1e-245bdf620088
+2016-04-09T01:06:08.755463549 1996.464204s info: Table f532abf3-34ba-4cec-ab1e-245bdf620088: Deleted the table.
+2016-04-09T01:06:09.458293240 1997.167035s info: Table c1f66c3a-25d1-40f2-b667-29ef2d171eac: Starting a new Raft election for term 1.
+2016-04-09T01:06:09.458548484 1997.167291s info: Table c1f66c3a-25d1-40f2-b667-29ef2d171eac: Added replica on this server.
+2016-04-09T01:06:09.520076310 1997.228818s info: Table c1f66c3a-25d1-40f2-b667-29ef2d171eac: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:07:01.232994258 2048.941736s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/c1f66c3a-25d1-40f2-b667-29ef2d171eac
+2016-04-09T01:07:01.233005196 2048.941746s info: Table c1f66c3a-25d1-40f2-b667-29ef2d171eac: Deleted the table.
+2016-04-09T01:07:01.893544002 2049.602286s info: Table a54b673a-1afb-4878-badf-bdd43745958d: Starting a new Raft election for term 1.
+2016-04-09T01:07:01.893878080 2049.602619s info: Table a54b673a-1afb-4878-badf-bdd43745958d: Added replica on this server.
+2016-04-09T01:07:01.966555997 2049.675298s info: Table a54b673a-1afb-4878-badf-bdd43745958d: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:08:06.355662885 2114.064404s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/a54b673a-1afb-4878-badf-bdd43745958d
+2016-04-09T01:08:06.355673735 2114.064414s info: Table a54b673a-1afb-4878-badf-bdd43745958d: Deleted the table.
+2016-04-09T01:08:07.200468715 2114.909210s info: Table 487d1ee5-9c61-45e6-bdb9-f92f5eede720: Starting a new Raft election for term 1.
+2016-04-09T01:08:07.200599870 2114.909341s info: Table 487d1ee5-9c61-45e6-bdb9-f92f5eede720: Added replica on this server.
+2016-04-09T01:08:07.258221790 2114.966963s info: Table 487d1ee5-9c61-45e6-bdb9-f92f5eede720: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:08:46.487204837 2154.195946s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/487d1ee5-9c61-45e6-bdb9-f92f5eede720
+2016-04-09T01:08:46.487215956 2154.195957s info: Table 487d1ee5-9c61-45e6-bdb9-f92f5eede720: Deleted the table.
+2016-04-09T01:08:47.536115233 2155.244857s info: Table 40ef9b04-f2cc-4f4e-899a-4a2c5b95f585: Starting a new Raft election for term 1.
+2016-04-09T01:08:47.536582833 2155.245325s info: Table 40ef9b04-f2cc-4f4e-899a-4a2c5b95f585: Added replica on this server.
+2016-04-09T01:08:47.593289184 2155.302031s info: Table 40ef9b04-f2cc-4f4e-899a-4a2c5b95f585: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:08:49.089012535 2156.797754s info: Table 06ebfe62-aa98-48ca-8e4e-456cd3ea1650: Starting a new Raft election for term 1.
+2016-04-09T01:08:49.089283394 2156.798025s info: Table 06ebfe62-aa98-48ca-8e4e-456cd3ea1650: Added replica on this server.
+2016-04-09T01:08:49.159822613 2156.868565s info: Table 06ebfe62-aa98-48ca-8e4e-456cd3ea1650: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:09:07.222272085 2174.931013s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/06ebfe62-aa98-48ca-8e4e-456cd3ea1650
+2016-04-09T01:09:07.222285024 2174.931026s info: Table 06ebfe62-aa98-48ca-8e4e-456cd3ea1650: Deleted the table.
+2016-04-09T01:09:07.688706204 2175.397448s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/40ef9b04-f2cc-4f4e-899a-4a2c5b95f585
+2016-04-09T01:09:07.688732995 2175.397474s info: Table 40ef9b04-f2cc-4f4e-899a-4a2c5b95f585: Deleted the table.
+2016-04-09T01:09:08.345970280 2176.054713s info: Table 54d79693-73b8-469c-b4fb-78bfa9ee650c: Starting a new Raft election for term 1.
+2016-04-09T01:09:08.346441391 2176.055183s info: Table 54d79693-73b8-469c-b4fb-78bfa9ee650c: Added replica on this server.
+2016-04-09T01:09:08.416139331 2176.124881s info: Table 54d79693-73b8-469c-b4fb-78bfa9ee650c: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:09:09.885761780 2177.594503s info: Table da971d70-c550-4ddb-9570-ec9e35665a6a: Starting a new Raft election for term 1.
+2016-04-09T01:09:09.885922651 2177.594664s info: Table da971d70-c550-4ddb-9570-ec9e35665a6a: Added replica on this server.
+2016-04-09T01:09:09.938501422 2177.647243s info: Table da971d70-c550-4ddb-9570-ec9e35665a6a: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:09:19.589949674 2187.298692s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/54d79693-73b8-469c-b4fb-78bfa9ee650c
+2016-04-09T01:09:19.589962566 2187.298703s info: Table 54d79693-73b8-469c-b4fb-78bfa9ee650c: Deleted the table.
+2016-04-09T01:09:19.664772077 2187.373514s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/da971d70-c550-4ddb-9570-ec9e35665a6a
+2016-04-09T01:09:19.664787893 2187.373529s info: Table da971d70-c550-4ddb-9570-ec9e35665a6a: Deleted the table.
+2016-04-09T01:09:23.994641735 2191.703384s info: Table 47573d87-0301-4cbd-a23f-4040bb1c9e34: Starting a new Raft election for term 1.
+2016-04-09T01:09:23.995012972 2191.703755s info: Table 47573d87-0301-4cbd-a23f-4040bb1c9e34: Added replica on this server.
+2016-04-09T01:09:24.061504507 2191.770246s info: Table 47573d87-0301-4cbd-a23f-4040bb1c9e34: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:09:25.467938288 2193.176680s info: Table 8dc2cd53-8190-44fa-b965-fee8745eba35: Starting a new Raft election for term 1.
+2016-04-09T01:09:25.468358515 2193.177100s info: Table 8dc2cd53-8190-44fa-b965-fee8745eba35: Added replica on this server.
+2016-04-09T01:09:25.528048385 2193.236791s info: Table 8dc2cd53-8190-44fa-b965-fee8745eba35: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:10:15.152809959 2242.861551s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/47573d87-0301-4cbd-a23f-4040bb1c9e34
+2016-04-09T01:10:15.152819474 2242.861560s info: Table 47573d87-0301-4cbd-a23f-4040bb1c9e34: Deleted the table.
+2016-04-09T01:10:15.513972971 2243.222715s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/8dc2cd53-8190-44fa-b965-fee8745eba35
+2016-04-09T01:10:15.513994353 2243.222735s info: Table 8dc2cd53-8190-44fa-b965-fee8745eba35: Deleted the table.
+2016-04-09T01:10:16.291587378 2244.000329s info: Table f890e37c-2749-4c94-a5bd-052d690d20db: Starting a new Raft election for term 1.
+2016-04-09T01:10:16.291855475 2244.000597s info: Table f890e37c-2749-4c94-a5bd-052d690d20db: Added replica on this server.
+2016-04-09T01:10:16.352029262 2244.060770s info: Table f890e37c-2749-4c94-a5bd-052d690d20db: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:13:09.523928812 2417.232671s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/f890e37c-2749-4c94-a5bd-052d690d20db
+2016-04-09T01:13:09.523939304 2417.232680s info: Table f890e37c-2749-4c94-a5bd-052d690d20db: Deleted the table.
+2016-04-09T01:13:10.218736601 2417.927478s info: Table 5b43b458-da52-4d0a-a512-d7b650d71fd5: Starting a new Raft election for term 1.
+2016-04-09T01:13:10.219052666 2417.927794s info: Table 5b43b458-da52-4d0a-a512-d7b650d71fd5: Added replica on this server.
+2016-04-09T01:13:10.281576871 2417.990319s info: Table 5b43b458-da52-4d0a-a512-d7b650d71fd5: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:14:02.447374767 2470.156117s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/5b43b458-da52-4d0a-a512-d7b650d71fd5
+2016-04-09T01:14:02.447393837 2470.156135s info: Table 5b43b458-da52-4d0a-a512-d7b650d71fd5: Deleted the table.
+2016-04-09T01:14:03.513500517 2471.222242s info: Table bc82c56f-acb5-4130-ade6-16de519569f7: Added replica on this server.
+2016-04-09T01:14:03.513575475 2471.222317s info: Table bc82c56f-acb5-4130-ade6-16de519569f7: Starting a new Raft election for term 1.
+2016-04-09T01:14:03.572553493 2471.281296s info: Table bc82c56f-acb5-4130-ade6-16de519569f7: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:14:32.750042707 2500.458784s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/bc82c56f-acb5-4130-ade6-16de519569f7
+2016-04-09T01:14:32.750056065 2500.458797s info: Table bc82c56f-acb5-4130-ade6-16de519569f7: Deleted the table.
+2016-04-09T01:14:33.536858697 2501.245601s info: Table ed009f63-19e7-4764-b705-1e64b8b583ff: Starting a new Raft election for term 1.
+2016-04-09T01:14:33.537241739 2501.245984s info: Table ed009f63-19e7-4764-b705-1e64b8b583ff: Added replica on this server.
+2016-04-09T01:14:33.596211181 2501.304954s info: Table ed009f63-19e7-4764-b705-1e64b8b583ff: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:14:46.430126766 2514.138868s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/ed009f63-19e7-4764-b705-1e64b8b583ff
+2016-04-09T01:14:46.430139127 2514.138880s info: Table ed009f63-19e7-4764-b705-1e64b8b583ff: Deleted the table.
+2016-04-09T01:14:47.171397542 2514.880139s info: Table f4064eb9-f591-4b4a-be57-0c951854ae89: Starting a new Raft election for term 1.
+2016-04-09T01:14:47.171630982 2514.880372s info: Table f4064eb9-f591-4b4a-be57-0c951854ae89: Added replica on this server.
+2016-04-09T01:14:47.230106970 2514.938849s info: Table f4064eb9-f591-4b4a-be57-0c951854ae89: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:17:53.300740339 2701.009481s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/f4064eb9-f591-4b4a-be57-0c951854ae89
+2016-04-09T01:17:53.300751719 2701.009492s info: Table f4064eb9-f591-4b4a-be57-0c951854ae89: Deleted the table.
+2016-04-09T01:17:53.967189921 2701.675932s info: Table 734fb533-c5b9-40b7-9765-4476c4a2eca2: Starting a new Raft election for term 1.
+2016-04-09T01:17:53.967541469 2701.676283s info: Table 734fb533-c5b9-40b7-9765-4476c4a2eca2: Added replica on this server.
+2016-04-09T01:17:54.037642214 2701.746384s info: Table 734fb533-c5b9-40b7-9765-4476c4a2eca2: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:22:37.436853556 2985.145595s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/734fb533-c5b9-40b7-9765-4476c4a2eca2
+2016-04-09T01:22:37.436868934 2985.145610s info: Table 734fb533-c5b9-40b7-9765-4476c4a2eca2: Deleted the table.
+2016-04-09T01:22:54.503166470 3002.211909s info: Table c9d23a1c-0d9a-4881-94fd-d6aba0e5bd17: Starting a new Raft election for term 1.
+2016-04-09T01:22:54.503588918 3002.212331s info: Table c9d23a1c-0d9a-4881-94fd-d6aba0e5bd17: Added replica on this server.
+2016-04-09T01:22:54.572134127 3002.280876s info: Table c9d23a1c-0d9a-4881-94fd-d6aba0e5bd17: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:23:53.013917061 3060.722659s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/c9d23a1c-0d9a-4881-94fd-d6aba0e5bd17
+2016-04-09T01:23:53.013941707 3060.722683s info: Table c9d23a1c-0d9a-4881-94fd-d6aba0e5bd17: Deleted the table.
+2016-04-09T01:23:53.678251359 3061.386993s info: Table ba01d554-653f-4e91-931d-7c37b7499079: Starting a new Raft election for term 1.
+2016-04-09T01:23:53.678518315 3061.387260s info: Table ba01d554-653f-4e91-931d-7c37b7499079: Added replica on this server.
+2016-04-09T01:23:53.729906438 3061.438648s info: Table ba01d554-653f-4e91-931d-7c37b7499079: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:25:51.014056142 3178.722797s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/ba01d554-653f-4e91-931d-7c37b7499079
+2016-04-09T01:25:51.014067359 3178.722808s info: Table ba01d554-653f-4e91-931d-7c37b7499079: Deleted the table.
+2016-04-09T01:25:52.063258249 3179.772000s info: Table 9efd5ef6-bee2-4bbf-bd30-e7ca5a50510a: Starting a new Raft election for term 1.
+2016-04-09T01:25:52.063727638 3179.772469s info: Table 9efd5ef6-bee2-4bbf-bd30-e7ca5a50510a: Added replica on this server.
+2016-04-09T01:25:52.123454866 3179.832197s info: Table 9efd5ef6-bee2-4bbf-bd30-e7ca5a50510a: This server is Raft leader for term 1. Latest log index is 0.
+2016-04-09T01:27:01.391203876 3249.099946s notice: Removing file /home/fox/dev/proc.edu.ria/rethinkdb_data/9efd5ef6-bee2-4bbf-bd30-e7ca5a50510a
+2016-04-09T01:27:01.391220231 3249.099961s info: Table 9efd5ef6-bee2-4bbf-bd30-e7ca5a50510a: Deleted the table.
+2016-04-09T01:27:02.102149146 3249.810891s info: Table 0d541166-0533-437e-8d40-ff915ce6b026: Starting a new Raft election for term 1.
+2016-04-09T01:27:02.102397652 3249.811140s info: Table 0d541166-0533-437e-8d40-ff915ce6b026: Added replica on this server.
+2016-04-09T01:27:02.159652762 3249.868394s info: Table 0d541166-0533-437e-8d40-ff915ce6b026: This server is Raft leader for term 1. Latest log index is 0.
