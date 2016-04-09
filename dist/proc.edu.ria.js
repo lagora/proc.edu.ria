@@ -1819,7 +1819,10 @@
 	    document.getElementById('loading-info').textContent = percent + ' %';
 	  }
 	});
+<<<<<<< HEAD
 >>>>>>> wip: client/server
+=======
+>>>>>>> 8305e4782320ed37b67676f63bc469991766fb85
 
 	    /**
 	     * Adds new data to this block algorithm's buffer.
@@ -1935,6 +1938,7 @@
 	    // Apply config defaults
 	    this.cfg = this.cfg.extend(cfg);
 
+<<<<<<< HEAD
 <<<<<<< c15c3f83ec444638daf5060e93f28289a2afa32d
 	    // Set initial values
 	    this.reset();
@@ -1942,6 +1946,9 @@
 =======
 	// builder.make()
 >>>>>>> wip: client/server
+=======
+	// builder.make()
+>>>>>>> 8305e4782320ed37b67676f63bc469991766fb85
 
 	  reset: function () {
 	    // Reset data buffer
