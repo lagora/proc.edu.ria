@@ -5,12 +5,25 @@
   "main": "index.html",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --watch",
+
     "gen-all": "node dist/generator.js --dump-db --dump-file --size 4",
     "gen-db": "node dist/generator.js --dump-db --size 4",
-    "gen-file": "node dist/generator.js --dump-file --size 4",
+    "gen-file": "node dist/generator.js --dump-file --size 8",
     "watch-gen": "webpack --config webpack.config.generator.js --watch",
+    "build-gen": "webpack --config webpack.config.client.js",
+
     "arch": "node dist/archiver.js",
     "watch-arch": "webpack --config webpack.config.archiver.js --watch",
+
+    "watch-server": "webpack --config webpack.config.server.js --watch",
+    "build-server": "webpack --config webpack.config.server.js",
+
+    "watch-client": "webpack --config webpack.config.client.js --watch",
+    "build-client": "webpack --config webpack.config.client.js",
+
+    "build": "npm run build-gen && npm run build-server && npm run build-client",
+
+    "front": "http-server -p 8081",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

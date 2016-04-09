@@ -18,9 +18,9 @@ var getVertices = (position, size) => {
 var scan = (max, step, callback) => {
   let i = 0
   let data = []
-  for (var x = 0; x < max; x += step) {
-    for (let y = 0; y < max; y += step) {
-      for (let z = 0; z < max; z += step) {
+  for (let y = 0; y < max; y += step) {
+    for (let z = 0; z < max; z += step) {
+      for (var x = 0; x < max; x += step) {
         // console.log('scan', i, x, y, z)
         if (callback) {
           callback(i, x, y, z)
@@ -68,8 +68,12 @@ var rule_0 = (data, rule, done) => {
         let level = 0
         let levelSize = rule.cfg.size
         let subSeed = rule.cfg.seed[index]
-        let {position, size} = rule.data[subSeed]
-        let dataBit = {type, level, levelSize, index, subSeed, position, size}
+        let position = { x: bit.x, y: bit.y, z: bit.z }
+        let size = rule.data[subSeed].size
+        axes.forEach((axis) => {
+          position[axis] += rule.data[subSeed].position[axis]
+        })
+        let dataBit = { type, level, levelSize, index, subSeed, position, size }
         return dataBit
       })
       next(null, data)
@@ -78,6 +82,12 @@ var rule_0 = (data, rule, done) => {
       if (dumpFile) {
         console.info('\t\tdumping data to file')
         let dumpFilename = `./data/data.0.size-${rule.cfg.size}.json`
+        let exists = fs.existsSync(dumpFilename)
+
+        if (exists) {
+          fs.unlinkSync(dumpFilename)
+        }
+
         fs.writeJSON(`${dumpFilename}`, data, (err) => {
           if (err) {
             console.error(`\t\tERROR: while trying to write dump ${dumpFilename}`, err)

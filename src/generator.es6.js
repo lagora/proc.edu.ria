@@ -29,6 +29,7 @@ while (rawSeed.length < cubicSize) {
 var seed = rawSeed.substr(0, cubicSize)
 
 var cfg = {
+  debug: argv.debug || true,
   dump: {
     db: -1 !== process.argv.indexOf('--dump-db'),
     file: -1 !== process.argv.indexOf('--dump-file')
@@ -57,23 +58,6 @@ var rulesIndex = fs.readJsonSync(rulesIndexFilename)
 var rulesSettings = []
 var data = []
 
-var scan = (max, step, callback) => {
-  let i = 0
-  for (var x = 0; x < max; x += step) {
-    for (let y = 0; y < max; y += step) {
-      for (let z = 0; z < max; z += step) {
-        console.log('scan', i, x, y, z)
-        callback(i, x, y, z)
-        i++
-      }
-    }
-  }
-}
-
-var methods = {
-  scan:scan
-}
-
 rulesIndex.files.forEach((rule) => {
   let ruleFilename = `./${rulesIndex.path}/${rule.filename}`
   let ruleFileFound = fs.existsSync(ruleFilename)
@@ -86,7 +70,6 @@ rulesIndex.files.forEach((rule) => {
       rulesSettings.push({})
     }
     rule.cfg = cfg
-    rule.method = methods[rule.method]
     rulesSettings.push(rule)
   }
 })
