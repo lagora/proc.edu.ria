@@ -1,6 +1,5 @@
 import generator from './generator.es6.js'
-var ws = require('websocket.io')
-  , server = ws.listen(8081)
+var server = ws.listen(8081)
 import ProceduriaBuilder from './ProceduriaBuilder.es6.js'
 
 server.on('upgrade', function (req, socket, head) {
