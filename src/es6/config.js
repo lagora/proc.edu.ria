@@ -9,7 +9,9 @@ if (rawQueryData.length) {
   rawQueryData.map((chunk) => queryParams[chunk[0]] = chunk[1]);
 }
 
+let dev = !!(queryParams && queryParams.dev) || false;
 const config = {
+  dev: dev,
   debug: !!(queryParams && queryParams.debug) || false,
   wireframe: !!(queryParams && queryParams.wireframe) || false,
   autoRotate: !!(queryParams && queryParams.autoRotate) || false,
@@ -21,7 +23,7 @@ const config = {
   zoom: queryParams && queryParams.zoom || 2,
   levelMax: queryParams && queryParams.levelMax || 0,
   size: parseInt(queryParams && queryParams.size || 4),
-  originalSeed: queryParams && queryParams.seed || 'proc.edu.ria'
+  originalSeed: queryParams && queryParams.seed || dev ? Math.random().toString():'proc.edu.ria'
 }
 let maxSeedLength = 512/4
 let maxSize = 32
@@ -37,10 +39,12 @@ while (config.rawSeed.length < config.cubicSize) {
 
 let sizeToUse = 'cubicSize'
 config.seed = config.rawSeed.substr(0, config.cubicSize).substr(0, config[sizeToUse])
-if (config.debug) console.info('config:', config)
-console.info('size', config.size)
-console.info('cubicSize', config.cubicSize)
-console.info('rawSeed', config.rawSeed.length, config.rawSeed)
-console.info('seed', config.seed.length, config.seed)
+if (config.debug) {
+  console.info('config:', config)
+  console.info('size', config.size)
+  console.info('cubicSize', config.cubicSize)
+  console.info('rawSeed', config.rawSeed.length, config.rawSeed)
+  console.info('seed', config.seed.length, config.seed)
+}
 
 export default config

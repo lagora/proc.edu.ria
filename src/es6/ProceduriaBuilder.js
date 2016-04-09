@@ -2,7 +2,6 @@ import cfg from './config.js'
 // import THREE from '../../node_modules/three/three.js'
 import { THREE, scene } from './init.js'
 
-
 class ProceduriaBuilder {
   getPositionAsVector3() {
     return new THREE.Vector3(
@@ -99,6 +98,7 @@ class ProceduriaBuilder {
       'y': offset,
       'z': offset
     }
+
     this.subSeedsForHalfSize = {
       'x': [0x9, 0xa],
       'y': [0xb, 0xc],
@@ -170,9 +170,10 @@ class ProceduriaBuilder {
 
   make() {
     if (cfg.debug)  console.info('ProceduriaBuilder.make : generating content')
-    for (var i = 0; i <= this.level.max; i++) {
+    for (let i = 0; i <= this.level.max; i++) {
       this.rules[i]()
     }
+
     this.data.forEach((data, index) => {
       this.data[index].id = this.putBlock(data, index, data.size)
     })
