@@ -15,7 +15,7 @@
     "gen-file-all": "npm run gen-file-4 && npm run gen-file-8 && npm run gen-file-16",
 
     "watch-gen": "webpack --config webpack.config.generator.js --watch",
-    "build-gen": "webpack --config webpack.config.client.js",
+    "build-gen": "webpack --config webpack.config.generator.js",
 
     "arch": "node dist/archiver.js",
     "watch-arch": "webpack --config webpack.config.archiver.js --watch",
