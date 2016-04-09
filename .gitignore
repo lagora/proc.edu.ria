@@ -1,2 +1,3 @@
 node_modules
-dist/proc.edu.ria.js
+rethinkdb_data
+dist
