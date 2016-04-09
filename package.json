@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --watch",
-    "gen": "node dist/generator.js",
+    "gen-all": "node dist/generator.js --dump-db --dump-file --size 4",
+    "gen-db": "node dist/generator.js --dump-db --size 4",
+    "gen-file": "node dist/generator.js --dump-file --size 4",
     "watch-gen": "webpack --config webpack.config.generator.js --watch",
     "arch": "node dist/archiver.js",
     "watch-arch": "webpack --config webpack.config.archiver.js --watch",
