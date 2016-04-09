@@ -30,5 +30,4 @@ if (config.debug) {
   console.info('size', config.size)
 }
 
-
 export default config

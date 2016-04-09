@@ -84,5 +84,3 @@ function render() {
   angle += 0.25
 }
 render()
-
-// builder.make()

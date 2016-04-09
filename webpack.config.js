@@ -1,7 +1,6 @@
 module.exports = {
   entry: [
     './node_modules/three/src/Three.js',
-    // './node_modules/three/examples/js/controls/OrbitControls.js',
     './node_modules/sha512/lib/sha512.js',
     './server/src/rule_0.js',
     './server/src/xyzScanner.js',
