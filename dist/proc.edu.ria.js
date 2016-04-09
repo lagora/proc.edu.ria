@@ -1509,6 +1509,139 @@
 	      X64Word(0x1f83d9ab, 0xfb41bd6b), X64Word(0x5be0cd19, 0x137e2179)
 	    ]);
 	  },
+<<<<<<< HEAD
+
+	  _doProcessBlock: function (M, offset) {
+	    // Shortcuts
+	    var H = this._hash.words;
+
+	    var H0 = H[0]; var H1 = H[1]; var H2 = H[2];
+	    var H3 = H[3]; var H4 = H[4]; var H5 = H[5];
+	    var H6 = H[6]; var H7 = H[7];
+
+	    var H0h = H0.high; var H0l = H0.low;
+	    var H1h = H1.high; var H1l = H1.low;
+	    var H2h = H2.high; var H2l = H2.low;
+	    var H3h = H3.high; var H3l = H3.low;
+	    var H4h = H4.high; var H4l = H4.low;
+	    var H5h = H5.high; var H5l = H5.low;
+	    var H6h = H6.high; var H6l = H6.low;
+	    var H7h = H7.high; var H7l = H7.low;
+
+	    // Working variables
+	    var ah = H0h; var al = H0l;
+	    var bh = H1h; var bl = H1l;
+	    var ch = H2h; var cl = H2l;
+	    var dh = H3h; var dl = H3l;
+	    var eh = H4h; var el = H4l;
+	    var fh = H5h; var fl = H5l;
+	    var gh = H6h; var gl = H6l;
+	    var hh = H7h; var hl = H7l;
+
+	    // Rounds
+	    for (var i = 0; i < 80; i++) {
+	      // Shortcut
+	      var Wi = W[i];
+
+	      // Extend message
+	      if (i < 16) {
+	        var Wih = Wi.high = M[offset + i * 2]     | 0;
+	        var Wil = Wi.low  = M[offset + i * 2 + 1] | 0;
+	      } else {
+	        // Gamma0
+	        var gamma0x  = W[i - 15];
+	        var gamma0xh = gamma0x.high;
+	        var gamma0xl = gamma0x.low;
+	        var gamma0h  = ((gamma0xh >>> 1) | (gamma0xl << 31)) ^ ((gamma0xh >>> 8) | (gamma0xl << 24)) ^ (gamma0xh >>> 7);
+	        var gamma0l  = ((gamma0xl >>> 1) | (gamma0xh << 31)) ^ ((gamma0xl >>> 8) | (gamma0xh << 24)) ^ ((gamma0xl >>> 7) | (gamma0xh << 25));
+
+	        // Gamma1
+	        var gamma1x  = W[i - 2];
+	        var gamma1xh = gamma1x.high;
+	        var gamma1xl = gamma1x.low;
+	        var gamma1h  = ((gamma1xh >>> 19) | (gamma1xl << 13)) ^ ((gamma1xh << 3) | (gamma1xl >>> 29)) ^ (gamma1xh >>> 6);
+	        var gamma1l  = ((gamma1xl >>> 19) | (gamma1xh << 13)) ^ ((gamma1xl << 3) | (gamma1xh >>> 29)) ^ ((gamma1xl >>> 6) | (gamma1xh << 26));
+
+	        // W[i] = gamma0 + W[i - 7] + gamma1 + W[i - 16]
+	        var Wi7  = W[i - 7];
+	        var Wi7h = Wi7.high;
+	        var Wi7l = Wi7.low;
+
+	        var Wi16  = W[i - 16];
+	        var Wi16h = Wi16.high;
+	        var Wi16l = Wi16.low;
+
+	        var Wil = gamma0l + Wi7l;
+	        var Wih = gamma0h + Wi7h + ((Wil >>> 0) < (gamma0l >>> 0) ? 1 : 0);
+	        var Wil = Wil + gamma1l;
+	        var Wih = Wih + gamma1h + ((Wil >>> 0) < (gamma1l >>> 0) ? 1 : 0);
+	        var Wil = Wil + Wi16l;
+	        var Wih = Wih + Wi16h + ((Wil >>> 0) < (Wi16l >>> 0) ? 1 : 0);
+
+	        Wi.high = Wih;
+	        Wi.low  = Wil;
+	      }
+
+	      var chh  = (eh & fh) ^ (~eh & gh);
+	      var chl  = (el & fl) ^ (~el & gl);
+	      var majh = (ah & bh) ^ (ah & ch) ^ (bh & ch);
+	      var majl = (al & bl) ^ (al & cl) ^ (bl & cl);
+
+	      var sigma0h = ((ah >>> 28) | (al << 4))  ^ ((ah << 30)  | (al >>> 2)) ^ ((ah << 25) | (al >>> 7));
+	      var sigma0l = ((al >>> 28) | (ah << 4))  ^ ((al << 30)  | (ah >>> 2)) ^ ((al << 25) | (ah >>> 7));
+	      var sigma1h = ((eh >>> 14) | (el << 18)) ^ ((eh >>> 18) | (el << 14)) ^ ((eh << 23) | (el >>> 9));
+	      var sigma1l = ((el >>> 14) | (eh << 18)) ^ ((el >>> 18) | (eh << 14)) ^ ((el << 23) | (eh >>> 9));
+
+	      // t1 = h + sigma1 + ch + K[i] + W[i]
+	      var Ki  = K[i];
+	      var Kih = Ki.high;
+	      var Kil = Ki.low;
+
+	      var t1l = hl + sigma1l;
+	      var t1h = hh + sigma1h + ((t1l >>> 0) < (hl >>> 0) ? 1 : 0);
+	      var t1l = t1l + chl;
+	      var t1h = t1h + chh + ((t1l >>> 0) < (chl >>> 0) ? 1 : 0);
+	      var t1l = t1l + Kil;
+	      var t1h = t1h + Kih + ((t1l >>> 0) < (Kil >>> 0) ? 1 : 0);
+	      var t1l = t1l + Wil;
+	      var t1h = t1h + Wih + ((t1l >>> 0) < (Wil >>> 0) ? 1 : 0);
+
+	      // t2 = sigma0 + maj
+	      var t2l = sigma0l + majl;
+	      var t2h = sigma0h + majh + ((t2l >>> 0) < (sigma0l >>> 0) ? 1 : 0);
+
+	      // Update working variables
+	      hh = gh; hl = gl;
+	      gh = fh; gl = fl;
+	      fh = eh; fl = el;
+	      el = (dl + t1l) | 0;
+	      eh = (dh + t1h + ((el >>> 0) < (dl >>> 0) ? 1 : 0)) | 0;
+	      dh = ch; dl = cl;
+	      ch = bh; cl = bl;
+	      bh = ah; bl = al;
+	      al = (t1l + t2l) | 0;
+	      ah = (t1h + t2h + ((al >>> 0) < (t1l >>> 0) ? 1 : 0)) | 0;
+	    }
+
+	    // Intermediate hash value
+	    H0l = H0.low  = (H0l + al);
+	    H0.high = (H0h + ah + ((H0l >>> 0) < (al >>> 0) ? 1 : 0));
+	    H1l = H1.low  = (H1l + bl);
+	    H1.high = (H1h + bh + ((H1l >>> 0) < (bl >>> 0) ? 1 : 0));
+	    H2l = H2.low  = (H2l + cl);
+	    H2.high = (H2h + ch + ((H2l >>> 0) < (cl >>> 0) ? 1 : 0));
+	    H3l = H3.low  = (H3l + dl);
+	    H3.high = (H3h + dh + ((H3l >>> 0) < (dl >>> 0) ? 1 : 0));
+	    H4l = H4.low  = (H4l + el);
+	    H4.high = (H4h + eh + ((H4l >>> 0) < (el >>> 0) ? 1 : 0));
+	    H5l = H5.low  = (H5l + fl);
+	    H5.high = (H5h + fh + ((H5l >>> 0) < (fl >>> 0) ? 1 : 0));
+	    H6l = H6.low  = (H6l + gl);
+	    H6.high = (H6h + gh + ((H6l >>> 0) < (gl >>> 0) ? 1 : 0));
+	    H7l = H7.low  = (H7l + hl);
+	    H7.high = (H7h + hh + ((H7l >>> 0) < (hl >>> 0) ? 1 : 0));
+	  },
+=======
 
 	  _doProcessBlock: function (M, offset) {
 	    // Shortcuts
@@ -1646,6 +1779,46 @@
 	    var data = this._data;
 	    var dataWords = data.words;
 
+	    var nBitsTotal = this._nDataBytes * 8;
+	    var nBitsLeft = data.sigBytes * 8;
+
+	    // Add padding
+	    dataWords[nBitsLeft >>> 5] |= 0x80 << (24 - nBitsLeft % 32);
+	    dataWords[(((nBitsLeft + 128) >>> 10) << 5) + 30] = Math.floor(nBitsTotal / 0x100000000);
+	    dataWords[(((nBitsLeft + 128) >>> 10) << 5) + 31] = nBitsTotal;
+	    data.sigBytes = dataWords.length * 4;
+
+	    // Hash final blocks
+	    this._process();
+
+	    // Convert hash to 32-bit word array before returning
+	    var hash = this._hash.toX32();
+
+	    // Return final computed hash
+	    return hash;
+	  },
+
+	  clone: function () {
+	    var clone = Hasher.clone.call(this);
+	    clone._hash = this._hash.clone();
+
+	    return clone;
+	  },
+
+	  blockSize: 1024/32
+	});
+
+
+	module.exports = Hasher._createHelper(SHA512);
+	module.exports.sha512 = SHA512
+>>>>>>> 1e1458833bdbb19f3a160adb21393446cec303a2
+
+	  _doFinalize: function () {
+	    // Shortcuts
+	    var data = this._data;
+	    var dataWords = data.words;
+
+<<<<<<< HEAD
 	    var nBitsTotal = this._nDataBytes * 8;
 	    var nBitsLeft = data.sigBytes * 8;
 
@@ -1950,6 +2123,258 @@
 	// builder.make()
 >>>>>>> 8305e4782320ed37b67676f63bc469991766fb85
 
+=======
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var WordArray = __webpack_require__(9)
+
+	var Base = (function () {
+	  function F() {}
+
+	  return {
+	    /**
+	     * Creates a new object that inherits from this object.
+	     *
+	     * @param {Object} overrides Properties to copy into the new object.
+	     *
+	     * @return {Object} The new object.
+	     *
+	     * @static
+	     *
+	     * @example
+	     *
+	     *     var MyType = CryptoJS.lib.Base.extend({
+	     *         field: 'value',
+	     *
+	     *         method: function () {
+	     *         }
+	     *     });
+	     */
+	    extend: function (overrides) {
+	      // Spawn
+	      F.prototype = this;
+	      var subtype = new F();
+
+	      // Augment
+	      if (overrides) {
+	        subtype.mixIn(overrides);
+	      }
+
+	      // Create default initializer
+	      if (!subtype.hasOwnProperty('init')) {
+	        subtype.init = function () {
+	          subtype.$super.init.apply(this, arguments);
+	        };
+	      }
+
+	      // Initializer's prototype is the subtype object
+	      subtype.init.prototype = subtype;
+
+	      // Reference supertype
+	      subtype.$super = this;
+
+	      return subtype;
+	    },
+
+	    /**
+	     * Extends this object and runs the init method.
+	     * Arguments to create() will be passed to init().
+	     *
+	     * @return {Object} The new object.
+	     *
+	     * @static
+	     *
+	     * @example
+	     *
+	     *     var instance = MyType.create();
+	     */
+	    create: function () {
+	      var instance = this.extend();
+	      instance.init.apply(instance, arguments);
+
+	      return instance;
+	    },
+
+	    /**
+	     * Initializes a newly created object.
+	     * Override this method to add some logic when your objects are created.
+	     *
+	     * @example
+	     *
+	     *     var MyType = CryptoJS.lib.Base.extend({
+	     *         init: function () {
+	     *             // ...
+	     *         }
+	     *     });
+	     */
+	      init: function () {
+	    },
+
+
+	    mixIn: function (properties) {
+	      for (var propertyName in properties) {
+	        if (properties.hasOwnProperty(propertyName)) {
+	          this[propertyName] = properties[propertyName];
+	        }
+	      }
+
+	      // IE won't copy toString using the loop above
+	      if (properties.hasOwnProperty('toString')) {
+	        this.toString = properties.toString;
+	      }
+	    },
+
+
+	    clone: function () {
+	      return this.init.prototype.extend(this);
+	    }
+	  };
+	}());
+
+
+	/**
+	 * Abstract buffered block algorithm template.
+	 *
+	 * The property blockSize must be implemented in a concrete subtype.
+	 *
+	 * @property {number} _minBufferSize The number of blocks that should be kept unprocessed in the buffer. Default: 0
+	 */
+	var BufferedBlockAlgorithm = Base.extend({
+	  /**
+	   * Resets this block algorithm's data buffer to its initial state.
+	   *
+	   * @example
+	   *
+	   *     bufferedBlockAlgorithm.reset();
+	   */
+	    reset: function () {
+	      // Initial values
+	      this._data = new WordArray();
+	      this._nDataBytes = 0;
+	    },
+
+	    /**
+	     * Adds new data to this block algorithm's buffer.
+	     *
+	     * @param {WordArray|string} data The data to append. Strings are converted to a WordArray using UTF-8.
+	     *
+	     * @example
+	     *
+	     *     bufferedBlockAlgorithm._append('data');
+	     *     bufferedBlockAlgorithm._append(wordArray);
+	     */
+	    _append: function (data) {
+	      //console.dir(data)
+
+	      if (Buffer.isBuffer(data)) {
+	        data = WordArray.fromBuffer(data)
+	      }
+
+	      // Append
+	      this._data.concat(data);
+	      this._nDataBytes += data.sigBytes;
+	    },
+
+	    /**
+	     * Processes available data blocks.
+	     *
+	     * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
+	     *
+	     * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
+	     *
+	     * @return {WordArray} The processed data.
+	     *
+	     * @example
+	     *
+	     *     var processedData = bufferedBlockAlgorithm._process();
+	     *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
+	     */
+	    _process: function (doFlush) {
+	      // Shortcuts
+	      var data = this._data;
+	      var dataWords = data.words;
+	      var dataSigBytes = data.sigBytes;
+	      var blockSize = this.blockSize;
+	      var blockSizeBytes = blockSize * 4;
+
+	      // Count blocks ready
+	      var nBlocksReady = dataSigBytes / blockSizeBytes;
+	      if (doFlush) {
+	          // Round up to include partial blocks
+	          nBlocksReady = Math.ceil(nBlocksReady);
+	      } else {
+	          // Round down to include only full blocks,
+	          // less the number of blocks that must remain in the buffer
+	          nBlocksReady = Math.max((nBlocksReady | 0) - this._minBufferSize, 0);
+	      }
+
+	      // Count words ready
+	      var nWordsReady = nBlocksReady * blockSize;
+
+	      // Count bytes ready
+	      var nBytesReady = Math.min(nWordsReady * 4, dataSigBytes);
+
+	      // Process blocks
+	      if (nWordsReady) {
+	        for (var offset = 0; offset < nWordsReady; offset += blockSize) {
+	          // Perform concrete-algorithm logic
+	          this._doProcessBlock(dataWords, offset);
+	        }
+
+	        // Remove processed words
+	        var processedWords = dataWords.splice(0, nWordsReady);
+	        data.sigBytes -= nBytesReady;
+	      }
+
+	      // Return processed words
+	      return new WordArray(processedWords, nBytesReady);
+	    },
+
+	    /**
+	     * Creates a copy of this object.
+	     * @example
+	     *
+	     *     var clone = bufferedBlockAlgorithm.clone();
+	     */
+	    clone: function () {
+	      var clone = Base.clone.call(this);
+	      clone._data = this._data.clone();
+
+	      return clone;
+	    },
+
+	      _minBufferSize: 0
+	    });
+
+	/**
+	 * Abstract hasher template.
+	 *
+	 * @property {number} blockSize The number of 32-bit words this hasher operates on. Default: 16 (512 bits)
+	 */
+	var Hasher = BufferedBlockAlgorithm.extend({
+	  /**
+	   * Configuration options.
+	   */
+	  cfg: Base.extend(),
+
+	  /**
+	   * Initializes a newly created hasher.
+	   * @example
+	   *
+	   *     var hasher = CryptoJS.algo.SHA256.create();
+	   */
+	  init: function (cfg) {
+	    // Apply config defaults
+	    this.cfg = this.cfg.extend(cfg);
+
+	    // Set initial values
+	    this.reset();
+	  },
+
+>>>>>>> 1e1458833bdbb19f3a160adb21393446cec303a2
 	  reset: function () {
 	    // Reset data buffer
 	    BufferedBlockAlgorithm.reset.call(this);
