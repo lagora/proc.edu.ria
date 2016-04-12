@@ -1,31 +1,32 @@
-import sha512 from '../../node_modules/sha512/lib/sha512.js'
+import sha512 from 'sha512'
+
 var raw = window.location.search,
 refined = raw.length ? raw.replace('?',''):false,
+splitted = refined.split('&').map((opts) => opts.split('=')),
 [...rawQueryData] = refined ? refined.split('&').map((chunk) => chunk.split('=')):false,
 queryParams = false;
 
-if (rawQueryData.length) {
-  queryParams = {};
-  rawQueryData.map((chunk) => queryParams[chunk[0]] = chunk[1]);
+var opts = {};
+splitted.forEach((opt) => {
+  opts[opt[0]] = opt[1]
+})
+
+const config = {
+  dev: opts.dev || true,
+  debug: opts.debug || true,
+  wireframe: opts.wireframe || false,
+  autoRotate: opts.autoRotate || true,
+  w: parseInt(opts.w) || 320,
+  h: parseInt(opts.h) || 240,
+  fov: parseInt(opts.fov) || 75,
+  near: parseFloat(opts.near) || 0.1,
+  far: parseInt(opts.far) || 1000,
+  zoom: parseInt(opts.zoom) || 2,
+  levelMax: parseInt(opts.levelMax) || 0,
+  size: parseInt(opts.size) || 4,
+  originalSeed: opts.seed || opts.dev ? Math.random().toString():'proc.edu.ria'
 }
 
-let dev = !!(queryParams && queryParams.dev) || false
-let debug = !!(queryParams && queryParams.debug) || false
-const config = {
-  dev: dev,
-  debug: debug,
-  wireframe: !!(queryParams && queryParams.wireframe) || false,
-  autoRotate: !!(queryParams && queryParams.autoRotate) || false,
-  w: queryParams && queryParams.w || 720,
-  h: queryParams && queryParams.h || 480,
-  fov: queryParams && queryParams.fov || 75,
-  near: queryParams && queryParams.near || 0.1,
-  far: queryParams && queryParams.far || 1000,
-  zoom: queryParams && queryParams.zoom || 2,
-  levelMax: queryParams && queryParams.levelMax || 0,
-  size: parseInt(queryParams && queryParams.size || 4),
-  // originalSeed: queryParams && queryParams.seed || dev ? Math.random().toString():'proc.edu.ria'
-}
 // let maxSeedLength = 512/4
 // let maxSize = 32
 // config.size = maxSize < config.size ? maxSize:config.size
