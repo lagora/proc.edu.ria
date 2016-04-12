@@ -1,9 +1,9 @@
-var glob = require('glob');
+var path = require('path');
 
 module.exports = {
-  entry: glob.sync('./server/src/*.js').concat('./node_modules/websocket.io/lib/websocket.io.js'),
+  entry: './server/src/server.es6.js',
   output: {
-    path: 'server/dist/',
+    path: './server/dist',
     filename: 'proc.edu.ria.server.js'
   },
   target: "node",
@@ -11,18 +11,14 @@ module.exports = {
     loaders: [
       {
         test: /\.es6\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015']
         }
-      }
-      ,{
-        test: /\.json$/,
+      },
+      {
+        test: /\.json/,
         loader: 'json-loader'
-      }
-      ,{
-        test: /\.html$/,
-        loader: 'html-loader'
       }
     ]
   }
