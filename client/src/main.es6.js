@@ -69,13 +69,14 @@ var putBlock = (data) => {
 }
 
 let data = []
-let url = `http://localhost:8081/data/data.0.size-${cfg.size}.json`
+let url = `http://localhost:1337/data/data.0.size-${cfg.size}.json`
 var req = new XMLHttpRequest()
 req.open('GET', url, true)
 req.onreadystatechange = function (aEvt) {
   if (req.readyState == 4) {
      if(req.status == 200) {
        data.push([])
+      //  console.log('req.responseText', req.responseText)
        data[0] = JSON.parse(req.responseText)
         let i = 0
         let intervalId = window.setInterval(() => {
