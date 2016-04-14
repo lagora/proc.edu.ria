@@ -69,30 +69,25 @@ var putBlock = (data) => {
 }
 
 let data = []
-let url = `http://localhost:1337/data/data.0.size-${cfg.size}.json`
-var req = new XMLHttpRequest()
-req.open('GET', url, true)
-req.onreadystatechange = function (aEvt) {
-  if (req.readyState == 4) {
-     if(req.status == 200) {
-       data.push([])
-      //  console.log('req.responseText', req.responseText)
-       data[0] = JSON.parse(req.responseText)
+
+cfg.ws.onmessage = event => {
+  if ('message' === event.type) {
+    let incomingData = JSON.parse(event.data);
+    console.log('incomingData', incomingData);
+    if ('raw' === incomingData.type) {
+      if (Array.isArray(incomingData.data)) {
+        data = incomingData.data;
         let i = 0
         let intervalId = window.setInterval(() => {
-          putBlock(data[0][i])
+          putBlock(data[i])
           i++
-          if (i === data[0].length) {
+          if (i === data.length) {
             window.clearInterval(intervalId)
           }
         }, cfg.stepSeed)
-        //  data[0].forEach((data) => {
-        //    putBlock(data)
-        //  })
-     } else {
-       console.error("Erreur pendant le chargement de la page.\n");
-     }
+      } else {
+        putBlock(incomingData.data);
+      }
+    }
   }
 }
-
-req.send(null);

@@ -1,11 +1,11 @@
 import waterfall from 'async-waterfall'
-import r from 'rethinkdbdash'
-// var r = require('rethinkdb')
+// import r from 'rethinkdbdash'
+var r = require('rethinkdb')
 
 var proceduriaDbName = 'proceduria'
 var tables = [
-  'data'
-  ,'vertices'
+  'raw'
+  // ,'vertices'
   // ,'faces'
   // ,'colors'
   // ,'shaders'
@@ -30,7 +30,7 @@ var resetDb = (callback) => {
     (next) => {
       r.dbDrop(proceduriaDbName).run(cnx, (err) => {
         console[err ? 'error':'info']('\t\t' + (err ? 'KO':'OK'), err, 'dbDrop', proceduriaDbName)
-        next(null)
+        next(err)
       })
     },
     (next) => {
@@ -60,7 +60,7 @@ var resetDb = (callback) => {
     },
   ], (err, results) => {
     console.info('\tEND: resetDb')
-    callback()
+    callback(err)
   })
 }
 

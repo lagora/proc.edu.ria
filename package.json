@@ -4,7 +4,7 @@
   "description": "a procedural city",
   "main": "index.html",
   "scripts": {
-    "start": "node server/dist/proc.edu.ria.server.js",
+    "start": "nodemon server/dist/proc.edu.ria.server.js",
     "gen-all": "node dist/generator.js --dump-db --dump-file --size 4",
     "gen-db": "node dist/generator.js --dump-db --size 4",
     "gen-file-4": "node dist/generator.js --dump-file --size 4",
@@ -49,15 +49,20 @@
     "html-loader": "^0.4.3",
     "json-loader": "^0.5.4",
     "rethinkdb": "^2.3.0",
+    "rethinkdb-websocket-client": "^0.4.7",
     "rethinkdbdash": "^2.2.18",
     "serve-static": "^1.10.2",
     "sha512": "0.0.1",
+    "simple-memoize": "^1.0.2",
     "socket.io": "^1.4.5",
     "style-loader": "^0.13.1",
     "three": "^0.75.0",
     "three-orbit-controls": "^72.0.0",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-load-plugins": "^0.1.2",
+    "websocket": "^1.0.22",
+    "websocketserver": "^1.0.0"
   },
   "devDependencies": {}
 }
