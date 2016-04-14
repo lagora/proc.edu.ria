@@ -1,9 +1,9 @@
 console.info('Proc.Edu.Ria')
-import fs from 'fs-extra'
-import waterfall from 'async-waterfall'
-import sha512 from 'sha512'
-import rule_0 from './rules/rule.0.es6.js'
-import resetDb from './reset.db.es6.js'
+import waterfall  from 'async-waterfall'
+import fs  from 'fs-extra'
+import sha512  from 'sha512'
+import resetDb  from './reset.db.es6.js'
+import rule_0  from './rules/rule.0.es6.js'
 
 var argv = {}
 process.argv.join(' ').split('--').slice(1).map((a) => a.trim()).map((a) => {
