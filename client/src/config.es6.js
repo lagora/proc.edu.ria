@@ -1,7 +1,11 @@
 import sha512 from 'sha512'
 
-var raw = window.location.search,
-refined = raw.length ? raw.replace('?',''):false,
+var raw = window.location.search;
+console.log('raw', raw);
+if (!raw) {
+  window.location = '/?w=320&h=240&debug=true&size=8';
+}
+var refined = raw.length ? raw.replace('?',''):false,
 splitted = refined.split('&').map((opts) => opts.split('=')),
 [...rawQueryData] = refined ? refined.split('&').map((chunk) => chunk.split('=')):false,
 queryParams = false;
@@ -41,6 +45,13 @@ const config = {
 
 // let sizeToUse = 'cubicSize'
 // config.seed = config.rawSeed.substr(0, config.cubicSize).substr(0, config[sizeToUse])
+config.ws = new WebSocket('ws://localhost:8015')
+
+config.ws.onopen = event => {
+  console.log('websocket connected')
+  config.ws.send(JSON.stringify({event:"cfg", cfg:config}))
+}
+
 if (config.debug) {
   console.info('config:', config)
   console.info('size', config.size)
