@@ -1,5 +1,3 @@
-var path = require('path');
-
 module.exports = {
   entry: './server/src/server.es6.js',
   output: {

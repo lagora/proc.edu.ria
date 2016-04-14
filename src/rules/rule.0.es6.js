@@ -1,6 +1,5 @@
 import waterfall from 'async-waterfall'
 import fs from 'fs-extra'
-import r from 'rethinkdb'
 
 var axes = ['x', 'y', 'z']
 
@@ -42,22 +41,6 @@ var rule_0 = (data, rule, done) => {
   console.info('\t\tuseDb', useDb, 'dumpFile', dumpFile)
   waterfall([
     (next) => {
-      if (useDb) {
-        r.connect( {host: 'localhost', port: 28015}, (err, conn) => {
-          if (err) {
-            console.error(err);
-          }
-          if (conn) {
-            console.info('\t\tOK: cnx')
-            cnx = conn
-          }
-          next(err)
-        })
-      } else {
-        next(null)
-      }
-    },
-    (next) => {
       let data = scan(rule.cfg.size, 1)
       next(null, data)
     },
@@ -74,9 +57,17 @@ var rule_0 = (data, rule, done) => {
           position[axis] += rule.data[subSeed].position[axis]
         })
         let dataBit = { type, level, levelSize, index, subSeed, position, size }
+        // if (rule.cfg.ws && rule.cfg.wsId) {
+        //   rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: dataBit}), rule.cfg.wsId);
+        // }
         return dataBit
       })
       next(null, data)
+    },
+    (data, next) => {
+      if (rule.cfg.ws && rule.cfg.wsId) {
+        rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: data}), rule.cfg.wsId);
+      }
     },
     (data, next) => {
       if (dumpFile) {
@@ -99,17 +90,6 @@ var rule_0 = (data, rule, done) => {
       } else {
         next(null, data)
       }
-    },
-    (data, next) => {
-      if (useDb) {
-        console.info('\t\tsave to db')
-        data.map((dataBit) => {
-            r.db('proceduria').table('data').insert(dataBit).run(cnx, (err) => {
-              if (err) console.err('\t\tERR:', err, 'insert', dataBit)
-            })
-        })
-      }
-      next(null, data)
     }
   ], (err, data) => {
     console[err ? 'error':'info']('\t\t'+(err ? 'KO':'OK'), err, 'LVL 0:', data ? `${data.length} entries`:'no entries')
