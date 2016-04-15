@@ -3,7 +3,7 @@ import sha512 from 'sha512'
 var raw = window.location.search;
 console.log('raw', raw);
 if (!raw) {
-  window.location = '/?w=320&h=240&debug=true&size=4';
+  window.location = '/?w=320&h=240&debug=true&size=8';
 }
 var refined = raw.length ? raw.replace('?',''):false,
 splitted = refined.split('&').map((opts) => opts.split('=')),
