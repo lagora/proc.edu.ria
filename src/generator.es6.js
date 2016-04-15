@@ -46,8 +46,6 @@ var generate = (cfg, done) => {
     unit: 1
   }
 
-  console.info('cfg:', cfg)
-
   var rulesIndexFilename = './rules.json'
   var rulesIndexFound = fs.existsSync(rulesIndexFilename)
   console.error(rulesIndexFound ? 'OK':'KO', `looking for ${rulesIndexFilename}`)
