@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import waterfall from 'async-waterfall'
 import fs from 'fs-extra'
 
@@ -34,13 +35,11 @@ var scan = (max, step, callback) => {
 }
 
 var rule_0 = (data, rule, done) => {
-  
+
   let then = () => {
     console.info('\tSTART: rule_0')
-    var useDb = true === rule.cfg.dump.db
     var dumpFile = true === rule.cfg.dump.file
     var cnx = false
-    console.info('\t\tuseDb', useDb, 'dumpFile', dumpFile)
     waterfall([
       (next) => {
         let data = scan(rule.cfg.size, 1)
@@ -58,44 +57,39 @@ var rule_0 = (data, rule, done) => {
           axes.forEach((axis) => {
             position[axis] += rule.data[subSeed].position[axis]
           })
-          let dataBit = { type, level, levelSize, index, subSeed, position, size }
+          let dbDataRawType = { type, level, levelSize, index, subSeed, position, size }
+          let dbDataBlockType = {}
+          dbDataBlockType.geometry = new THREE.BoxGeometry(
+            size.x, size.y, size.z,
+            1, 1, 1
+           )
+           dbDataBlockType.position = position;
+           dbDataBlockType.material = new THREE.MeshPhongMaterial( {
+             color: 0xdddddd,
+             specular: 0x009900,
+             shininess: 30,
+             fog: true,
+             shading: THREE.FlatShading
+           } )
           // if (rule.cfg.ws && rule.cfg.wsId) {
-          //   rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: dataBit}), rule.cfg.wsId);
+          //   rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: dbDataRawType}), rule.cfg.wsId);
           // }
-          // if (rule.cfg.db) {
-          //   rule.cfg.db.insert(dataBit);
-          // }
-          return dataBit
+          if (rule.cfg.db) {
+            rule.cfg.db.insert(dbDataRawType);
+            rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: dbDataRawType}), rule.cfg.wsId);
+
+            rule.cfg.db.insert(dbDataBlockType);
+            rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'block', data: dbDataBlockType}), rule.cfg.wsId);
+          }
+          return dbDataRawType
         })
         next(null, data)
       },
-      (data, next) => {
-        if (rule.cfg.ws && rule.cfg.wsId) {
-          rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: data}), rule.cfg.wsId);
-        }
-      },
-      (data, next) => {
-        if (dumpFile) {
-          console.info('\t\tdumping data to file')
-          let dumpFilename = `./data/data.0.size-${rule.cfg.size}.json`
-          let exists = fs.existsSync(dumpFilename)
-
-          if (exists) {
-            fs.unlinkSync(dumpFilename)
-          }
-
-          fs.writeJSON(`${dumpFilename}`, data, (err) => {
-            if (err) {
-              console.error(`\t\tERROR: while trying to write dump ${dumpFilename}`, err)
-            } else {
-              console.info(`\t\tOK: dump ${dumpFilename}`)
-              next(null, data)
-            }
-          })
-        } else {
-          next(null, data)
-        }
-      }
+      // (data, next) => {
+      //   if (rule.cfg.ws && rule.cfg.wsId) {
+      //     rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: data}), rule.cfg.wsId);
+      //   }
+      // },
     ], (err, data) => {
       console[err ? 'error':'info']('\t\t'+(err ? 'KO':'OK'), err, 'LVL 0:', data ? `${data.length} entries`:'no entries')
       console.info('\tEND: rule_0')
@@ -106,12 +100,17 @@ var rule_0 = (data, rule, done) => {
 console.error(rule.cfg);
 
   if (rule.cfg.db) {
-    rule.cfg.db.find({type: 'raw', size: data.size}, (err, items) => {
-      console.log('err', err, 'items', items);
-      if (err || !items || 0 === items.length) {
+    console.log(`looking for previous rule_0 records using type:raw, levelSize:${rule.cfg.size}`);
+    rule.cfg.db.find({type: 'raw', levelSize: rule.cfg.size}, (err, items) => {
+      if (err) {
+        then();
+      } else if (!items || 0 === items.length) {
+        console.log('no previous rule_0 data found');
         then();
       } else {
-        server.sendMessage('one', JSON.stringify({type: 'raw', data: items}), id);
+        console.info('found previous rule_0 data, sending them');
+        rule.cfg.ws.webSocketOut({type: 'raw', data: items}, rule.cfg.wsId);
+        done(null, items);
       }
     });
   } else {
