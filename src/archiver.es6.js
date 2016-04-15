@@ -1,6 +1,5 @@
 import waterfall from 'async-waterfall'
 import fs from 'fs-extra'
-import r from 'rethinkdb'
 
 var proceduriaDbName = 'proceduria'
 // var tables = [

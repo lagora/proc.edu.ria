@@ -1,6 +1,4 @@
 import waterfall from 'async-waterfall'
-// import r from 'rethinkdbdash'
-var r = require('rethinkdb')
 
 var proceduriaDbName = 'proceduria'
 var tables = [
