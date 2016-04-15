@@ -3,7 +3,6 @@ import fs  from 'fs-extra'
 import connect from 'connect'
 import serveStatic from 'serve-static'
 import http from 'http'
-// var server = http.Server(app);
 
 import bodyParser from 'connect-hopeful-body-parser'
 import generator from '../../src/generator.es6.js'
