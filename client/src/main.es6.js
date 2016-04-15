@@ -77,14 +77,20 @@ cfg.ws.onmessage = event => {
     if ('raw' === incomingData.type) {
       if (Array.isArray(incomingData.data)) {
         data = incomingData.data;
-        let i = 0
-        let intervalId = window.setInterval(() => {
-          putBlock(data[i])
-          i++
-          if (i === data.length) {
-            window.clearInterval(intervalId)
+        if (512 < data.length) {
+          let i = 0
+          let intervalId = window.setInterval(() => {
+            putBlock(data[i])
+            i++
+            if (i === data.length) {
+              window.clearInterval(intervalId)
+            }
+          }, 10)
+        } else {
+          for (var i = 0; i < data.length; i++) {
+            putBlock(data[i])
           }
-        }, cfg.stepSeed)
+        }
       } else {
         putBlock(incomingData.data);
       }
