@@ -34,6 +34,7 @@ var generate = (cfg, done) => {
     debug: cfg ? cfg.debug:argv.debug || true,
     ws: cfg && cfg.ws ? cfg.ws:false,
     wsId: cfg && cfg.wsId ? cfg.wsId:false,
+    db: cfg && cfg.db ? cfg.db:false,
     dump: {
       file: false,//cfg ? false:-1 !== process.argv.indexOf('--dump-file')
     },
