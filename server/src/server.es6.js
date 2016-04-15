@@ -8,6 +8,9 @@ import bodyParser from 'connect-hopeful-body-parser'
 import resetDb from '../../src/reset.db.es6.js'
 import generator from '../../src/generator.es6.js'
 
+var Datastore = require('nedb');
+var db = new Datastore({ filename: 'data' })
+
 app
 .use(bodyParser())
 // .use('/cfg', (req, res, next) => {
@@ -16,7 +19,7 @@ app
 //   })
 // })
 .use(
-    serveStatic("./")
+  serveStatic("./")
 ).listen(1337, () => {
   console.info('Proc.Edu.Ria')
 });
@@ -44,6 +47,7 @@ server.on("message", (rawData, id) => {
       console.log('cfg', data);
       data.ws = server;
       data.wsId = id;
+      data.db = db;
       generator(data);
     break;
   }

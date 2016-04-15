@@ -4,6 +4,7 @@ import sha512  from 'sha512'
 import rule_0  from './rules/rule.0.es6.js'
 
 var generate = (cfg, done) => {
+  console.log('##################', 'generate');
   if (!cfg) {
     var argv = {}
     process.argv.join(' ').split('--').slice(1).map((a) => a.trim()).map((a) => {
@@ -34,6 +35,7 @@ var generate = (cfg, done) => {
     debug: cfg ? cfg.debug:argv.debug || true,
     ws: cfg && cfg.ws ? cfg.ws:false,
     wsId: cfg && cfg.wsId ? cfg.wsId:false,
+    db: cfg && cfg.db ? cfg.db:false,
     dump: {
       file: false,//cfg ? false:-1 !== process.argv.indexOf('--dump-file')
     },
