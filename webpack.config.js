@@ -1,24 +1,36 @@
+var path = require('path');
+var projectRoot = process.env.PWD; // Absolute path to the project root
+var resolveRoot = path.join(projectRoot, 'node_modules'); // project root/node_modules
+
 module.exports = {
-  entry: [
-    './node_modules/three/src/Three.js',
-    './node_modules/sha512/lib/sha512.js',
-    './server/src/rule_0.js',
-    './server/src/xyzScanner.js',
-    './server/src/ProceduriaBuilder.js',
-    './server/src/server.js'
-  ],
+  entry: {
+    server: './src/server.es6.js',
+    client: './src/client.es6.js'
+  },
+  target: "node",
   output: {
-    path: 'server/dist/',
-    filename: 'proc.edu.ria.server.js'
+    path: './dist/',
+    filename: "[name].js"
+  },
+  resolve: {
+    root: path.join(__dirname),
+    fallback: path.join(__dirname, 'node_modules'),
+    modulesDirectories: ['node_modules'],
+    extensions: ['', '.json', '.js', '.jsx', '.scss', '.png', '.jpg', '.jpeg', '.gif']
   },
   module: {
     loaders: [
       {
         test: /\.es6\.js$/,
         loader: 'babel',
+        exclude: '/node_modules',
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.json/,
+        loader: 'json-loader'
       }
     ]
   }
