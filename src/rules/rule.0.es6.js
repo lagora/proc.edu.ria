@@ -1,44 +1,36 @@
-import * as THREE from 'three'
-import waterfall from 'async-waterfall'
+import * as THREE from 'three';
+import waterfall from 'async-waterfall';
 
-var axes = ['x', 'y', 'z']
+import scan from '../scan.es6.js';
 
-var getVertices = (position, size) => {
-  let start = {
-    position: position,
-    size: size
-  }
-  let end = {}
-  axes.forEach((axis) => {
-    end.position[axis] = position[axis] + size[axis]
-  })
-}
+var axes = ['x', 'y', 'z'];
+var methods = {};
 
-var scan = (max, step, callback) => {
-  let i = 0
-  let data = []
-  for (let y = 0; y < max; y += step) {
-    for (let z = 0; z < max; z += step) {
-      for (var x = 0; x < max; x += step) {
-        // console.log('scan', i, x, y, z)
-        if (callback) {
-          callback(i, x, y, z)
-        } else {
-          data.push({i, x, y, z})
-        }
-        i++
-      }
-    }
-  }
-  if (!callback)  return data
-}
+// var scan = (max, step, callback) => {
+//   let i = 0
+//   let data = []
+//   for (let y = 0; y < max; y += step) {
+//     for (let z = 0; z < max; z += step) {
+//       for (var x = 0; x < max; x += step) {
+//         // console.log('scan', i, x, y, z)
+//         if (callback) {
+//           callback(i, x, y, z)
+//         } else {
+//           data.push({i, x, y, z})
+//         }
+//         i++
+//       }
+//     }
+//   }
+//   if (!callback)  return data
+// }
 
 var rule_0 = (cfg, done) => {
 
   let then = (cfg, done) => {
-    console.info('\tSTART: rule_0')
+    console.info('\tSTART: rule_0', cfg.rule)
     waterfall([
-      (next) => {
+      (cfgnext) => {
         let data = scan(cfg.size, 1)
         next(null, cfg, data)
       },
@@ -79,8 +71,6 @@ var rule_0 = (cfg, done) => {
           });
 
           object.vertices = geometry.vertices;
-
-          console.log('cube', cube);
 
           cfg.db.insert(raw);
           cfg.ws.sendMessage('one', JSON.stringify(raw), cfg.wsId);

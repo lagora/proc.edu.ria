@@ -1,34 +1,30 @@
-import waterfall from 'async-waterfall'
-import fs  from 'fs-extra'
-import connect from 'connect'
-import serveStatic from 'serve-static'
-import http from 'http'
-// var server = http.Server(app);
+import waterfall from 'async-waterfall';
+import fs from 'fs-extra'
+import connect from 'connect';
+import serveStatic from 'serve-static';
+import http from 'http';
 
-import bodyParser from 'connect-hopeful-body-parser'
-import generator from '../../src/generator.es6.js'
-var Datastore = require('nedb');
-var WebSocketServer = require("websocketserver");
+import generator from './generator.es6.js';
+import Datastore from 'nedb';
+import WebSocketServer from 'websocketserver';
+import glob from 'glob';
 
 waterfall([
   (next) => {
-    let rulesIndexFilename = './rules.json';
-    let rulesIndexFound = fs.existsSync(rulesIndexFilename);
-    let err = rulesIndexFound ? null:new Error('rules index not found');
-    let rulesIndex = rulesIndexFound ? fs.readJsonSync(rulesIndexFilename):null;
-    next(err, rulesIndex);
-  },
-  (rulesIndex, next) => {
-    let cfg = rulesIndex;
+    let cfg = {
+      version: "0.0.0",
+      path: "rules",
+      files: glob.sync('./rules/*.json')
+    };
     next(null, cfg);
   },
   (cfg, next) => {
-    let oneRuleFileNotFound = cfg.files.some((fileData) => !fs.existsSync(`./${cfg.path}/${fileData.filename}`));
+    let oneRuleFileNotFound = cfg.files.some((filename) => !fs.existsSync(`${filename}`));
     let err = oneRuleFileNotFound ? new Error(`one rule file is missing in ${cfg.path}`):null
     next(err, cfg);
   },
   (cfg, next) => {
-    cfg.rules = cfg.files.map((fileData) => fs.readJsonSync(`./${cfg.path}/${fileData.filename}`));
+    cfg.rules = cfg.files.map((filename) => JSON.parse(fs.readFileSync(`${filename}`).toString()));
     next(null, cfg);
   },
   (cfg, next) => {
