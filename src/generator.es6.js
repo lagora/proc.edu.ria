@@ -25,7 +25,7 @@ var generate = (cfg, done) => {
   waterfall([
     (next) => {
       cfg.rule = cfg.rules[index];
-      let result = rule_0(cfg, next);
+      rule_0(cfg, next);
       index++;
     }
   ], (err, results) => {

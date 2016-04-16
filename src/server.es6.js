@@ -28,7 +28,7 @@ waterfall([
     next(null, cfg);
   },
   (cfg, next) => {
-    cfg.db = new Datastore();
+    cfg.db = new Datastore({filename: './data/proc.edu.ria.json', autoload: true});
     next(null, cfg);
   }
 ], (err, cfg) => {

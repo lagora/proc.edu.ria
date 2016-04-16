@@ -38,6 +38,10 @@ function render() {
 }
 render()
 
+let data = [];
+let geometry = new THREE.BufferGeometry();
+geometry.dynamic = true;
+
 var putBlock = (data) => {
   if (!data) {
     console.error('no data, aborting');
@@ -68,27 +72,37 @@ var putBlock = (data) => {
     cube.position[axis] = data.position[axis]
   })
 
-  scene.add( cube )
-}
+  scene.add( cube );
+};
 
-let data = []
-let geometry = new THREE.BufferGeometry();
-geometry.dynamic = true;
+var putObject = (data) => {
+  let vertices = new Float32Array( data.vertices.length * 3 ); // three components per vertex
+  geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+  let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+  let mesh = new THREE.Mesh( geometry, material );
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+};
 
 cfg.ws.onmessage = event => {
   if ('message' !== event.type) return;
   let incomingData = JSON.parse(event.data);
   if ('mesh' === incomingData.type) {
     scene.add(incomingData.mesh);
-  } else if ('object' === incomingData.type) {
-    let vertices = new Float32Array( incomingData.vertices.length * 3 ); // three components per vertex
-    geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-    let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-    let mesh = new THREE.Mesh( geometry, incomingData.material );
-    scene.add(mesh);
-  } else if ('raw' === incomingData.type) {
-    putBlock(incomingData);
   } else {
-    console.log('unrecognized incomingData:', incomingData);
+    if (!Array.isArray(incomingData.data)) {
+      incomingData = [incomingData];
+    }
+  
+    console.log('incomingData', incomingData)
+    let isRaw = 'raw' === incomingData.Type;
+    incomingData.forEach((item) => isRaw ? putBlock(item):putObject(item) );
+
+    //if ('object' === incomingData.type) {
+    //  incomingData.data.forEach((item) => putObject(item) );
+    //} else if ('raw' === incomingData.type) {
+    //  incomingData.forEach((item) => putBlock(item) );
+    //}
   }
 }
