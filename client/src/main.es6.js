@@ -80,13 +80,15 @@ cfg.ws.onmessage = event => {
   let incomingData = JSON.parse(event.data);
   if ('mesh' === incomingData.type) {
     scene.add(incomingData.mesh);
-  } else if ('vertices' === incomingData.type) {
+  } else if ('object' === incomingData.type) {
     let vertices = new Float32Array( incomingData.vertices.length * 3 ); // three components per vertex
     geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
     let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
     let mesh = new THREE.Mesh( geometry, incomingData.material );
     scene.add(mesh);
   } else if ('raw' === incomingData.type) {
-    putBlock(incomingData.data);
+    putBlock(incomingData);
+  } else {
+    console.log('unrecognized incomingData:', incomingData);
   }
 }
