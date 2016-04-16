@@ -55,11 +55,14 @@ var rule_0 = (cfg, done) => {
             position[axis] += cfg.rule.data[subSeed].position[axis]
           });
           let raw = { type, level, levelSize, index, subSeed, position, size };
+          let object = {
+            type: 'object'
+          };
           let geometry = new THREE.BoxGeometry(
             size.x, size.y, size.z,
             1, 1, 1
           );
-          let material = new THREE.MeshPhongMaterial( {
+          object.material = new THREE.MeshPhongMaterial( {
             color: 0xdddddd,
             specular: 0x009900,
             shininess: 30,
@@ -67,7 +70,7 @@ var rule_0 = (cfg, done) => {
             shading: THREE.FlatShading
           } );
 
-          let cube = new THREE.Mesh( geometry, material );
+          let cube = new THREE.Mesh( geometry, object.material );
           cube.castShadow = true;
           cube.receiveShadow = true;
 
@@ -75,16 +78,17 @@ var rule_0 = (cfg, done) => {
             cube.position[axis] = position[axis]
           });
 
-          let vertices = geometry.vertices;
+          object.vertices = geometry.vertices;
 
           cfg.db.insert(raw);
-          cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: raw}), cfg.wsId);
+          cfg.ws.sendMessage('one', JSON.stringify(raw), cfg.wsId);
 
-          cfg.db.insert({type: 'geometry', vertices: vertices, material: material});
-          cfg.ws.sendMessage('one', JSON.stringify({type: 'geometry', vertices: vertices, material: material}), cfg.wsId);
+          cfg.db.insert(object);
+          cfg.ws.sendMessage('one', JSON.stringify(object), cfg.wsId);
 
-          // cfg.db.insert({type: 'mesh', data: cube});
-          // cfg.ws.sendMessage('one', JSON.stringify({type: 'mesh', mesh: cube}), cfg.wsId);
+          // cfg.db.insert({type: 'mesh', mesh: JSON.stringify(cube)});
+          cfg.db.insert(cube);
+          cfg.ws.sendMessage('one', JSON.stringify(cube), cfg.wsId);
 
           return raw;
         })
@@ -92,7 +96,7 @@ var rule_0 = (cfg, done) => {
       },
     ], (err, data) => {
       console[err ? 'error':'info']('\t\t'+(err ? 'KO':'OK'), err, 'LVL 0:', data ? `${data.length} entries`:'no entries')
-      console.info('\tEND: rule_0', data);
+      console.info('\tEND: rule_0');
       done(null, data);
     })
   };
