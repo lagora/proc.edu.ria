@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import waterfall from 'async-waterfall'
-import fs from 'fs-extra'
 
 var axes = ['x', 'y', 'z']
 
@@ -34,88 +33,89 @@ var scan = (max, step, callback) => {
   if (!callback)  return data
 }
 
-var rule_0 = (data, rule, done) => {
+var rule_0 = (cfg, done) => {
 
-  let then = () => {
+  let then = (cfg, done) => {
     console.info('\tSTART: rule_0')
-    var dumpFile = true === rule.cfg.dump.file
-    var cnx = false
     waterfall([
       (next) => {
-        let data = scan(rule.cfg.size, 1)
-        next(null, data)
+        let data = scan(cfg.size, 1)
+        next(null, cfg, data)
       },
-      (data, next) => {
+      (cfg, data, next) => {
         data = data.map((bit) => {
-          let index = bit.i
-          let type = 'raw'
-          let level = 0
-          let levelSize = rule.cfg.size
-          let subSeed = rule.cfg.seed[index]
-          let position = { x: bit.x, y: bit.y, z: bit.z }
-          let size = rule.data[subSeed].size
+          let index = bit.i;
+          let type = 'raw';
+          let level = 0;
+          let levelSize = cfg.size;
+          let subSeed = cfg.seed[index];
+          let position = { x: bit.x, y: bit.y, z: bit.z };
+          let size = cfg.rule.data[subSeed].size;
           axes.forEach((axis) => {
-            position[axis] += rule.data[subSeed].position[axis]
-          })
-          let dbDataRawType = { type, level, levelSize, index, subSeed, position, size }
-          let dbDataBlockType = {}
-          dbDataBlockType.geometry = new THREE.BoxGeometry(
+            position[axis] += cfg.rule.data[subSeed].position[axis]
+          });
+          let raw = { type, level, levelSize, index, subSeed, position, size };
+          let object = {
+            type: 'object'
+          };
+          let geometry = new THREE.BoxGeometry(
             size.x, size.y, size.z,
             1, 1, 1
-           )
-           dbDataBlockType.position = position;
-           dbDataBlockType.material = new THREE.MeshPhongMaterial( {
-             color: 0xdddddd,
-             specular: 0x009900,
-             shininess: 30,
-             fog: true,
-             shading: THREE.FlatShading
-           } )
-          // if (rule.cfg.ws && rule.cfg.wsId) {
-          //   rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: dbDataRawType}), rule.cfg.wsId);
-          // }
-          if (rule.cfg.db) {
-            rule.cfg.db.insert(dbDataRawType);
-            rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: dbDataRawType}), rule.cfg.wsId);
+          );
+          object.material = new THREE.MeshPhongMaterial( {
+            color: 0xdddddd,
+            specular: 0x009900,
+            shininess: 30,
+            fog: true,
+            shading: THREE.FlatShading
+          } );
 
-            rule.cfg.db.insert(dbDataBlockType);
-            rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'block', data: dbDataBlockType}), rule.cfg.wsId);
-          }
-          return dbDataRawType
+          let cube = new THREE.Mesh( geometry, object.material );
+          cube.castShadow = true;
+          cube.receiveShadow = true;
+
+          axes.forEach((axis) => {
+            cube.position[axis] = position[axis]
+          });
+
+          object.vertices = geometry.vertices;
+
+          console.log('cube', cube);
+
+          cfg.db.insert(raw);
+          cfg.ws.sendMessage('one', JSON.stringify(raw), cfg.wsId);
+
+          cfg.db.insert(object);
+          cfg.ws.sendMessage('one', JSON.stringify(object), cfg.wsId);
+
+          // cfg.db.insert({type: 'mesh', mesh: JSON.stringify(cube)});
+          // cfg.db.insert({type: 'mesh', data: JSON.stringify(cube)});
+          // cfg.ws.sendMessage('one', JSON.stringify(cube), cfg.wsId);
+
+          return raw;
         })
-        next(null, data)
+        next(null, data);
       },
-      // (data, next) => {
-      //   if (rule.cfg.ws && rule.cfg.wsId) {
-      //     rule.cfg.ws.sendMessage('one', JSON.stringify({type: 'raw', data: data}), rule.cfg.wsId);
-      //   }
-      // },
     ], (err, data) => {
       console[err ? 'error':'info']('\t\t'+(err ? 'KO':'OK'), err, 'LVL 0:', data ? `${data.length} entries`:'no entries')
-      console.info('\tEND: rule_0')
-      done(null, data)
+      console.info('\tEND: rule_0');
+      done(null, data);
     })
-  }
+  };
 
-console.error(rule.cfg);
-
-  if (rule.cfg.db) {
-    console.log(`looking for previous rule_0 records using type:raw, levelSize:${rule.cfg.size}`);
-    rule.cfg.db.find({type: 'raw', levelSize: rule.cfg.size}, (err, items) => {
-      if (err) {
-        then();
-      } else if (!items || 0 === items.length) {
-        console.log('no previous rule_0 data found');
-        then();
-      } else {
-        console.info('found previous rule_0 data, sending them');
-        rule.cfg.ws.webSocketOut({type: 'raw', data: items}, rule.cfg.wsId);
-        done(null, items);
-      }
-    });
-  } else {
-    then()
-  }
+  console.log(`looking for previous rule_0 records using type:raw, levelSize:${cfg.size}`);
+  cfg.db.find({type: 'geometry', levelSize: cfg.size}, (err, items) => {
+    if (err) {
+      then(cfg, done);
+    } else if (!items || 0 === items.length) {
+      console.log('no previous rule_0 data found');
+      then(cfg, done);
+    } else {
+      console.info('found previous rule_0 data, sending them');
+      cfg.ws.webSocketOut({type: 'geometry', data: items}, cfg.wsId);
+      done(null, items);
+    }
+  });
 
 }
 

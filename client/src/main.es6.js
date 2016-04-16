@@ -44,15 +44,13 @@ var putBlock = (data) => {
     return;
   }
 
-  console.log('putBlock', data);
-  // if (cfg.debug)  console.info('putBlock', data.index, data.subSeed, data.position, data.size)
-  let geometry = data.geometry ? data.geometry:new THREE.BoxGeometry(
+  let geometry = new THREE.BoxGeometry(
     data.size.x, data.size.y, data.size.z,
     1, 1, 1
    )
   // let material = new THREE.MeshLambertMaterial( { color: c } )
   // let material = new THREE.MeshNormalMaterial( { wireframe: cfg.wireframe } )
-  let material = data.material ? data.material:new THREE.MeshPhongMaterial( {
+  let material = new THREE.MeshPhongMaterial( {
     color: 0xdddddd,
     specular: 0x009900,
     shininess: 30,
@@ -62,42 +60,35 @@ var putBlock = (data) => {
   // let material = new THREE.MeshDepthMaterial( { wireframe: cfg.wireframe } )
   // let material = new THREE.LineBasicMaterial( { fog: true })
   let cube = new THREE.Mesh( geometry, material )
-  // if (cfg.debug)  console.info(cube.geometry, cube.faces)
   cube.castShadow = true
   cube.receiveShadow = true
+  cube.name = data.name
 
   axes.forEach((axis) => {
     cube.position[axis] = data.position[axis]
   })
 
-  // if (cfg.debug)  console.info('cube.position:', cube.position)
-  return scene.add( cube )
+  scene.add( cube )
 }
 
 let data = []
+let geometry = new THREE.BufferGeometry();
+geometry.dynamic = true;
 
 cfg.ws.onmessage = event => {
   if ('message' !== event.type) return;
   let incomingData = JSON.parse(event.data);
-  if ('block' === incomingData.type) return;
-  console.log('incomingData', incomingData);
-  if (Array.isArray(incomingData.data)) {
-    data = incomingData.data;
-    if (512 < data.length) {
-      let i = 0
-      let intervalId = window.setInterval(() => {
-        putBlock(data[i])
-        i++
-        if (i === data.length) {
-          window.clearInterval(intervalId)
-        }
-      }, 10)
-    } else {
-      for (var i = 0; i < data.length; i++) {
-        putBlock(data[i])
-      }
-    }
+  if ('mesh' === incomingData.type) {
+    scene.add(incomingData.mesh);
+  } else if ('object' === incomingData.type) {
+    let vertices = new Float32Array( incomingData.vertices.length * 3 ); // three components per vertex
+    geometry.addAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+    let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+    let mesh = new THREE.Mesh( geometry, incomingData.material );
+    scene.add(mesh);
+  } else if ('raw' === incomingData.type) {
+    putBlock(incomingData);
   } else {
-    putBlock(incomingData.data);
+    console.log('unrecognized incomingData:', incomingData);
   }
 }
