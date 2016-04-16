@@ -80,6 +80,8 @@ var rule_0 = (cfg, done) => {
 
           object.vertices = geometry.vertices;
 
+          console.log('cube', cube);
+
           cfg.db.insert(raw);
           cfg.ws.sendMessage('one', JSON.stringify(raw), cfg.wsId);
 
@@ -87,8 +89,8 @@ var rule_0 = (cfg, done) => {
           cfg.ws.sendMessage('one', JSON.stringify(object), cfg.wsId);
 
           // cfg.db.insert({type: 'mesh', mesh: JSON.stringify(cube)});
-          cfg.db.insert(cube);
-          cfg.ws.sendMessage('one', JSON.stringify(cube), cfg.wsId);
+          // cfg.db.insert({type: 'mesh', data: JSON.stringify(cube)});
+          // cfg.ws.sendMessage('one', JSON.stringify(cube), cfg.wsId);
 
           return raw;
         })
