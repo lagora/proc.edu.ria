@@ -7,12 +7,13 @@ var axes = ['x', 'y', 'z'];
 var methods = {};
 
 var rule_0 = (cfg, done) => {
+
   let then = (cfg, done) => {
-    console.info('\tSTART: rule_0');
+    console.info('\tSTART: rule_0', cfg.rule)
     waterfall([
       (next) => {
-        let data = scan(cfg.size, 1);
-        next(null, cfg, data);
+        let data = scan(cfg.size, 1)
+        next(null, cfg, data)
       },
       (cfg, data, next) => {
         data = data.map((bit) => {
@@ -28,23 +29,19 @@ var rule_0 = (cfg, done) => {
           });
           let raw = { type, level, levelSize, index, subSeed, position, size };
           let object = {
-            type: 'object',
-            level: level,
-            levelSize: levelSize,
-            index: index,
-            subSeed: subSeed
+            type: 'object'
           };
           let geometry = new THREE.BoxGeometry(
             size.x, size.y, size.z,
             1, 1, 1
           );
-          // object.material = new THREE.MeshPhongMaterial( {
-          //   color: 0xdddddd,
-          //   specular: 0x009900,
-          //   shininess: 30,
-          //   fog: true,
-          //   shading: THREE.FlatShading
-          // } );
+          object.material = new THREE.MeshPhongMaterial( {
+            color: 0xdddddd,
+            specular: 0x009900,
+            shininess: 30,
+            fog: true,
+            shading: THREE.FlatShading
+          } );
 
           let cube = new THREE.Mesh( geometry, object.material );
           cube.castShadow = true;
@@ -57,9 +54,9 @@ var rule_0 = (cfg, done) => {
           object.vertices = geometry.vertices;
 
           cfg.db.insert(raw);
-          cfg.db.insert(object);
-
           cfg.ws.sendMessage('one', JSON.stringify(raw), cfg.wsId);
+
+          cfg.db.insert(object);
           cfg.ws.sendMessage('one', JSON.stringify(object), cfg.wsId);
 
           // cfg.db.insert({type: 'mesh', mesh: JSON.stringify(cube)});
@@ -68,8 +65,8 @@ var rule_0 = (cfg, done) => {
 
           return raw;
         })
-        next(null, cfg, data);
-      }
+        next(null, data);
+      },
     ], (err, data) => {
       console[err ? 'error':'info']('\t\t'+(err ? 'KO':'OK'), err, 'LVL 0:', data ? `${data.length * 2} entries`:'no entries')
       console.info('\tEND: rule_0');
@@ -77,9 +74,9 @@ var rule_0 = (cfg, done) => {
     })
   };
 
-  var previous = (cfg, type, callback, done) => {
+  var previous = (type, callback, done) => {
     console.log(`looking for previous rule_0 records using type:${type}, levelSize:${cfg.size}`);
-    cfg.db.find({type: type, level: 0, levelSize: cfg.size}, (err, items) => {
+    cfg.db.find({type: 'object', level:0, levelSize: cfg.size}, (err, items) => {
       if (err) {
         callback(cfg, done);
       } else if (!items || 0 === items.length) {
@@ -87,15 +84,16 @@ var rule_0 = (cfg, done) => {
         callback(cfg, done);
       } else {
         console.info(`found previous ${type} rule_0 data, sending them`);
-        cfg.ws.webSocketOut({type: type, data: items}, cfg.wsId);
+        cfg.ws.webSocketOut({type: 'object', data: items}, cfg.wsId);
         done(null, items);
       }
     });
   };
 
-  previous(cfg, 'object', (cfg, done) => {
-    previous(cfg, 'raw', then, done);
-  }, done)
+  previous('object', () => {
+    previous('raw', then, done);
+  }, done);
+
 }
 
 export default rule_0
