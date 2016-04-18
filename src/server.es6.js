@@ -11,10 +11,11 @@ import glob from 'glob';
 
 waterfall([
   (next) => {
+    let version = '0.0';
     let cfg = {
-      version: "0.0.0",
+      version: version,
       path: "rules",
-      files: glob.sync('./rules/*.json')
+      files: glob.sync(`./rules/${version}/*.json`)
     };
     next(null, cfg);
   },
