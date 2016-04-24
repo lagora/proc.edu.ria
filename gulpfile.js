@@ -1,15 +1,12 @@
-const gulp = require('gulp');
-const es6Pipeline = require('gulp-webpack-es6-pipeline');
+var gulp = require('gulp');
+var rename = require('gulp-rename');
+var es6transpiler = require('gulp-es6-transpiler');
 
-es6Pipeline.registerBuildGulpTasks(
-  gulp,
-  {
-    entryPoints: [
-      './src/css/proc.edu.ria.css',
-      './node_modules/three/three.js',
-      './src/es6/config.js',
-      './src/es6/main.js'
-    ],
-    outputDir: './dist'
-  }
-);
+gulp.task('default', function () {
+	return gulp.src('src/proc.edu.ria.es6.js')
+		.pipe(es6transpiler({
+      "environments": ["node"],
+    }))
+		.pipe(rename('proc.edu.ria.js'))
+		.pipe(gulp.dest('build'));
+});
