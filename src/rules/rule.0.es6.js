@@ -246,12 +246,12 @@ const SIZE_Z = 5;
 var axes = ['x', 'y', 'z'];
 var methods = {};
 
-export default function* (cfg) {
+export default function (cfg, done) {
   let rule = rule_O_specs[cfg.version];
   console.info(`\tSTART: rule_0 using version: ${cfg.version}`);
 
   let data = scan(cfg.size, 1);
-
+  let newData = [];
   if ("0.0" === cfg.version) {
     for (var i = 0; i < data.length; i++) {
       let bit = data[i];
@@ -290,8 +290,9 @@ export default function* (cfg) {
       });
 
       object.vertices = geometry.vertices;
-      yield { raw, object };
+      newData.push({ raw, object });
     }
+    data = newData;
   }
 
   // if ("1.0" === cfg.version) {
@@ -338,7 +339,13 @@ export default function* (cfg) {
   //     });
   //
   //     object.vertices = geometry.vertices;
-  //     yield { raw, object };
+  //     newData.push({ raw, object });
   //   }
+  //    data = newData;
   // }
+  if (done) {
+    done(null, data);
+  } else {
+    return data;
+  }
 };
