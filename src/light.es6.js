@@ -1,4 +1,5 @@
-import { THREE, scene, camera, renderer } from './init.es6.js'
+import THREE from 'three'
+import { scene, camera, renderer } from './init.es6.js'
 import cfg from './config.es6.js'
 
 var HemisphereLight = new THREE.HemisphereLight( 0x777777, 0xcccccc, 0.5 )

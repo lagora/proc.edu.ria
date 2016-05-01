@@ -4,7 +4,7 @@ import connect from 'connect';
 import serveStatic from 'serve-static';
 import http from 'http';
 
-import generator from './generator.es6.js';
+// import generator from './generator.es6.js';
 import Datastore from 'nedb';
 import WebSocketServer from 'websocketserver';
 import glob from 'glob';
@@ -73,7 +73,7 @@ waterfall([
         data.wsId = id;
         data.db = cfg.db;
         data.rules = cfg.rules;
-        generator(data);
+        // generator(data);
       break;
       case 'raw':
         console.info('looking for previous raw data');

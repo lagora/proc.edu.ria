@@ -4,18 +4,17 @@ var resolveRoot = path.join(projectRoot, 'node_modules'); // project root/node_m
 
 module.exports = {
   entry: {
-    server: './src/server.es6.js',
-    client: './src/client.es6.js'
+    proceduria: './src/proc.edu.ria.es6.js'
   },
   target: "node",
   output: {
-    path: './dist/',
+    path: './build/',
     filename: "[name].js"
   },
   resolve: {
     root: path.join(__dirname),
     fallback: path.join(__dirname, 'node_modules'),
-    modulesDirectories: ['node_modules'],
+    modulesDirectories: ['rules', 'node_modules'],
     extensions: ['', '.json', '.js', '.jsx', '.scss', '.png', '.jpg', '.jpeg', '.gif']
   },
   module: {
@@ -23,15 +22,17 @@ module.exports = {
       {
         test: /\.es6\.js$/,
         loader: 'babel',
-        exclude: '/node_modules',
+        exclude: '/node_modules/',
         query: {
-          presets: ['es2015']
+          presets: ['es2015'],
+          plugins: ['transform-runtime']
         }
       },
       {
-        test: /\.json/,
+        test: /\.json$/,
         loader: 'json-loader'
       }
     ]
-  }
+  },
+  devtool: "source-map"
 };
