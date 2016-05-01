@@ -6,8 +6,9 @@ var putBlock = (scene, data) => {
   if (!data) {
     console.error('no data, aborting');
     return;
+  } else if (data.raw) {
+    putBlock(scene, data.raw);
   }
-  data = data.raw;
 
   let geometry = new THREE.BoxGeometry(
     data.size.x, data.size.y, data.size.z,
