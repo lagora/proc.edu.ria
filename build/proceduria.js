@@ -53,11 +53,11 @@
 	
 	var _three2 = _interopRequireDefault(_three);
 	
-	var _configEs = __webpack_require__(/*! ./config.es6.js */ 2);
+	var _configEs = __webpack_require__(/*! ./config.es6.js */ 3);
 	
 	var _configEs2 = _interopRequireDefault(_configEs);
 	
-	var _initEs = __webpack_require__(/*! ./init.es6.js */ 9);
+	var _initEs = __webpack_require__(/*! ./init.es6.js */ 10);
 	
 	var _lightEs = __webpack_require__(/*! ./light.es6.js */ 11);
 	
@@ -65,15 +65,18 @@
 	
 	var _generatorEs2 = _interopRequireDefault(_generatorEs);
 	
-	var _putBlockEs = __webpack_require__(/*! ./putBlock.es6.js */ 16);
+	var _putBlockEs = __webpack_require__(/*! ./putBlock.es6.js */ 36);
 	
 	var _putBlockEs2 = _interopRequireDefault(_putBlockEs);
 	
-	var _putObjectEs = __webpack_require__(/*! ./putObject.es6.js */ 17);
+	var _putObjectEs = __webpack_require__(/*! ./putObject.es6.js */ 37);
 	
 	var _putObjectEs2 = _interopRequireDefault(_putObjectEs);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// import controls from 'three-orbit-controls';
+	
 	
 	var data = [];
 	var geometry = new _three2.default.BufferGeometry();
@@ -87,7 +90,7 @@
 	var putMethod = 'raw';
 	
 	var update = function update() {
-	  if (_configEs2.default.autoRotate && window.controls.autoRotate) controls.update();
+	  if (_configEs2.default.autoRotate) controls.update();
 	
 	  if (_configEs2.default.debug) {
 	    _lightEs.HemisphereLightHelper.update();
@@ -40803,516 +40806,6 @@
 
 /***/ },
 /* 2 */
-/*!***************************!*\
-  !*** ./src/config.es6.js ***!
-  \***************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _configuratorEs = __webpack_require__(/*! ./configurator.es6.js */ 3);
-	
-	var _configuratorEs2 = _interopRequireDefault(_configuratorEs);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var cfg = new _configuratorEs2.default(8, 'proc.edu.ria');
-	// console.log('cfg', cfg);
-	cfg.dev = true;
-	cfg.debug = true;
-	cfg.wireframe = false;
-	cfg.autoRotate = true;
-	cfg.w = 320;
-	cfg.h = 240;
-	cfg.fov = 75;
-	cfg.near = 0.1;
-	cfg.far = 1000;
-	cfg.zoom = 2;
-	cfg.levelMax = 0;
-	
-	// if (cfg.debug) {
-	//   console.info('cfg:', cfg);
-	//   console.info('size', cfg.size);
-	//   console.info('seed', cfg.seed.length, cfg.seed);
-	// }
-	
-	exports.default = cfg;
-
-/***/ },
-/* 3 */
-/*!*********************************!*\
-  !*** ./src/configurator.es6.js ***!
-  \*********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ 4);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _md = __webpack_require__(/*! md5 */ 5);
-	
-	var _md2 = _interopRequireDefault(_md);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Configurator = function Configurator(size, seed) {
-	  (0, _classCallCheck3.default)(this, Configurator);
-	
-	  this.cache = [];
-	  this.size = size || 8;
-	  this.cubicSize = Math.pow(size, 3);
-	  var mkSeed = function mkSeed(str) {
-	    return (0, _md2.default)(str);
-	  };
-	  this.seedSource = seed ? seed : 'proc.edu.ria';
-	  this.rawSeed = this.cache[this.seedSource] ? this.cache[this.seedSource] : mkSeed(this.seedSource);
-	
-	  while (this.rawSeed.length < this.cubicSize) {
-	    var remaining = this.cubicSize - this.rawSeed.length;
-	    // console.info(`Filling up seed: ${((this.rawSeed.length/this.cubicSize)*100).toString().substr(0, 2)}% => ${remaining}/${this.cubicSize}`)
-	    this.rawSeed += mkSeed(this.rawSeed).substr(0, remaining);
-	  }
-	};
-	
-	;
-	
-	exports.default = Configurator;
-
-/***/ },
-/* 4 */
-/*!***************************************************!*\
-  !*** ./~/babel-runtime/helpers/classCallCheck.js ***!
-  \***************************************************/
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	exports.__esModule = true;
-	
-	exports.default = function (instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	};
-
-/***/ },
-/* 5 */
-/*!**********************!*\
-  !*** ./~/md5/md5.js ***!
-  \**********************/
-/***/ function(module, exports, __webpack_require__) {
-
-	(function(){
-	  var crypt = __webpack_require__(/*! crypt */ 6),
-	      utf8 = __webpack_require__(/*! charenc */ 7).utf8,
-	      isBuffer = __webpack_require__(/*! is-buffer */ 8),
-	      bin = __webpack_require__(/*! charenc */ 7).bin,
-	
-	  // The core
-	  md5 = function (message, options) {
-	    // Convert to byte array
-	    if (message.constructor == String)
-	      if (options && options.encoding === 'binary')
-	        message = bin.stringToBytes(message);
-	      else
-	        message = utf8.stringToBytes(message);
-	    else if (isBuffer(message))
-	      message = Array.prototype.slice.call(message, 0);
-	    else if (!Array.isArray(message))
-	      message = message.toString();
-	    // else, assume byte array already
-	
-	    var m = crypt.bytesToWords(message),
-	        l = message.length * 8,
-	        a =  1732584193,
-	        b = -271733879,
-	        c = -1732584194,
-	        d =  271733878;
-	
-	    // Swap endian
-	    for (var i = 0; i < m.length; i++) {
-	      m[i] = ((m[i] <<  8) | (m[i] >>> 24)) & 0x00FF00FF |
-	             ((m[i] << 24) | (m[i] >>>  8)) & 0xFF00FF00;
-	    }
-	
-	    // Padding
-	    m[l >>> 5] |= 0x80 << (l % 32);
-	    m[(((l + 64) >>> 9) << 4) + 14] = l;
-	
-	    // Method shortcuts
-	    var FF = md5._ff,
-	        GG = md5._gg,
-	        HH = md5._hh,
-	        II = md5._ii;
-	
-	    for (var i = 0; i < m.length; i += 16) {
-	
-	      var aa = a,
-	          bb = b,
-	          cc = c,
-	          dd = d;
-	
-	      a = FF(a, b, c, d, m[i+ 0],  7, -680876936);
-	      d = FF(d, a, b, c, m[i+ 1], 12, -389564586);
-	      c = FF(c, d, a, b, m[i+ 2], 17,  606105819);
-	      b = FF(b, c, d, a, m[i+ 3], 22, -1044525330);
-	      a = FF(a, b, c, d, m[i+ 4],  7, -176418897);
-	      d = FF(d, a, b, c, m[i+ 5], 12,  1200080426);
-	      c = FF(c, d, a, b, m[i+ 6], 17, -1473231341);
-	      b = FF(b, c, d, a, m[i+ 7], 22, -45705983);
-	      a = FF(a, b, c, d, m[i+ 8],  7,  1770035416);
-	      d = FF(d, a, b, c, m[i+ 9], 12, -1958414417);
-	      c = FF(c, d, a, b, m[i+10], 17, -42063);
-	      b = FF(b, c, d, a, m[i+11], 22, -1990404162);
-	      a = FF(a, b, c, d, m[i+12],  7,  1804603682);
-	      d = FF(d, a, b, c, m[i+13], 12, -40341101);
-	      c = FF(c, d, a, b, m[i+14], 17, -1502002290);
-	      b = FF(b, c, d, a, m[i+15], 22,  1236535329);
-	
-	      a = GG(a, b, c, d, m[i+ 1],  5, -165796510);
-	      d = GG(d, a, b, c, m[i+ 6],  9, -1069501632);
-	      c = GG(c, d, a, b, m[i+11], 14,  643717713);
-	      b = GG(b, c, d, a, m[i+ 0], 20, -373897302);
-	      a = GG(a, b, c, d, m[i+ 5],  5, -701558691);
-	      d = GG(d, a, b, c, m[i+10],  9,  38016083);
-	      c = GG(c, d, a, b, m[i+15], 14, -660478335);
-	      b = GG(b, c, d, a, m[i+ 4], 20, -405537848);
-	      a = GG(a, b, c, d, m[i+ 9],  5,  568446438);
-	      d = GG(d, a, b, c, m[i+14],  9, -1019803690);
-	      c = GG(c, d, a, b, m[i+ 3], 14, -187363961);
-	      b = GG(b, c, d, a, m[i+ 8], 20,  1163531501);
-	      a = GG(a, b, c, d, m[i+13],  5, -1444681467);
-	      d = GG(d, a, b, c, m[i+ 2],  9, -51403784);
-	      c = GG(c, d, a, b, m[i+ 7], 14,  1735328473);
-	      b = GG(b, c, d, a, m[i+12], 20, -1926607734);
-	
-	      a = HH(a, b, c, d, m[i+ 5],  4, -378558);
-	      d = HH(d, a, b, c, m[i+ 8], 11, -2022574463);
-	      c = HH(c, d, a, b, m[i+11], 16,  1839030562);
-	      b = HH(b, c, d, a, m[i+14], 23, -35309556);
-	      a = HH(a, b, c, d, m[i+ 1],  4, -1530992060);
-	      d = HH(d, a, b, c, m[i+ 4], 11,  1272893353);
-	      c = HH(c, d, a, b, m[i+ 7], 16, -155497632);
-	      b = HH(b, c, d, a, m[i+10], 23, -1094730640);
-	      a = HH(a, b, c, d, m[i+13],  4,  681279174);
-	      d = HH(d, a, b, c, m[i+ 0], 11, -358537222);
-	      c = HH(c, d, a, b, m[i+ 3], 16, -722521979);
-	      b = HH(b, c, d, a, m[i+ 6], 23,  76029189);
-	      a = HH(a, b, c, d, m[i+ 9],  4, -640364487);
-	      d = HH(d, a, b, c, m[i+12], 11, -421815835);
-	      c = HH(c, d, a, b, m[i+15], 16,  530742520);
-	      b = HH(b, c, d, a, m[i+ 2], 23, -995338651);
-	
-	      a = II(a, b, c, d, m[i+ 0],  6, -198630844);
-	      d = II(d, a, b, c, m[i+ 7], 10,  1126891415);
-	      c = II(c, d, a, b, m[i+14], 15, -1416354905);
-	      b = II(b, c, d, a, m[i+ 5], 21, -57434055);
-	      a = II(a, b, c, d, m[i+12],  6,  1700485571);
-	      d = II(d, a, b, c, m[i+ 3], 10, -1894986606);
-	      c = II(c, d, a, b, m[i+10], 15, -1051523);
-	      b = II(b, c, d, a, m[i+ 1], 21, -2054922799);
-	      a = II(a, b, c, d, m[i+ 8],  6,  1873313359);
-	      d = II(d, a, b, c, m[i+15], 10, -30611744);
-	      c = II(c, d, a, b, m[i+ 6], 15, -1560198380);
-	      b = II(b, c, d, a, m[i+13], 21,  1309151649);
-	      a = II(a, b, c, d, m[i+ 4],  6, -145523070);
-	      d = II(d, a, b, c, m[i+11], 10, -1120210379);
-	      c = II(c, d, a, b, m[i+ 2], 15,  718787259);
-	      b = II(b, c, d, a, m[i+ 9], 21, -343485551);
-	
-	      a = (a + aa) >>> 0;
-	      b = (b + bb) >>> 0;
-	      c = (c + cc) >>> 0;
-	      d = (d + dd) >>> 0;
-	    }
-	
-	    return crypt.endian([a, b, c, d]);
-	  };
-	
-	  // Auxiliary functions
-	  md5._ff  = function (a, b, c, d, x, s, t) {
-	    var n = a + (b & c | ~b & d) + (x >>> 0) + t;
-	    return ((n << s) | (n >>> (32 - s))) + b;
-	  };
-	  md5._gg  = function (a, b, c, d, x, s, t) {
-	    var n = a + (b & d | c & ~d) + (x >>> 0) + t;
-	    return ((n << s) | (n >>> (32 - s))) + b;
-	  };
-	  md5._hh  = function (a, b, c, d, x, s, t) {
-	    var n = a + (b ^ c ^ d) + (x >>> 0) + t;
-	    return ((n << s) | (n >>> (32 - s))) + b;
-	  };
-	  md5._ii  = function (a, b, c, d, x, s, t) {
-	    var n = a + (c ^ (b | ~d)) + (x >>> 0) + t;
-	    return ((n << s) | (n >>> (32 - s))) + b;
-	  };
-	
-	  // Package private blocksize
-	  md5._blocksize = 16;
-	  md5._digestsize = 16;
-	
-	  module.exports = function (message, options) {
-	    if(typeof message == 'undefined')
-	      return;
-	
-	    var digestbytes = crypt.wordsToBytes(md5(message, options));
-	    return options && options.asBytes ? digestbytes :
-	        options && options.asString ? bin.bytesToString(digestbytes) :
-	        crypt.bytesToHex(digestbytes);
-	  };
-	
-	})();
-
-
-/***/ },
-/* 6 */
-/*!********************************!*\
-  !*** ./~/md5/~/crypt/crypt.js ***!
-  \********************************/
-/***/ function(module, exports) {
-
-	(function() {
-	  var base64map
-	      = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
-	
-	  crypt = {
-	    // Bit-wise rotation left
-	    rotl: function(n, b) {
-	      return (n << b) | (n >>> (32 - b));
-	    },
-	
-	    // Bit-wise rotation right
-	    rotr: function(n, b) {
-	      return (n << (32 - b)) | (n >>> b);
-	    },
-	
-	    // Swap big-endian to little-endian and vice versa
-	    endian: function(n) {
-	      // If number given, swap endian
-	      if (n.constructor == Number) {
-	        return crypt.rotl(n, 8) & 0x00FF00FF | crypt.rotl(n, 24) & 0xFF00FF00;
-	      }
-	
-	      // Else, assume array and swap all items
-	      for (var i = 0; i < n.length; i++)
-	        n[i] = crypt.endian(n[i]);
-	      return n;
-	    },
-	
-	    // Generate an array of any length of random bytes
-	    randomBytes: function(n) {
-	      for (var bytes = []; n > 0; n--)
-	        bytes.push(Math.floor(Math.random() * 256));
-	      return bytes;
-	    },
-	
-	    // Convert a byte array to big-endian 32-bit words
-	    bytesToWords: function(bytes) {
-	      for (var words = [], i = 0, b = 0; i < bytes.length; i++, b += 8)
-	        words[b >>> 5] |= bytes[i] << (24 - b % 32);
-	      return words;
-	    },
-	
-	    // Convert big-endian 32-bit words to a byte array
-	    wordsToBytes: function(words) {
-	      for (var bytes = [], b = 0; b < words.length * 32; b += 8)
-	        bytes.push((words[b >>> 5] >>> (24 - b % 32)) & 0xFF);
-	      return bytes;
-	    },
-	
-	    // Convert a byte array to a hex string
-	    bytesToHex: function(bytes) {
-	      for (var hex = [], i = 0; i < bytes.length; i++) {
-	        hex.push((bytes[i] >>> 4).toString(16));
-	        hex.push((bytes[i] & 0xF).toString(16));
-	      }
-	      return hex.join('');
-	    },
-	
-	    // Convert a hex string to a byte array
-	    hexToBytes: function(hex) {
-	      for (var bytes = [], c = 0; c < hex.length; c += 2)
-	        bytes.push(parseInt(hex.substr(c, 2), 16));
-	      return bytes;
-	    },
-	
-	    // Convert a byte array to a base-64 string
-	    bytesToBase64: function(bytes) {
-	      for (var base64 = [], i = 0; i < bytes.length; i += 3) {
-	        var triplet = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2];
-	        for (var j = 0; j < 4; j++)
-	          if (i * 8 + j * 6 <= bytes.length * 8)
-	            base64.push(base64map.charAt((triplet >>> 6 * (3 - j)) & 0x3F));
-	          else
-	            base64.push('=');
-	      }
-	      return base64.join('');
-	    },
-	
-	    // Convert a base-64 string to a byte array
-	    base64ToBytes: function(base64) {
-	      // Remove non-base-64 characters
-	      base64 = base64.replace(/[^A-Z0-9+\/]/ig, '');
-	
-	      for (var bytes = [], i = 0, imod4 = 0; i < base64.length;
-	          imod4 = ++i % 4) {
-	        if (imod4 == 0) continue;
-	        bytes.push(((base64map.indexOf(base64.charAt(i - 1))
-	            & (Math.pow(2, -2 * imod4 + 8) - 1)) << (imod4 * 2))
-	            | (base64map.indexOf(base64.charAt(i)) >>> (6 - imod4 * 2)));
-	      }
-	      return bytes;
-	    }
-	  };
-	
-	  module.exports = crypt;
-	})();
-
-
-/***/ },
-/* 7 */
-/*!************************************!*\
-  !*** ./~/md5/~/charenc/charenc.js ***!
-  \************************************/
-/***/ function(module, exports) {
-
-	var charenc = {
-	  // UTF-8 encoding
-	  utf8: {
-	    // Convert a string to a byte array
-	    stringToBytes: function(str) {
-	      return charenc.bin.stringToBytes(unescape(encodeURIComponent(str)));
-	    },
-	
-	    // Convert a byte array to a string
-	    bytesToString: function(bytes) {
-	      return decodeURIComponent(escape(charenc.bin.bytesToString(bytes)));
-	    }
-	  },
-	
-	  // Binary encoding
-	  bin: {
-	    // Convert a string to a byte array
-	    stringToBytes: function(str) {
-	      for (var bytes = [], i = 0; i < str.length; i++)
-	        bytes.push(str.charCodeAt(i) & 0xFF);
-	      return bytes;
-	    },
-	
-	    // Convert a byte array to a string
-	    bytesToString: function(bytes) {
-	      for (var str = [], i = 0; i < bytes.length; i++)
-	        str.push(String.fromCharCode(bytes[i]));
-	      return str.join('');
-	    }
-	  }
-	};
-	
-	module.exports = charenc;
-
-
-/***/ },
-/* 8 */
-/*!************************************!*\
-  !*** ./~/md5/~/is-buffer/index.js ***!
-  \************************************/
-/***/ function(module, exports) {
-
-	/**
-	 * Determine if an object is Buffer
-	 *
-	 * Author:   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
-	 * License:  MIT
-	 *
-	 * `npm install is-buffer`
-	 */
-	
-	module.exports = function (obj) {
-	  return !!(obj != null &&
-	    (obj._isBuffer || // For Safari 5-7 (missing Object.prototype.constructor)
-	      (obj.constructor &&
-	      typeof obj.constructor.isBuffer === 'function' &&
-	      obj.constructor.isBuffer(obj))
-	    ))
-	}
-
-
-/***/ },
-/* 9 */
-/*!*************************!*\
-  !*** ./src/init.es6.js ***!
-  \*************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.renderer = exports.camera = exports.scene = undefined;
-	
-	var _three = __webpack_require__(/*! three */ 1);
-	
-	var _three2 = _interopRequireDefault(_three);
-	
-	var _configEs = __webpack_require__(/*! ./config.es6.js */ 2);
-	
-	var _configEs2 = _interopRequireDefault(_configEs);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var OrbitControls = __webpack_require__(/*! three-orbit-controls */ 10)(_three2.default);
-	
-	var scene = new _three2.default.Scene();
-	var camera = new _three2.default.PerspectiveCamera(_configEs2.default.fov, _configEs2.default.w / _configEs2.default.h, _configEs2.default.near, _configEs2.default.far);
-	var renderer = new _three2.default.WebGLRenderer();
-	renderer.shadowMap.enabled = true;
-	scene.up = new _three2.default.Vector3(0, 0, 1);
-	
-	if (_configEs2.default.debug) {
-	  var size = _configEs2.default.size + 1;
-	  var step = 1;
-	  var gridHelper = new _three2.default.GridHelper(size, step);
-	  if (_configEs2.default.debug) console.info('init', 'gridHelper:', 'size:', size);
-	  scene.add(gridHelper);
-	};
-	
-	renderer.setSize(_configEs2.default.w * _configEs2.default.zoom, _configEs2.default.h * _configEs2.default.zoom);
-	
-	var axes = ['x', 'y', 'z'];
-	
-	window.camereReset = function () {
-	  var sizeToUse = 'size';
-	  var distance = _configEs2.default[sizeToUse] * 1.5;
-	  camera.position.x = distance;
-	  camera.position.y = distance;
-	  camera.position.z = distance;
-	  camera.lookAt({ x: _configEs2.default[sizeToUse], y: _configEs2.default[sizeToUse], z: _configEs2.default[sizeToUse] });
-	};
-	
-	window.camereReset();
-	
-	window.controls = new OrbitControls(camera, renderer.domElement);
-	window.controls.autoRotate = _configEs2.default.autoRotate;
-	
-	document.body.appendChild(renderer.domElement);
-	
-	exports.scene = scene;
-	exports.camera = camera;
-	exports.renderer = renderer;
-
-/***/ },
-/* 10 */
 /*!*****************************************!*\
   !*** ./~/three-orbit-controls/index.js ***!
   \*****************************************/
@@ -42440,6 +41933,516 @@
 
 
 /***/ },
+/* 3 */
+/*!***************************!*\
+  !*** ./src/config.es6.js ***!
+  \***************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _configuratorEs = __webpack_require__(/*! ./configurator.es6.js */ 4);
+	
+	var _configuratorEs2 = _interopRequireDefault(_configuratorEs);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var cfg = new _configuratorEs2.default(4, 'proc.edu.ria');
+	// console.log('cfg', cfg);
+	cfg.dev = true;
+	cfg.debug = true;
+	cfg.wireframe = false;
+	cfg.autoRotate = true;
+	cfg.w = 320;
+	cfg.h = 240;
+	cfg.fov = 75;
+	cfg.near = 0.1;
+	cfg.far = 1000;
+	cfg.zoom = 2;
+	cfg.levelMax = 0;
+	
+	// if (cfg.debug) {
+	//   console.info('cfg:', cfg);
+	//   console.info('size', cfg.size);
+	//   console.info('seed', cfg.seed.length, cfg.seed);
+	// }
+	
+	exports.default = cfg;
+
+/***/ },
+/* 4 */
+/*!*********************************!*\
+  !*** ./src/configurator.es6.js ***!
+  \*********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ 5);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _md = __webpack_require__(/*! md5 */ 6);
+	
+	var _md2 = _interopRequireDefault(_md);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Configurator = function Configurator(size, seed) {
+	  (0, _classCallCheck3.default)(this, Configurator);
+	
+	  this.cache = [];
+	  this.size = size || 4;
+	  this.cubicSize = Math.pow(size, 3);
+	  var mkSeed = function mkSeed(str) {
+	    return (0, _md2.default)(str);
+	  };
+	  this.seedSource = seed ? seed : 'proc.edu.ria';
+	  this.rawSeed = this.cache[this.seedSource] ? this.cache[this.seedSource] : mkSeed(this.seedSource);
+	
+	  while (this.rawSeed.length < this.cubicSize) {
+	    var remaining = this.cubicSize - this.rawSeed.length;
+	    // console.info(`Filling up seed: ${((this.rawSeed.length/this.cubicSize)*100).toString().substr(0, 2)}% => ${remaining}/${this.cubicSize}`)
+	    this.rawSeed += mkSeed(this.rawSeed).substr(0, remaining);
+	  }
+	};
+	
+	;
+	
+	exports.default = Configurator;
+
+/***/ },
+/* 5 */
+/*!***************************************************!*\
+  !*** ./~/babel-runtime/helpers/classCallCheck.js ***!
+  \***************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	exports.default = function (instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	};
+
+/***/ },
+/* 6 */
+/*!**********************!*\
+  !*** ./~/md5/md5.js ***!
+  \**********************/
+/***/ function(module, exports, __webpack_require__) {
+
+	(function(){
+	  var crypt = __webpack_require__(/*! crypt */ 7),
+	      utf8 = __webpack_require__(/*! charenc */ 8).utf8,
+	      isBuffer = __webpack_require__(/*! is-buffer */ 9),
+	      bin = __webpack_require__(/*! charenc */ 8).bin,
+	
+	  // The core
+	  md5 = function (message, options) {
+	    // Convert to byte array
+	    if (message.constructor == String)
+	      if (options && options.encoding === 'binary')
+	        message = bin.stringToBytes(message);
+	      else
+	        message = utf8.stringToBytes(message);
+	    else if (isBuffer(message))
+	      message = Array.prototype.slice.call(message, 0);
+	    else if (!Array.isArray(message))
+	      message = message.toString();
+	    // else, assume byte array already
+	
+	    var m = crypt.bytesToWords(message),
+	        l = message.length * 8,
+	        a =  1732584193,
+	        b = -271733879,
+	        c = -1732584194,
+	        d =  271733878;
+	
+	    // Swap endian
+	    for (var i = 0; i < m.length; i++) {
+	      m[i] = ((m[i] <<  8) | (m[i] >>> 24)) & 0x00FF00FF |
+	             ((m[i] << 24) | (m[i] >>>  8)) & 0xFF00FF00;
+	    }
+	
+	    // Padding
+	    m[l >>> 5] |= 0x80 << (l % 32);
+	    m[(((l + 64) >>> 9) << 4) + 14] = l;
+	
+	    // Method shortcuts
+	    var FF = md5._ff,
+	        GG = md5._gg,
+	        HH = md5._hh,
+	        II = md5._ii;
+	
+	    for (var i = 0; i < m.length; i += 16) {
+	
+	      var aa = a,
+	          bb = b,
+	          cc = c,
+	          dd = d;
+	
+	      a = FF(a, b, c, d, m[i+ 0],  7, -680876936);
+	      d = FF(d, a, b, c, m[i+ 1], 12, -389564586);
+	      c = FF(c, d, a, b, m[i+ 2], 17,  606105819);
+	      b = FF(b, c, d, a, m[i+ 3], 22, -1044525330);
+	      a = FF(a, b, c, d, m[i+ 4],  7, -176418897);
+	      d = FF(d, a, b, c, m[i+ 5], 12,  1200080426);
+	      c = FF(c, d, a, b, m[i+ 6], 17, -1473231341);
+	      b = FF(b, c, d, a, m[i+ 7], 22, -45705983);
+	      a = FF(a, b, c, d, m[i+ 8],  7,  1770035416);
+	      d = FF(d, a, b, c, m[i+ 9], 12, -1958414417);
+	      c = FF(c, d, a, b, m[i+10], 17, -42063);
+	      b = FF(b, c, d, a, m[i+11], 22, -1990404162);
+	      a = FF(a, b, c, d, m[i+12],  7,  1804603682);
+	      d = FF(d, a, b, c, m[i+13], 12, -40341101);
+	      c = FF(c, d, a, b, m[i+14], 17, -1502002290);
+	      b = FF(b, c, d, a, m[i+15], 22,  1236535329);
+	
+	      a = GG(a, b, c, d, m[i+ 1],  5, -165796510);
+	      d = GG(d, a, b, c, m[i+ 6],  9, -1069501632);
+	      c = GG(c, d, a, b, m[i+11], 14,  643717713);
+	      b = GG(b, c, d, a, m[i+ 0], 20, -373897302);
+	      a = GG(a, b, c, d, m[i+ 5],  5, -701558691);
+	      d = GG(d, a, b, c, m[i+10],  9,  38016083);
+	      c = GG(c, d, a, b, m[i+15], 14, -660478335);
+	      b = GG(b, c, d, a, m[i+ 4], 20, -405537848);
+	      a = GG(a, b, c, d, m[i+ 9],  5,  568446438);
+	      d = GG(d, a, b, c, m[i+14],  9, -1019803690);
+	      c = GG(c, d, a, b, m[i+ 3], 14, -187363961);
+	      b = GG(b, c, d, a, m[i+ 8], 20,  1163531501);
+	      a = GG(a, b, c, d, m[i+13],  5, -1444681467);
+	      d = GG(d, a, b, c, m[i+ 2],  9, -51403784);
+	      c = GG(c, d, a, b, m[i+ 7], 14,  1735328473);
+	      b = GG(b, c, d, a, m[i+12], 20, -1926607734);
+	
+	      a = HH(a, b, c, d, m[i+ 5],  4, -378558);
+	      d = HH(d, a, b, c, m[i+ 8], 11, -2022574463);
+	      c = HH(c, d, a, b, m[i+11], 16,  1839030562);
+	      b = HH(b, c, d, a, m[i+14], 23, -35309556);
+	      a = HH(a, b, c, d, m[i+ 1],  4, -1530992060);
+	      d = HH(d, a, b, c, m[i+ 4], 11,  1272893353);
+	      c = HH(c, d, a, b, m[i+ 7], 16, -155497632);
+	      b = HH(b, c, d, a, m[i+10], 23, -1094730640);
+	      a = HH(a, b, c, d, m[i+13],  4,  681279174);
+	      d = HH(d, a, b, c, m[i+ 0], 11, -358537222);
+	      c = HH(c, d, a, b, m[i+ 3], 16, -722521979);
+	      b = HH(b, c, d, a, m[i+ 6], 23,  76029189);
+	      a = HH(a, b, c, d, m[i+ 9],  4, -640364487);
+	      d = HH(d, a, b, c, m[i+12], 11, -421815835);
+	      c = HH(c, d, a, b, m[i+15], 16,  530742520);
+	      b = HH(b, c, d, a, m[i+ 2], 23, -995338651);
+	
+	      a = II(a, b, c, d, m[i+ 0],  6, -198630844);
+	      d = II(d, a, b, c, m[i+ 7], 10,  1126891415);
+	      c = II(c, d, a, b, m[i+14], 15, -1416354905);
+	      b = II(b, c, d, a, m[i+ 5], 21, -57434055);
+	      a = II(a, b, c, d, m[i+12],  6,  1700485571);
+	      d = II(d, a, b, c, m[i+ 3], 10, -1894986606);
+	      c = II(c, d, a, b, m[i+10], 15, -1051523);
+	      b = II(b, c, d, a, m[i+ 1], 21, -2054922799);
+	      a = II(a, b, c, d, m[i+ 8],  6,  1873313359);
+	      d = II(d, a, b, c, m[i+15], 10, -30611744);
+	      c = II(c, d, a, b, m[i+ 6], 15, -1560198380);
+	      b = II(b, c, d, a, m[i+13], 21,  1309151649);
+	      a = II(a, b, c, d, m[i+ 4],  6, -145523070);
+	      d = II(d, a, b, c, m[i+11], 10, -1120210379);
+	      c = II(c, d, a, b, m[i+ 2], 15,  718787259);
+	      b = II(b, c, d, a, m[i+ 9], 21, -343485551);
+	
+	      a = (a + aa) >>> 0;
+	      b = (b + bb) >>> 0;
+	      c = (c + cc) >>> 0;
+	      d = (d + dd) >>> 0;
+	    }
+	
+	    return crypt.endian([a, b, c, d]);
+	  };
+	
+	  // Auxiliary functions
+	  md5._ff  = function (a, b, c, d, x, s, t) {
+	    var n = a + (b & c | ~b & d) + (x >>> 0) + t;
+	    return ((n << s) | (n >>> (32 - s))) + b;
+	  };
+	  md5._gg  = function (a, b, c, d, x, s, t) {
+	    var n = a + (b & d | c & ~d) + (x >>> 0) + t;
+	    return ((n << s) | (n >>> (32 - s))) + b;
+	  };
+	  md5._hh  = function (a, b, c, d, x, s, t) {
+	    var n = a + (b ^ c ^ d) + (x >>> 0) + t;
+	    return ((n << s) | (n >>> (32 - s))) + b;
+	  };
+	  md5._ii  = function (a, b, c, d, x, s, t) {
+	    var n = a + (c ^ (b | ~d)) + (x >>> 0) + t;
+	    return ((n << s) | (n >>> (32 - s))) + b;
+	  };
+	
+	  // Package private blocksize
+	  md5._blocksize = 16;
+	  md5._digestsize = 16;
+	
+	  module.exports = function (message, options) {
+	    if(typeof message == 'undefined')
+	      return;
+	
+	    var digestbytes = crypt.wordsToBytes(md5(message, options));
+	    return options && options.asBytes ? digestbytes :
+	        options && options.asString ? bin.bytesToString(digestbytes) :
+	        crypt.bytesToHex(digestbytes);
+	  };
+	
+	})();
+
+
+/***/ },
+/* 7 */
+/*!********************************!*\
+  !*** ./~/md5/~/crypt/crypt.js ***!
+  \********************************/
+/***/ function(module, exports) {
+
+	(function() {
+	  var base64map
+	      = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+	
+	  crypt = {
+	    // Bit-wise rotation left
+	    rotl: function(n, b) {
+	      return (n << b) | (n >>> (32 - b));
+	    },
+	
+	    // Bit-wise rotation right
+	    rotr: function(n, b) {
+	      return (n << (32 - b)) | (n >>> b);
+	    },
+	
+	    // Swap big-endian to little-endian and vice versa
+	    endian: function(n) {
+	      // If number given, swap endian
+	      if (n.constructor == Number) {
+	        return crypt.rotl(n, 8) & 0x00FF00FF | crypt.rotl(n, 24) & 0xFF00FF00;
+	      }
+	
+	      // Else, assume array and swap all items
+	      for (var i = 0; i < n.length; i++)
+	        n[i] = crypt.endian(n[i]);
+	      return n;
+	    },
+	
+	    // Generate an array of any length of random bytes
+	    randomBytes: function(n) {
+	      for (var bytes = []; n > 0; n--)
+	        bytes.push(Math.floor(Math.random() * 256));
+	      return bytes;
+	    },
+	
+	    // Convert a byte array to big-endian 32-bit words
+	    bytesToWords: function(bytes) {
+	      for (var words = [], i = 0, b = 0; i < bytes.length; i++, b += 8)
+	        words[b >>> 5] |= bytes[i] << (24 - b % 32);
+	      return words;
+	    },
+	
+	    // Convert big-endian 32-bit words to a byte array
+	    wordsToBytes: function(words) {
+	      for (var bytes = [], b = 0; b < words.length * 32; b += 8)
+	        bytes.push((words[b >>> 5] >>> (24 - b % 32)) & 0xFF);
+	      return bytes;
+	    },
+	
+	    // Convert a byte array to a hex string
+	    bytesToHex: function(bytes) {
+	      for (var hex = [], i = 0; i < bytes.length; i++) {
+	        hex.push((bytes[i] >>> 4).toString(16));
+	        hex.push((bytes[i] & 0xF).toString(16));
+	      }
+	      return hex.join('');
+	    },
+	
+	    // Convert a hex string to a byte array
+	    hexToBytes: function(hex) {
+	      for (var bytes = [], c = 0; c < hex.length; c += 2)
+	        bytes.push(parseInt(hex.substr(c, 2), 16));
+	      return bytes;
+	    },
+	
+	    // Convert a byte array to a base-64 string
+	    bytesToBase64: function(bytes) {
+	      for (var base64 = [], i = 0; i < bytes.length; i += 3) {
+	        var triplet = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2];
+	        for (var j = 0; j < 4; j++)
+	          if (i * 8 + j * 6 <= bytes.length * 8)
+	            base64.push(base64map.charAt((triplet >>> 6 * (3 - j)) & 0x3F));
+	          else
+	            base64.push('=');
+	      }
+	      return base64.join('');
+	    },
+	
+	    // Convert a base-64 string to a byte array
+	    base64ToBytes: function(base64) {
+	      // Remove non-base-64 characters
+	      base64 = base64.replace(/[^A-Z0-9+\/]/ig, '');
+	
+	      for (var bytes = [], i = 0, imod4 = 0; i < base64.length;
+	          imod4 = ++i % 4) {
+	        if (imod4 == 0) continue;
+	        bytes.push(((base64map.indexOf(base64.charAt(i - 1))
+	            & (Math.pow(2, -2 * imod4 + 8) - 1)) << (imod4 * 2))
+	            | (base64map.indexOf(base64.charAt(i)) >>> (6 - imod4 * 2)));
+	      }
+	      return bytes;
+	    }
+	  };
+	
+	  module.exports = crypt;
+	})();
+
+
+/***/ },
+/* 8 */
+/*!************************************!*\
+  !*** ./~/md5/~/charenc/charenc.js ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	var charenc = {
+	  // UTF-8 encoding
+	  utf8: {
+	    // Convert a string to a byte array
+	    stringToBytes: function(str) {
+	      return charenc.bin.stringToBytes(unescape(encodeURIComponent(str)));
+	    },
+	
+	    // Convert a byte array to a string
+	    bytesToString: function(bytes) {
+	      return decodeURIComponent(escape(charenc.bin.bytesToString(bytes)));
+	    }
+	  },
+	
+	  // Binary encoding
+	  bin: {
+	    // Convert a string to a byte array
+	    stringToBytes: function(str) {
+	      for (var bytes = [], i = 0; i < str.length; i++)
+	        bytes.push(str.charCodeAt(i) & 0xFF);
+	      return bytes;
+	    },
+	
+	    // Convert a byte array to a string
+	    bytesToString: function(bytes) {
+	      for (var str = [], i = 0; i < bytes.length; i++)
+	        str.push(String.fromCharCode(bytes[i]));
+	      return str.join('');
+	    }
+	  }
+	};
+	
+	module.exports = charenc;
+
+
+/***/ },
+/* 9 */
+/*!************************************!*\
+  !*** ./~/md5/~/is-buffer/index.js ***!
+  \************************************/
+/***/ function(module, exports) {
+
+	/**
+	 * Determine if an object is Buffer
+	 *
+	 * Author:   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+	 * License:  MIT
+	 *
+	 * `npm install is-buffer`
+	 */
+	
+	module.exports = function (obj) {
+	  return !!(obj != null &&
+	    (obj._isBuffer || // For Safari 5-7 (missing Object.prototype.constructor)
+	      (obj.constructor &&
+	      typeof obj.constructor.isBuffer === 'function' &&
+	      obj.constructor.isBuffer(obj))
+	    ))
+	}
+
+
+/***/ },
+/* 10 */
+/*!*************************!*\
+  !*** ./src/init.es6.js ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.renderer = exports.camera = exports.scene = undefined;
+	
+	var _three = __webpack_require__(/*! three */ 1);
+	
+	var _three2 = _interopRequireDefault(_three);
+	
+	var _configEs = __webpack_require__(/*! ./config.es6.js */ 3);
+	
+	var _configEs2 = _interopRequireDefault(_configEs);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var OrbitControls = __webpack_require__(/*! three-orbit-controls */ 2)(_three2.default);
+	
+	var scene = new _three2.default.Scene();
+	var camera = new _three2.default.PerspectiveCamera(_configEs2.default.fov, _configEs2.default.w / _configEs2.default.h, _configEs2.default.near, _configEs2.default.far);
+	var renderer = new _three2.default.WebGLRenderer();
+	renderer.shadowMap.enabled = true;
+	scene.up = new _three2.default.Vector3(0, 0, 1);
+	
+	if (_configEs2.default.debug) {
+	  var size = _configEs2.default.size + 1;
+	  var step = 1;
+	  var gridHelper = new _three2.default.GridHelper(size, step);
+	  if (_configEs2.default.debug) console.info('init', 'gridHelper:', 'size:', size);
+	  scene.add(gridHelper);
+	};
+	
+	renderer.setSize(_configEs2.default.w * _configEs2.default.zoom, _configEs2.default.h * _configEs2.default.zoom);
+	
+	var axes = ['x', 'y', 'z'];
+	
+	window.camereReset = function () {
+	  var sizeToUse = 'size';
+	  var distance = _configEs2.default[sizeToUse] * 1.5;
+	  camera.position.x = distance;
+	  camera.position.y = distance;
+	  camera.position.z = distance;
+	  camera.lookAt({ x: _configEs2.default[sizeToUse], y: _configEs2.default[sizeToUse], z: _configEs2.default[sizeToUse] });
+	};
+	
+	window.camereReset();
+	
+	window.controls = new OrbitControls(camera, renderer.domElement);
+	window.controls.autoRotate = _configEs2.default.autoRotate;
+	
+	document.body.appendChild(renderer.domElement);
+	
+	exports.scene = scene;
+	exports.camera = camera;
+	exports.renderer = renderer;
+
+/***/ },
 /* 11 */
 /*!**************************!*\
   !*** ./src/light.es6.js ***!
@@ -42457,9 +42460,9 @@
 	
 	var _three2 = _interopRequireDefault(_three);
 	
-	var _initEs = __webpack_require__(/*! ./init.es6.js */ 9);
+	var _initEs = __webpack_require__(/*! ./init.es6.js */ 10);
 	
-	var _configEs = __webpack_require__(/*! ./config.es6.js */ 2);
+	var _configEs = __webpack_require__(/*! ./config.es6.js */ 3);
 	
 	var _configEs2 = _interopRequireDefault(_configEs);
 	
@@ -42549,103 +42552,23 @@
 	});
 	
 	exports.default = function (cfg, done) {
-	  var rule = rule_O_specs[cfg.version];
 	  console.info('\tSTART: rule_0 using version: ' + cfg.version);
 	
 	  var data = (0, _scanEs2.default)(cfg.size, 1);
-	  var newData = [];
-	  if ("0.0" === cfg.version) {
-	    var _loop = function _loop() {
-	      var bit = data[i];
-	      var index = bit.i;
-	      var type = 'raw';
-	      var level = 0;
-	      var levelSize = cfg.size;
-	      var subSeed = cfg.seed[index];
-	      var position = { x: bit.x, y: bit.y, z: bit.z };
-	      var size = rule.data[subSeed].size;
-	      axes.forEach(function (axis) {
-	        position[axis] += rule.data[subSeed].position[axis];
-	      });
-	      var raw = { type: type, level: level, levelSize: levelSize, index: index, subSeed: subSeed, position: position, size: size };
-	      var object = {
-	        type: 'object'
-	      };
-	      var geometry = new THREE.BoxGeometry(size.x, size.y, size.z, 1, 1, 1);
-	      object.material = new THREE.MeshPhongMaterial({
-	        color: 0xdddddd,
-	        specular: 0x009900,
-	        shininess: 30,
-	        fog: true,
-	        shading: THREE.FlatShading
-	      });
-	
-	      var cube = new THREE.Mesh(geometry, object.material);
-	      cube.castShadow = true;
-	      cube.receiveShadow = true;
-	
-	      axes.forEach(function (axis) {
-	        cube.position[axis] = position[axis];
-	      });
-	
-	      object.vertices = geometry.vertices;
-	      newData.push({ raw: raw, object: object });
-	    };
-	
-	    for (var i = 0; i < data.length; i++) {
-	      _loop();
-	    }
-	    data = newData;
+	  switch (cfg.version) {
+	    case "0.0":
+	      data = (0, _rule0V00Es2.default)(cfg, data);
+	      break;
+	    case "1.0":
+	      data = (0, _rule0V10Es2.default)(cfg, data);
+	      break;
+	    case "2.0":
+	      data = (0, _rule0V20Es2.default)(cfg, data);
+	      break;
+	    default:
+	      data = (0, _rule0V20Es2.default)(cfg, data);
 	  }
 	
-	  // if ("1.0" === cfg.version) {
-	  //   for (var i = 0; i < data.length; i++) {
-	  //     let bit = data[i];
-	  //     let index = bit.i;
-	  //     let type = 'raw';
-	  //     let level = 0;
-	  //     let levelSize = cfg.size;
-	  //     let subSeed = cfg.seed[index];
-	  //     let hexSeed = parseInt(subSeed, 16);
-	  //     let position = {
-	  //       x: bit.x + rule.data[hexSeed + POSITION_X],
-	  //       y: bit.y + rule.data[hexSeed + POSITION_Y],
-	  //       z: bit.z + rule.data[hexSeed + POSITION_Z]
-	  //     };
-	  //     let size = {
-	  //       x: rule.data[hexSeed + SIZE_X],
-	  //       y: rule.data[hexSeed + SIZE_Y],
-	  //       z: rule.data[hexSeed + SIZE_Z]
-	  //     };
-	  //     let raw = { type, level, levelSize, index, subSeed, position, size };
-	  //     let object = {
-	  //       type: 'object'
-	  //     };
-	  //     let geometry = new THREE.BoxGeometry(
-	  //       size.x, size.y, size.z,
-	  //       1, 1, 1
-	  //     );
-	  //     object.material = new THREE.MeshPhongMaterial( {
-	  //       color: 0xdddddd,
-	  //       specular: 0x009900,
-	  //       shininess: 30,
-	  //       fog: true,
-	  //       shading: THREE.FlatShading
-	  //     } );
-	  //
-	  //     let cube = new THREE.Mesh( geometry, object.material );
-	  //     cube.castShadow = true;
-	  //     cube.receiveShadow = true;
-	  //
-	  //     axes.forEach((axis) => {
-	  //       cube.position[axis] = position[axis]
-	  //     });
-	  //
-	  //     object.vertices = geometry.vertices;
-	  //     newData.push({ raw, object });
-	  //   }
-	  //    data = newData;
-	  // }
 	  if (done) {
 	    done(null, data);
 	  } else {
@@ -42665,220 +42588,21 @@
 	
 	var _scanEs2 = _interopRequireDefault(_scanEs);
 	
+	var _rule0V00Es = __webpack_require__(/*! ./rule.0.v.0.0.es6.js */ 16);
+	
+	var _rule0V00Es2 = _interopRequireDefault(_rule0V00Es);
+	
+	var _rule0V10Es = __webpack_require__(/*! ./rule.0.v.1.0.es6.js */ 17);
+	
+	var _rule0V10Es2 = _interopRequireDefault(_rule0V10Es);
+	
+	var _rule0V20Es = __webpack_require__(/*! ./rule.0.v.2.0.es6.js */ 43);
+	
+	var _rule0V20Es2 = _interopRequireDefault(_rule0V20Es);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	var rule_O_specs = {
-	  "0.0": {
-	    "version": "0.0",
-	    "name": "volumetric density",
-	    "method": "scan",
-	    "data": {
-	      "0": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        }
-	      },
-	
-	      "1": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "2": {
-	        "position": {
-	          "x": 0.5,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "3": {
-	        "position": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "4": {
-	        "position": {
-	          "x": 0,
-	          "y": 0.5,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "5": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0.5
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "6": {
-	        "position": {
-	          "x": 0.5,
-	          "y": 0,
-	          "z": 0.5
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "7": {
-	        "position": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	      "8": {
-	        "position": {
-	          "x": 0,
-	          "y": 0.5,
-	          "z": 0.5
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 0.5,
-	          "z": 0.5
-	        }
-	      },
-	
-	      "9": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 1,
-	          "z": 1
-	        }
-	      },
-	      "a": {
-	        "position": {
-	          "x": 0.5,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 0.5,
-	          "y": 1,
-	          "z": 1
-	        }
-	      },
-	      "b": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 1,
-	          "y": 0.5,
-	          "z": 1
-	        }
-	      },
-	      "c": {
-	        "position": {
-	          "x": 0,
-	          "y": 0.5,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 1,
-	          "y": 0.5,
-	          "z": 1
-	        }
-	      },
-	      "d": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 1,
-	          "y": 1,
-	          "z": 0.5
-	        }
-	      },
-	      "e": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0.5
-	        },
-	        "size": {
-	          "x": 1,
-	          "y": 1,
-	          "z": 0.5
-	        }
-	      },
-	
-	      "f": {
-	        "position": {
-	          "x": 0,
-	          "y": 0,
-	          "z": 0
-	        },
-	        "size": {
-	          "x": 1,
-	          "y": 1,
-	          "z": 1
-	        }
-	      }
-	    }
-	  },
-	  "1.0": {
-	    "version": "1.0",
-	    "name": "volumetric density",
-	    "method": "scan",
-	    "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 0, 0.5, 0, 0.5, 0.5, 0.5, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0, 0, 0.5, 1, 1, 0.5, 0, 0, 0.5, 1, 1, 0, 0, 0, 1, 0.5, 1, 0, 0.5, 0, 1, 0.5, 1, 0, 0, 0, 1, 1, 0.5, 0, 0, 0.5, 1, 1, 0.5, 0, 0, 0, 1, 1, 1]
-	  }
-	};
 	
 	var POSITION_X = 0;
 	var POSITION_Y = 1;
@@ -43007,6 +42731,153 @@
 
 /***/ },
 /* 16 */
+/*!***************************************!*\
+  !*** ./src/rules/rule.0.v.0.0.es6.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var rule = __webpack_require__(/*! ../../rules/rule.0.v.0.0.json */ 41);
+	var axes = ['x', 'y', 'z'];
+	
+	exports.default = function (cfg, data) {
+	  var newData = [];
+	
+	  var _loop = function _loop() {
+	    var bit = data[i];
+	    var index = bit.i;
+	    var type = 'raw';
+	    var level = 0;
+	    var levelSize = cfg.size;
+	    var subSeed = cfg.seed[index];
+	    var position = { x: bit.x, y: bit.y, z: bit.z };
+	    var size = rule.data[subSeed].size;
+	    axes.forEach(function (axis) {
+	      position[axis] += rule.data[subSeed].position[axis];
+	    });
+	    var raw = { type: type, level: level, levelSize: levelSize, index: index, subSeed: subSeed, position: position, size: size };
+	    var object = {
+	      type: 'object'
+	    };
+	    var geometry = new THREE.BoxGeometry(size.x, size.y, size.z, 1, 1, 1);
+	    object.material = new THREE.MeshPhongMaterial({
+	      color: 0xdddddd,
+	      specular: 0x009900,
+	      shininess: 30,
+	      fog: true,
+	      shading: THREE.FlatShading
+	    });
+	
+	    var cube = new THREE.Mesh(geometry, object.material);
+	    cube.castShadow = true;
+	    cube.receiveShadow = true;
+	
+	    axes.forEach(function (axis) {
+	      cube.position[axis] = position[axis];
+	    });
+	
+	    object.vertices = geometry.vertices;
+	    newData.push({ raw: raw, object: object });
+	  };
+	
+	  for (var i = 0; i < data.length; i++) {
+	    _loop();
+	  }
+	  return newData;
+	};
+
+/***/ },
+/* 17 */
+/*!***************************************!*\
+  !*** ./src/rules/rule.0.v.1.0.es6.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var rule = __webpack_require__(/*! ../../rules/rule.0.v.1.0.json */ 42);
+	var axes = ['x', 'y', 'z'];
+	
+	exports.default = function (cfg, data) {
+	  var rule = cfg.rule;
+	  var newData = [];
+	
+	  var _loop = function _loop() {
+	    var bit = data[i];
+	    var index = bit.i;
+	    var type = 'raw';
+	    var level = 0;
+	    var levelSize = cfg.size;
+	    var subSeed = cfg.seed[index];
+	    var hexSeed = parseInt(subSeed, 16);
+	    var position = {
+	      x: bit.x + rule.data[hexSeed + POSITION_X],
+	      y: bit.y + rule.data[hexSeed + POSITION_Y],
+	      z: bit.z + rule.data[hexSeed + POSITION_Z]
+	    };
+	    var size = {
+	      x: rule.data[hexSeed + SIZE_X],
+	      y: rule.data[hexSeed + SIZE_Y],
+	      z: rule.data[hexSeed + SIZE_Z]
+	    };
+	    var raw = { type: type, level: level, levelSize: levelSize, index: index, subSeed: subSeed, position: position, size: size };
+	    var object = {
+	      type: 'object'
+	    };
+	    var geometry = new THREE.BoxGeometry(size.x, size.y, size.z, 1, 1, 1);
+	    object.material = new THREE.MeshPhongMaterial({
+	      color: 0xdddddd,
+	      specular: 0x009900,
+	      shininess: 30,
+	      fog: true,
+	      shading: THREE.FlatShading
+	    });
+	
+	    var cube = new THREE.Mesh(geometry, object.material);
+	    cube.castShadow = true;
+	    cube.receiveShadow = true;
+	
+	    axes.forEach(function (axis) {
+	      cube.position[axis] = position[axis];
+	    });
+	
+	    object.vertices = geometry.vertices;
+	    newData.push({ raw: raw, object: object });
+	  };
+	
+	  for (var i = 0; i < data.length; i++) {
+	    _loop();
+	  }
+	  return newData;
+	};
+
+/***/ },
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
 /*!*****************************!*\
   !*** ./src/putBlock.es6.js ***!
   \*****************************/
@@ -43030,8 +42901,9 @@
 	  if (!data) {
 	    console.error('no data, aborting');
 	    return;
+	  } else if (data.raw) {
+	    putBlock(scene, data.raw);
 	  }
-	  data = data.raw;
 	
 	  var geometry = new _three2.default.BoxGeometry(data.size.x, data.size.y, data.size.z, 1, 1, 1);
 	  // let material = new THREE.MeshLambertMaterial( { color: c } )
@@ -43060,7 +42932,7 @@
 	exports.default = putBlock;
 
 /***/ },
-/* 17 */
+/* 37 */
 /*!******************************!*\
   !*** ./src/putObject.es6.js ***!
   \******************************/
@@ -43081,6 +42953,538 @@
 	};
 	
 	exports.default = putObject;
+
+/***/ },
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */
+/*!*********************************!*\
+  !*** ./rules/rule.0.v.0.0.json ***!
+  \*********************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+		"version": "0.0",
+		"name": "volumetric density",
+		"method": "scan",
+		"data": {
+			"0": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"1": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"2": {
+				"position": {
+					"x": 0.5,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"3": {
+				"position": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"4": {
+				"position": {
+					"x": 0,
+					"y": 0.5,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"5": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0.5
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"6": {
+				"position": {
+					"x": 0.5,
+					"y": 0,
+					"z": 0.5
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"7": {
+				"position": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"8": {
+				"position": {
+					"x": 0,
+					"y": 0.5,
+					"z": 0.5
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"9": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 1,
+					"z": 1
+				}
+			},
+			"a": {
+				"position": {
+					"x": 0.5,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 1,
+					"z": 1
+				}
+			},
+			"b": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 1,
+					"y": 0.5,
+					"z": 1
+				}
+			},
+			"c": {
+				"position": {
+					"x": 0,
+					"y": 0.5,
+					"z": 0
+				},
+				"size": {
+					"x": 1,
+					"y": 0.5,
+					"z": 1
+				}
+			},
+			"d": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 1,
+					"y": 1,
+					"z": 0.5
+				}
+			},
+			"e": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0.5
+				},
+				"size": {
+					"x": 1,
+					"y": 1,
+					"z": 0.5
+				}
+			},
+			"f": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 1,
+					"y": 1,
+					"z": 1
+				}
+			}
+		}
+	};
+
+/***/ },
+/* 42 */
+/*!*********************************!*\
+  !*** ./rules/rule.0.v.1.0.json ***!
+  \*********************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+		"version": "1.0",
+		"name": "volumetric density",
+		"method": "scan",
+		"data": [
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0.5,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0.5,
+			0,
+			0,
+			0,
+			0.5,
+			1,
+			1,
+			0.5,
+			0,
+			0,
+			0.5,
+			1,
+			1,
+			0,
+			0,
+			0,
+			1,
+			0.5,
+			1,
+			0,
+			0.5,
+			0,
+			1,
+			0.5,
+			1,
+			0,
+			0,
+			0,
+			1,
+			1,
+			0.5,
+			0,
+			0,
+			0.5,
+			1,
+			1,
+			0.5,
+			0,
+			0,
+			0,
+			1,
+			1,
+			1
+		]
+	};
+
+/***/ },
+/* 43 */
+/*!***************************************!*\
+  !*** ./src/rules/rule.0.v.2.0.es6.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var rule = __webpack_require__(/*! ../../rules/rule.0.v.2.0.json */ 44);
+	var axes = ['x', 'y', 'z'];
+	//WIP
+	
+	exports.default = function (cfg, data) {
+	  var newData = [];
+	  console.log('"########"', rule.data);
+	
+	  var _loop = function _loop() {
+	    var bit = data[i];
+	    var index = bit.i;
+	    var type = 'raw';
+	    var level = 0;
+	    var levelSize = cfg.size;
+	    var subSeed = cfg.seed[index];
+	    var position = {};
+	    var size = {};
+	    axes.forEach(function (axis) {
+	      position[axis] = bit[axis];
+	      if (!rule.data[subSeed].position || !rule.data[subSeed].position[axis]) {
+	        position[axis] += rule.data.default.position[axis];
+	      } else {
+	        position[axis] += rule.data[subSeed].position[axis];
+	      }
+	      if (!rule.data[subSeed].size || !rule.data[subSeed].size[axis]) {
+	        size[axis] = rule.data.default.size[axis];
+	      } else {
+	        size[axis] = rule.data[subSeed].size[axis];
+	      }
+	
+	      // if (rule.data[subSeed].position) {
+	      //   if (rule.data[subSeed].position[axis]) {
+	      //     position[axis] += rule.data[subSeed].position[axis];
+	      //   } else {
+	      //     position[axis] += rule.data.default.position[axis];
+	      //   }
+	      // } else {
+	      //   position[axis] += rule.data.default.position[axis];
+	      // }
+	      // size[axis] = rule.data[subSeed].size[axis] ? rule.data[subSeed].size[axis]:rule.data.default.size[axis];
+	    });
+	    var raw = { type: type, level: level, levelSize: levelSize, index: index, subSeed: subSeed, position: position, size: size };
+	    var object = {
+	      type: 'object'
+	    };
+	    var geometry = new THREE.BoxGeometry(size.x, size.y, size.z, 1, 1, 1);
+	    object.material = new THREE.MeshPhongMaterial({
+	      color: 0xdddddd,
+	      specular: 0x009900,
+	      shininess: 30,
+	      fog: true,
+	      shading: THREE.FlatShading
+	    });
+	
+	    var cube = new THREE.Mesh(geometry, object.material);
+	    cube.castShadow = true;
+	    cube.receiveShadow = true;
+	
+	    axes.forEach(function (axis) {
+	      cube.position[axis] = position[axis];
+	    });
+	
+	    object.vertices = geometry.vertices;
+	    newData.push({ raw: raw, object: object });
+	  };
+	
+	  for (var i = 0; i < data.length; i++) {
+	    _loop();
+	  }
+	  return newData;
+	};
+
+/***/ },
+/* 44 */
+/*!*********************************!*\
+  !*** ./rules/rule.0.v.2.0.json ***!
+  \*********************************/
+/***/ function(module, exports) {
+
+	module.exports = {
+		"version": "2.0",
+		"name": "volumetric density",
+		"method": "scan",
+		"data": {
+			"0": {
+				"size": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				}
+			},
+			"2": {
+				"position": {
+					"x": 0.5
+				}
+			},
+			"3": {
+				"position": {
+					"x": 0.5,
+					"y": 0.5
+				}
+			},
+			"4": {
+				"position": {
+					"y": 0.5
+				}
+			},
+			"5": {
+				"position": {
+					"z": 0.5
+				}
+			},
+			"6": {
+				"position": {
+					"x": 0.5,
+					"z": 0.5
+				}
+			},
+			"7": {
+				"position": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"8": {
+				"position": {
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"9": {
+				"size": {
+					"y": 1,
+					"z": 1
+				}
+			},
+			"default": {
+				"position": {
+					"x": 0,
+					"y": 0,
+					"z": 0
+				},
+				"size": {
+					"x": 0.5,
+					"y": 0.5,
+					"z": 0.5
+				}
+			},
+			"a": {
+				"position": {
+					"x": 0.5
+				},
+				"size": {
+					"x": 0.5,
+					"y": 1,
+					"z": 1
+				}
+			},
+			"b": {
+				"size": {
+					"x": 1,
+					"z": 1
+				}
+			},
+			"c": {
+				"position": {
+					"y": 0.5
+				},
+				"size": {
+					"x": 1,
+					"z": 1
+				}
+			},
+			"d": {
+				"size": {
+					"x": 1,
+					"y": 1
+				}
+			},
+			"e": {
+				"position": {
+					"z": 0.5
+				},
+				"size": {
+					"x": 1,
+					"y": 1
+				}
+			},
+			"f": {
+				"size": {
+					"x": 1,
+					"y": 1,
+					"z": 1
+				}
+			}
+		}
+	};
 
 /***/ }
 /******/ ]);

@@ -1,5 +1,5 @@
 import Configurator from './configurator.es6.js';
-var cfg = new Configurator(8, 'proc.edu.ria');
+var cfg = new Configurator(4, 'proc.edu.ria');
 // console.log('cfg', cfg);
 cfg.dev = true;
 cfg.debug = true;

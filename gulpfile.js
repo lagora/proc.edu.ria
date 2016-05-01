@@ -5,7 +5,7 @@ var es6transpiler = require('gulp-es6-transpiler');
 gulp.task('default', function () {
 	return gulp.src('src/proc.edu.ria.es6.js')
 		.pipe(es6transpiler({
-      "environments": ["node"],
+      "environments": ["node", "browser"],
     }))
 		.pipe(rename('proc.edu.ria.js'))
 		.pipe(gulp.dest('build'));

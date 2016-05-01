@@ -3,7 +3,7 @@ import md5 from 'md5';
 class Configurator {
   constructor(size, seed) {
     this.cache = [];
-    this.size = size || 8;
+    this.size = size || 4;
     this.cubicSize = Math.pow(size, 3);
     var mkSeed = (str) => md5(str);
     this.seedSource = seed ? seed:'proc.edu.ria';
