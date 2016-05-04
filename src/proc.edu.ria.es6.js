@@ -1,5 +1,5 @@
 import THREE from 'three';
-// import controls from 'three-orbit-controls';
+import controls from 'three-orbit-controls';
 import cfg from './config.es6.js';
 import { scene, camera, renderer, render } from './init.es6.js';
 import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from './light.es6.js';
