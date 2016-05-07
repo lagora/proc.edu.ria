@@ -1,43 +1,42 @@
-import * as THREE from 'three';
-import waterfall from 'async-waterfall';
-
-import scan from '../scan.es6.js';
-
-import rule_0_v00 from './rule.0.v.0.0.es6.js';
-import rule_0_v10 from './rule.0.v.1.0.es6.js';
-import rule_0_v20 from './rule.0.v.2.0.es6.js';
-
-const POSITION_X = 0;
-const POSITION_Y = 1;
-const POSITION_Z = 2;
-const SIZE_X = 3;
-const SIZE_Y = 4;
-const SIZE_Z = 5;
-
+import * as methods from '../methods.es6.js';
+var rule = require('../../rules/rule.0.json');
 var axes = ['x', 'y', 'z'];
-var methods = {};
 
-export default function (cfg, done) {
-  console.info(`\tSTART: rule_0 using version: ${cfg.version}`);
+export default function (world, callback) {
+  console.time(`\tSTART: rule_0 using version: ${rule.version}`);
+  world = methods.ruleInit(world);
+  for (var i = 0; i < world.scan.length; i++) {
+    let bit = world.scan[i];
+    let index = bit.i;
+    let type = 'raw';
+    let level = 0;
+    let levelSize = world.size;
+    let subSeed = world.seed[index] || 'proc.edu.ria';
+    let size = { x: 0, y: 0, z: 0 };
+    if (rule.data[subSeed] && rule.data[subSeed].size) {
+      size = rule.data[subSeed].size;
+    }
+    let position = {};
+    ['x', 'y', 'z'].forEach((axis) => {
+      //world position
+      position[axis] = bit[axis];
 
-  let data = scan(cfg.size, 1);
-  switch (cfg.version) {
-    case "0.0":
-      data  = rule_0_v00(cfg, data);
-      break;
-    case "1.0":
-      data  = rule_0_v10(cfg, data);
-      break;
-    case "2.0":
-      data  = rule_0_v20(cfg, data);
-      break;
-    default:
-    data = rule_0_v20(cfg, data);
+      //putBlock position cube using a axial center anchor vertex
+      position[axis] += size[axis] / 2;
+
+      if (rule.data[subSeed].position) {
+        if (rule.data[subSeed].position[axis]) {
+          position[axis] += rule.data[subSeed].position[axis];
+        }
+      }
+    });
+
+    let renderMethod = rule.renderMethod;
+    let raw = { type, level, levelSize, index, subSeed, position, size, renderMethod };
+    // console.log(raw);
+    world.data[world.rule.index].push(raw);
   }
 
-  if (done) {
-    done(null, data);
-  } else {
-    return data;
-  }
+  console.timeEnd(`\tEND`);
+  callback(null, world);
 };

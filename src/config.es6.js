@@ -8,10 +8,13 @@ cfg.autoRotate = true;
 cfg.w = 320;
 cfg.h = 240;
 cfg.fov = 75;
-cfg.near = 0.1;
+cfg.near = 0.001;
 cfg.far = 1000;
 cfg.zoom = 2;
 cfg.levelMax = 0;
+cfg.cameraType = 'orbit';
+cfg.cameraTypes = ['orbit', 'fps'];
+cfg.clock = new THREE.Clock();
 
 // if (cfg.debug) {
 //   console.info('cfg:', cfg);

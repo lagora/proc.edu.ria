@@ -1,44 +1,51 @@
-import THREE from 'three';
-import controls from 'three-orbit-controls';
+import 'babel-polyfill';
 import cfg from './config.es6.js';
-import { scene, camera, renderer, render } from './init.es6.js';
+import THREE from 'three';
+import Camera from './camera.es6.js';
+import { scene, renderer, render } from './init.es6.js';
 import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from './light.es6.js';
+import scan from './scan.es6.js';
 import generator from './generator.es6.js';
-import putBlock from './putBlock.es6.js';
-import putObject from './putObject.es6.js';
+import * as renderMethods from './methods.es6.js';
+import pilar from './pilar.es6.js';
 
-let data = []
+var camera = new Camera();
+
+let world = {
+  seed: cfg.rawSeed,
+  size: cfg.size,
+  unit: cfg.unit,
+  cubicSize: cfg.cubicSize,
+  scan: scan(cfg.size, 1),
+  data: []
+};
+
 let geometry = new THREE.BufferGeometry();
 geometry.dynamic = true;
 
-let angle = 0;
-var put = {
-  'raw': putBlock,
-  'object': putObject
-};
-var putMethod = 'raw';
-
 var update = () => {
-  if (cfg.autoRotate) controls.update();
+  cfg.delta = cfg.clock.getDelta();
 
   if (cfg.debug) {
     HemisphereLightHelper.update();
     DirectionalLightHelper.update();
   }
 
-  camera.lookAt(new THREE.Vector3());
+  camera.update();
+  renderer.clear();
   requestAnimationFrame( update );
-  renderer.render( scene, camera );
-  angle += 0.25;
+  renderer.render( scene, camera.camera );
 };
 
 update();
 
-generator(cfg, (err, data) => {
-  console.log('err', err);
-  if (Array.isArray(data)) {
-    data.forEach((item) => {
-      put[putMethod](scene, item[putMethod], geometry);
+pilar(scene, cfg);
+
+generator(world, (err, newWorld) => {
+  world = newWorld;
+  world.data.forEach((levelData) => {
+    levelData.forEach((item) => {
+      renderMethods[item.renderMethod](scene, item, world.size);
     });
-  }
+  });
 });

@@ -14,6 +14,7 @@ class Configurator {
       // console.info(`Filling up seed: ${((this.rawSeed.length/this.cubicSize)*100).toString().substr(0, 2)}% => ${remaining}/${this.cubicSize}`)
       this.rawSeed += mkSeed(this.rawSeed).substr(0, remaining);
     }
+    this.seed = this.rawSeed;
   }
 };
 

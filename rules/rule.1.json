@@ -1,0 +1,15 @@
+{
+  "version":"0.0",
+  "name":"volumes connexion",
+  "method": "scan",
+  "data": {
+    "f:x:f": {
+      "position": {
+
+      },
+      "size": {
+
+      }
+    },
+  }
+}
