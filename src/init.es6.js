@@ -24,24 +24,25 @@ renderer.setSize( cfg.w * cfg.zoom, cfg.h * cfg.zoom );
 
 let axes = ['x', 'y', 'z'];
 
-var material = new THREE.LineBasicMaterial({
+if (cfg.debug) {
+  var material = new THREE.LineBasicMaterial({
     color: 0xffffff
-});
-let geometry = new THREE.Geometry();
-for (var x = 0; x <= cfg.size; x++) {
-  for (var y = 0; y <= cfg.size; y++) {
-    for (var z = 0; z <= cfg.size; z++) {
-      geometry.vertices.push(new THREE.Vector3(0, y, z));
-      geometry.vertices.push(new THREE.Vector3(cfg.size, y, z));
-      geometry.vertices.push(new THREE.Vector3(x, y, 0));
-      geometry.vertices.push(new THREE.Vector3(x, y, cfg.size));
-      geometry.vertices.push(new THREE.Vector3(x, 0, z));
-      geometry.vertices.push(new THREE.Vector3(x, cfg.size, z));
+  });
+  let geometry = new THREE.Geometry();
+  for (var x = 0; x <= cfg.size; x++) {
+    for (var y = 0; y <= cfg.size; y++) {
+      for (var z = 0; z <= cfg.size; z++) {
+        geometry.vertices.push(new THREE.Vector3(0, y, z));
+        geometry.vertices.push(new THREE.Vector3(cfg.size, y, z));
+        geometry.vertices.push(new THREE.Vector3(x, y, 0));
+        geometry.vertices.push(new THREE.Vector3(x, y, cfg.size));
+        geometry.vertices.push(new THREE.Vector3(x, 0, z));
+        geometry.vertices.push(new THREE.Vector3(x, cfg.size, z));
+      }
     }
   }
+  scene.add(new THREE.LineSegments(geometry, material));
 }
-scene.add(new THREE.LineSegments(geometry, material));
-
 
 document.body.appendChild( renderer.domElement );
 

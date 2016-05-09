@@ -51,5 +51,5 @@ gulp.task('watch', function () {
 
 gulp.task('rules_build_dist', ['rules', 'dist', 'build']);
 gulp.task('build_dist', ['dist', 'build']);
-// gulp.task('default', ['rules', 'dist', 'build']);
-gulp.task('default', ['build_dist']);
+gulp.task('default', ['rules', 'dist', 'build']);
+// gulp.task('default', ['build_dist']);

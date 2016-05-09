@@ -3,7 +3,7 @@ import THREE from 'three';
 
 let axes = ['x', 'y', 'z'];
 
-var putBlock = (scene, data, worldSize) => {
+var putBlock = (scene, data, laterMerging = true) => {
   if (!data) {
     console.error('no data, aborting');
     return;
@@ -11,7 +11,7 @@ var putBlock = (scene, data, worldSize) => {
     putBlock(scene, data.raw);
   }
 
-  let geometry = new THREE.BoxBufferGeometry(
+  let geometry = new THREE.BoxGeometry(
     data.size.x, data.size.y, data.size.z
   );
   let material = new THREE.MeshPhongMaterial( {
@@ -22,26 +22,15 @@ var putBlock = (scene, data, worldSize) => {
     wireframe: cfg.wireframe,
     shading: THREE.FlatShading
   } );
-  let cube = new THREE.Mesh( geometry, material );
-  cube.castShadow = true;
-  cube.receiveShadow = true;
+  let mesh = new THREE.Mesh( geometry, material );
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  mesh.position.set(data.position.x, data.position.y, data.position.z);
 
-  cube.position.set(data.position.x, data.position.y, data.position.z);
-
-  scene.add( cube );
-
-  if (1 == 0 && cfg.debug) {
-    let cube = new THREE.Mesh(
-      new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshBasicMaterial( { wireframe: true })
-    );
-    // data.z += cfg.size / 2;
-    cube.position.set(
-      Math.floor(data.position.x) + 0.5,
-      Math.floor(data.position.y) + worldSize / 2,
-      Math.floor(data.position.z) + 0.5
-    );
-    scene.add( cube );
+  if (laterMerging) {
+    return mesh;
+  } else {
+    scene.add( mesh );
   }
 };
 

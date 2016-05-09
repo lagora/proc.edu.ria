@@ -1,10 +1,11 @@
 import waterfall from 'async-waterfall';
 import * as r from './rules.es6.js';
 
-export default function (world, done) {
-  world.unit = 1;
-  world.version = "0.0";
+function generator (cfg, callback) {
+  console.trace('generator', cfg);
   waterfall([(next) => {
-    next(null, world);
-  }].concat(Object.values(r)), done);
+    next(null, cfg);
+  }].concat(Object.values(r)), callback);
 }
+
+export default generator;

@@ -1,25 +1,27 @@
 import Configurator from './configurator.es6.js';
-var cfg = new Configurator(4, 'proc.edu.ria');
-// console.log('cfg', cfg);
+import querystringparser from '../node_modules/querystringparser/js/querystringparser.js';
+var querystring = window.location.search ? window.location.search.substr(1):'';
+var qs = querystringparser.parse(querystring);
+var cfg = new Configurator(qs.size || 4, 'proc.edu.ria');
 cfg.dev = true;
-cfg.debug = true;
-cfg.wireframe = false;
-cfg.autoRotate = false;
-cfg.w = 320;
-cfg.h = 240;
-cfg.fov = 75;
-cfg.near = 0.001;
-cfg.far = 1000;
-cfg.zoom = 2;
-cfg.levelMax = 0;
-cfg.cameraType = 'orbit';
+cfg.debug = qs.debug || false;
+cfg.wireframe = qs.wireframe || false;
+cfg.autoRotate = qs.autoRotate || false;
+cfg.w = qs.w || 320;
+cfg.h = qs.h || 240;
+cfg.fov = qs.fov || 75;
+cfg.near = qs.near || 0.001;
+cfg.far = qs.far || 1000;
+cfg.zoom = qs.zoom || 2;
+cfg.levelMax = qs.levelMax || 0;
+cfg.cameraType = qs.cameraType || 'orbit';
 cfg.cameraTypes = ['orbit', 'fps'];
 cfg.clock = new THREE.Clock();
 
-// if (cfg.debug) {
-//   console.info('cfg:', cfg);
-//   console.info('size', cfg.size);
-//   console.info('seed', cfg.seed.length, cfg.seed);
-// }
+if (cfg.debug) {
+  // console.log('cfg', cfg);
+  console.info('size', cfg.size);
+  console.info('seed', cfg.seed.length, cfg.seed);
+}
 
 export default cfg;
