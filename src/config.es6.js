@@ -4,6 +4,7 @@ var querystring = window.location.search ? window.location.search.substr(1):'';
 var qs = querystringparser.parse(querystring);
 var cfg = new Configurator(qs.size || 4, 'proc.edu.ria');
 cfg.dev = true;
+cfg.shadows = qs.shadows || false;
 cfg.debug = qs.debug || false;
 cfg.wireframe = qs.wireframe || false;
 cfg.autoRotate = qs.autoRotate || false;

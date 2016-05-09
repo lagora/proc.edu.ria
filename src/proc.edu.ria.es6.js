@@ -59,8 +59,8 @@ generator(world, (err, newWorld) => {
       shading: THREE.FlatShading
     } );
     let mesh = new THREE.Mesh(geometry, material);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    mesh.castShadow = cfg.shadows || true;
+    mesh.receiveShadow = cfg.shadows || true;
     scene.add(mesh);
   });
 });
