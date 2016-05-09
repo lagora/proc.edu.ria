@@ -4,11 +4,14 @@
   "description": "a procedural city",
   "main": "index.html",
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server ./dist",
+    "start": "http-server ./dist",
     "build": "./node_modules/gulp/bin/gulp.js",
     "dev": "npm run build && npm start",
     "postinstall": "npm build",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
     "async-waterfall": "^0.1.5",
     "fs-extra": "^0.30.0",
     "md5": "^2.1.0",
+    "querystringparser": "^0.1.1",
     "three": "^0.75.0",
     "three-orbit-controls": "^72.0.0"
   },
