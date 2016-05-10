@@ -1,14 +1,23 @@
 import THREE from 'three';
-let axes = ['x', 'y', 'z'];
+import scan from './scan.es6.js';
 
-export default (scene, cfg) => {
-  cfg.scan.forEach((data) => {
-    let cube = new THREE.Mesh(
-      new THREE.BoxGeometry(1, 1, 1),
-      new THREE.MeshBasicMaterial( { wireframe: true })
-    );
-    data.z += cfg.size / 2;
-    cube.position.set(data.x, data.y, data.z);
-    scene.add( cube );
+function grid(cfg) {
+  if (!cfg.debug) {
+    return;
+  }
+
+  var material = new THREE.LineBasicMaterial({color: 0xffffff});
+  let geometry = new THREE.Geometry();
+  scan(cfg.size, 1).forEach(({ i, x, y, z }) => {
+    geometry.vertices.push(new THREE.Vector3(0, y, z));
+    geometry.vertices.push(new THREE.Vector3(cfg.size, y, z));
+    geometry.vertices.push(new THREE.Vector3(x, y, 0));
+    geometry.vertices.push(new THREE.Vector3(x, y, cfg.size));
+    geometry.vertices.push(new THREE.Vector3(x, 0, z));
+    geometry.vertices.push(new THREE.Vector3(x, cfg.size, z));
   });
-};
+
+  return new THREE.LineSegments(geometry, material);
+}
+
+export default grid;

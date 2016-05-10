@@ -6,9 +6,10 @@
   "scripts": {
     "start": "http-server ./dist",
     "build": "./node_modules/gulp/bin/gulp.js",
+    "build-tests": "gulp build-test",
     "dev": "npm run build && npm start",
     "postinstall": "npm build",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register && gulp rules_build_dist"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -40,7 +41,9 @@
     "gulp-concat": "^2.6.0",
     "gulp-sourcemaps": "^2.0.0-alpha",
     "gulp-watch": "^4.3.5",
+    "jsdom": "^9.0.0",
     "mocha": "^2.4.5",
+    "mocha-jsdom": "^1.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"

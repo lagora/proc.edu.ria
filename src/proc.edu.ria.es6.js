@@ -1,29 +1,20 @@
-import 'babel-polyfill';
-import cfg from './config.es6.js';
-import THREE from 'three';
-import Camera from './camera.es6.js';
-import { scene, renderer, render } from './init.es6.js';
-import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from './light.es6.js';
-import scan from './scan.es6.js';
-import generator from './generator.es6.js';
-import * as renderMethods from './methods.es6.js';
-import mergeGeometry from './mergeGeometry.es6.js';
-import pilar from './pilar.es6.js';
+import "babel-polyfill";
+import cfg from "./config.es6.js";
+import THREE from "three";
+import Camera from "./camera.es6.js";
+import { scene, renderer, render } from "./init.es6.js";
+import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from "./light.es6.js";
+import scan from "./scan.es6.js";
+import sceneAdd from "./sceneAdd.es6.js";
+import makePilar from "./makePilar.es6.js";
+import generator from "./generator.es6.js";
+import putBlock from "./putBlock.es6.js";
+import mergeGeometry from "./mergeGeometry.es6.js";
 
-var camera = new Camera();
-
-let world = {
-  seed: cfg.seed,
-  seedHash: cfg.seedHash,
-  size: cfg.size || 4,
-  unit: cfg.unit || 1,
-  cubicSize: cfg.cubicSize,
-  scan: scan(cfg.size, 1),
-  data: []
+var renderMethods = {
+  "putBlock": putBlock
 };
-
-// let geometry = new THREE.BufferGeometry();
-// geometry.dynamic = true;
+var camera = new Camera();
 
 var update = () => {
   cfg.delta = cfg.clock.getDelta();
@@ -41,15 +32,19 @@ var update = () => {
 
 update();
 
-pilar(scene, cfg);
+let pilar = makePilar(cfg.size);
+sceneAdd(scene, pilar);
+let meshes = [];
 
-generator(world, (err, newWorld) => {
-  world.data.forEach((levelData) => {
-    let meshes = [];
-    levelData.forEach((item) => {
-      meshes.push(renderMethods[item.renderMethod](scene, item));
+generator(cfg, (err, worldData) => {
+  console.log('worldData', worldData[0][0]);
+  worldData.forEach((levelData) => {
+    levelData
+    .filter((item) => {
+      return !!item.renderMethod;
+    }).forEach((item) => {
+      meshes.push(renderMethods[item.renderMethod](item));
     });
-    let geometry = mergeGeometry(meshes);
     let material = new THREE.MeshPhongMaterial({
       color: 0xdddddd,
       specular: 0x009900,
@@ -58,9 +53,9 @@ generator(world, (err, newWorld) => {
       wireframe: cfg.wireframe,
       shading: THREE.FlatShading
     } );
-    let mesh = new THREE.Mesh(geometry, material);
+    let mesh = new THREE.Mesh(mergeGeometry(meshes), material);
     mesh.castShadow = cfg.shadows || true;
     mesh.receiveShadow = cfg.shadows || true;
-    scene.add(mesh);
+    sceneAdd(scene, mesh);
   });
 });

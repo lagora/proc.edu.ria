@@ -10,7 +10,11 @@ function all (cfg, callback) {
   console.time(`\tNULL PASS: rule_1 using version: ${rule.version}`);
 
   console.timeEnd(`\tEND`);
-  callback(null, cfg);
+  if (callback) {
+    callback(null, cfg);
+  } else {
+    return [];
+  }
 };
 
 export { one, all };

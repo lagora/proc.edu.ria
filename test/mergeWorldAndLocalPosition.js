@@ -1,6 +1,7 @@
 import "babel-polyfill";
 import mergePositions from "../src/mergeWorldAndLocalPosition.es6.js";
 import assert from "assert";
+import jsdom from "mocha-jsdom";
 
 describe("mergeWorldAndLocalPosition.js", () => {
   it("is a function", () => {

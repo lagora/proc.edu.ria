@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import position from '../src/position.es6.js';
 import assert from 'assert';
+import jsdom from "mocha-jsdom";
 
 describe("position.js", () => {
   it("is a function", () => {

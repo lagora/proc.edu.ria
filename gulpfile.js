@@ -11,7 +11,7 @@ var path = require("path");
 var glob = require("glob");
 var batch = require("gulp-batch");
 
-gulp.task("rules", function () {
+gulp.task("rules", () => {
   let code = "";
   let names = [];
   glob.sync("./src/rules/*").sort().forEach((filepath, index) => {
@@ -24,7 +24,7 @@ gulp.task("rules", function () {
   return;
 });
 
-gulp.task("dist", function () {
+gulp.task("dist", () => {
   fs.removeSync("./dist/");
   fs.removeSync("./build/");
   fs.copySync("./package.json", "./dist/package.json");
@@ -34,7 +34,7 @@ gulp.task("dist", function () {
   return;
 });
 
-gulp.task("build", function () {
+gulp.task("build", () => {
   browserify({entries: "src/proc.edu.ria.es6.js", extensions: [".es6.js"], debug: true})
     .transform(babelify, { presets: ["es2015"] })
     .bundle()
@@ -42,9 +42,34 @@ gulp.task("build", function () {
     .pipe(gulp.dest("dist"));
 });
 
+let getTestFilePath = filepath => filepath.replace('./src/', './test/').replace('.es6', '');
+gulp.task("build-tests", () => {
+  glob.sync("./src/**/*.es6.js")
+  .filter((filepath) => {
+    return !fs.existsSync(getTestFilePath(filepath));
+  }).forEach((filepath, index) => {
+    if (index > 1) return;
+    let filename = path.basename(filepath);
+    let functionName = filename.split('.')[0];
+    let testCode = `import "babel-polyfill";
+import ${functionName} from ".${filepath}";
+import assert from "assert";
+import jsdom from "mocha-jsdom";
 
-gulp.task("watch", function () {
-    watch(["./src/**/*.js", "!./src/**/rules.es6.js"], batch(function (events, done) {
+describe("${functionName}", () => {
+  jsdom();
+  it("is a function", (done) => {
+    assert(typeof ${functionName} === "function");
+    done();
+  });
+});`;
+    fs.writeFileSync(getTestFilePath(filepath), testCode, {encoding: "utf8"});
+  });
+  return;
+});
+
+gulp.task("watch", () => {
+    watch(["./src/**/*.js", "!./src/**/rules.es6.js"], batch((events, done) => {
         gulp.start("rules_build_dist", done);
     }));
 });

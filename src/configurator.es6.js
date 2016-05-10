@@ -1,4 +1,4 @@
-import md5 from 'md5';
+import md5 from "md5";
 
 class Configurator {
   constructor(size, seed) {
@@ -6,7 +6,6 @@ class Configurator {
     this.size = size || 4;
     this.cubicSize = Math.pow(size, 3);
     var mkSeed = (str) => md5(str);
-    this.seed = seed ? seed:'proc.edu.ria';
     this.seedHash = this.cache[this.seed] ? this.cache[this.seed]:mkSeed(this.seed);
 
     while (this.seedHash.length < this.cubicSize) {

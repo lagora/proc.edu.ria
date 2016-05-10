@@ -1,53 +1,48 @@
-import * as methods from '../methods.es6.js';
-var rule = require('../../rules/rule.0.json');
-var axes = ['x', 'y', 'z'];
+import THREE from 'three';
+import mergeWorldAndLocalPosition from '../mergeWorldAndLocalPosition.es6.js';
+import adjustPositionBySize from '../adjustPositionBySize.es6.js';
+import getLocalPositionByRule from '../getLocalPositionByRule.es6.js';
+import getSizeByRule from '../getSizeByRule.es6.js';
+import getRuleMaterialOptions from '../getRuleMaterialOptions.es6.js';
+import * as methods from "../methods.es6.js";
+import getRuleDataBySubseed from "../getRuleDataBySubseed.es6.js"
 
-function one(subSeed, bit) {
-  // console.log(`${rule.name} ${subSeed}`);
-  let size = { x: 0, y: 0, z: 0 };
-  if (rule.data[subSeed] && rule.data[subSeed].size) {
-    size = rule.data[subSeed].size;
-  }
-  let position = {};
-  ['x', 'y', 'z'].forEach((axis) => {
-    //world position
-    position[axis] = bit[axis];
+var rule = require("../../rules/rule.0.json");
 
-    //putBlock position cube using a axial center anchor vertex
-    position[axis] += size[axis] / 2;
-
-    if (rule.data[subSeed].position) {
-      if (rule.data[subSeed].position[axis]) {
-        position[axis] += rule.data[subSeed].position[axis];
-      }
-    }
-  });
+function one(ruleData, bit) {
+  let size = getSizeByRule(ruleData);
+  let rawLocalPosition = getLocalPositionByRule(ruleData);
+  let localPosition = adjustPositionBySize(rawLocalPosition, size);
+  let position = mergeWorldAndLocalPosition(bit, localPosition);
+  let materialOptions = getRuleMaterialOptions(rule.material.args);
+  let material = new THREE[rule.material.name](materialOptions);
   let data = { position, size };
   return data;
 }
 
 function all(cfg, callback) {
-  console.time(`\tSTART: rule_0 using version: ${rule.version}`, cfg);
   cfg.scan = cfg.scan || scan(cfg.size, cfg.unit);
   let data = [];
   for (var i = 0; i < cfg.cubicSize; i++) {
     let bit = cfg.scan[i];
-    // console.trace('bit', bit);
     let index = bit.i;
-    let _one = one(cfg.seedHash[index], bit);
-    _one.type = 'raw';
+    let subseed = cfg.seedHash[index];
+    let ruleData = getRuleDataBySubseed(rule.data, subseed);
+    let _one = one(ruleData, bit);
+    _one.type = "raw";
     _one.level = 0;
     _one.levelSize = cfg.size;
-    _one.subSeed = cfg.seedHash[index];
+    _one.subseed = cfg.seedHash[index];
     _one.renderMethod = rule.renderMethod;
     data.push(_one);
   }
-  // console.trace('data', data);
-  console.timeEnd(`\tEND`);
-  window.localStorage.setItem(`rule_0-${cfg.seed}`, data);
-  cfg.data = cfg.data || [];
-  cfg.data.push(data);
-  callback(null, cfg);
+  if (callback) {
+    cfg.data = cfg.data || [];
+    cfg.data.push(data);
+    callback(null, cfg);
+  } else {
+    return data;
+  }
 };
 
 export { all, one };

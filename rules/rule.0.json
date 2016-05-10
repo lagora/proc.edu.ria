@@ -4,6 +4,17 @@
   "method": "scan",
   "renderMethod": "putBlock",
   "renderKey": "raw",
+  "material": {
+    "name": "MeshPhongMaterial",
+    "args": {
+      "color": "0xdddddd",
+      "specular": "0x009900",
+      "shininess": 30,
+      "fog": true,
+      "wireframe": false,
+      "shading": "FlatShading"
+    }
+  },
   "data": {
     "0": {},
 
