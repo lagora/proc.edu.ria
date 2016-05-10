@@ -6,9 +6,10 @@ import { scene, renderer, render } from "./init.es6.js";
 import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from "./light.es6.js";
 import scan from "./scan.es6.js";
 import sceneAdd from "./sceneAdd.es6.js";
-import makePilar from "./makePilar.es6.js";
+import getCityPilar from "./getCityPilar.es6.js";
 import generator from "./generator.es6.js";
 import putBlock from "./putBlock.es6.js";
+import getCityBlockHelper from "./getCityBlockHelper.es6.js";
 import mergeGeometry from "./mergeGeometry.es6.js";
 
 var renderMethods = {
@@ -32,12 +33,15 @@ var update = () => {
 
 update();
 
-let pilar = makePilar(cfg.size);
+let pilar = getCityPilar(cfg.size);
 sceneAdd(scene, pilar);
+
+let _grid = getCityBlockHelper(cfg.size);
+sceneAdd(scene, _grid);
 let meshes = [];
 
 generator(cfg, (err, worldData) => {
-  console.log('worldData', worldData[0][0]);
+  console.log('worldData', worldData.length, JSON.stringify(worldData).length);
   worldData.forEach((levelData) => {
     levelData
     .filter((item) => {

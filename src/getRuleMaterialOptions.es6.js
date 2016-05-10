@@ -1,5 +1,5 @@
-import THREE from 'three';
-let keysToHex = ['color', 'specular'];
+import THREE from "three";
+let keysToHex = ["color", "specular"];
 
 function getRuleMaterialOptions (options) {
   keysToHex.filter((key) => {

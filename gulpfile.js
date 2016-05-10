@@ -1,4 +1,6 @@
 var gulp = require("gulp");
+var nodemon = require("nodemon");
+var browserSync = require('browser-sync');
 var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
@@ -68,12 +70,37 @@ describe("${functionName}", () => {
   return;
 });
 
-gulp.task("watch", () => {
-    watch(["./src/**/*.js", "!./src/**/rules.es6.js"], batch((events, done) => {
-        gulp.start("rules_build_dist", done);
+gulp.task("watch-rules", () => {
+    watch(["./rules/**/*.json"], batch((events, done) => {
+        gulp.start("rules", done);
     }));
+});
+
+gulp.task("watch-src", () => {
+  watch(["./src/**/*.js", "!./src/**/rules.es6.js"], batch((events, done) => {
+        gulp.start("build", done);
+    }));
+});
+
+gulp.task('nodemon', function (cb) {
+	var started = false;
+
+	return nodemon({
+    script: './app.js'
+  , ext: 'js json'
+  , tasks: function (changedFiles) {
+    console.log('changedFiles', changedFiles);
+      var tasks = []
+      changedFiles.forEach(function (file) {
+        if (path.extname(file) === '.js' && !~tasks.indexOf('lint')) tasks.push('lint')
+        if (path.extname(file) === '.css' && !~tasks.indexOf('cssmin')) tasks.push('cssmin')
+      })
+      return tasks;
+    }
+  })
 });
 
 gulp.task("rules_build_dist", ["rules", "dist", "build"]);
 gulp.task("build_dist", ["dist", "build"]);
-gulp.task("default", ["rules_build_dist"]);
+gulp.task("dev", ["nodemon"]);
+gulp.task("default", ["nodemon"]);

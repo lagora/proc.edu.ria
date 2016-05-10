@@ -1,4 +1,4 @@
-import putBlock from './putBlock.es6.js';
+import putBlock from "./putBlock.es6.js";
 
 function makePilar (worldSize) {
   let size = { x: worldSize, y: worldSize * 10, z: worldSize };

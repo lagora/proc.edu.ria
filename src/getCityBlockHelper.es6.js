@@ -1,7 +1,7 @@
-import THREE from 'three';
-import scan from './scan.es6.js';
+import THREE from "three";
+import scan from "./scan.es6.js";
 
-function grid(cfg) {
+function getCityBlockHelper(cfg) {
   if (!cfg.debug) {
     return;
   }
@@ -20,4 +20,4 @@ function grid(cfg) {
   return new THREE.LineSegments(geometry, material);
 }
 
-export default grid;
+export default getCityBlockHelper;

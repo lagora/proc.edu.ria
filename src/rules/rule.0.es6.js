@@ -1,19 +1,14 @@
-import THREE from 'three';
-import mergeWorldAndLocalPosition from '../mergeWorldAndLocalPosition.es6.js';
-import adjustPositionBySize from '../adjustPositionBySize.es6.js';
-import getLocalPositionByRule from '../getLocalPositionByRule.es6.js';
-import getSizeByRule from '../getSizeByRule.es6.js';
-import getRuleMaterialOptions from '../getRuleMaterialOptions.es6.js';
-import * as methods from "../methods.es6.js";
+import THREE from "three";
+import getPositionByRule from "../getPositionByRule.es6.js";
+import getSizeByRule from "../getSizeByRule.es6.js";
 import getRuleDataBySubseed from "../getRuleDataBySubseed.es6.js"
+import getRuleMaterialOptions from "../getRuleMaterialOptions.es6.js";
 
 var rule = require("../../rules/rule.0.json");
 
 function one(ruleData, bit) {
   let size = getSizeByRule(ruleData);
-  let rawLocalPosition = getLocalPositionByRule(ruleData);
-  let localPosition = adjustPositionBySize(rawLocalPosition, size);
-  let position = mergeWorldAndLocalPosition(bit, localPosition);
+  let position = getPositionByRule(ruleData, bit, size);
   let materialOptions = getRuleMaterialOptions(rule.material.args);
   let material = new THREE[rule.material.name](materialOptions);
   let data = { position, size };
@@ -32,6 +27,7 @@ function all(cfg, callback) {
     _one.type = "raw";
     _one.level = 0;
     _one.levelSize = cfg.size;
+    _one.seed = cfg.seed;
     _one.subseed = cfg.seedHash[index];
     _one.renderMethod = rule.renderMethod;
     data.push(_one);
