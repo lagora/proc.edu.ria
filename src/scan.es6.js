@@ -1,5 +1,7 @@
+import from './getCacheName.es6.js';
+
 function scan(max, step = 1) {
-  let cachedName = `scan-${max}-${step}`;
+  let cachedName = getCacheName("scan");
   var cached = window.localStorage.getItem(cachedName);
   if (!cached) {
     cached = [];
