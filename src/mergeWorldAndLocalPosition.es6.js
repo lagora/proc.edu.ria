@@ -1,4 +1,4 @@
-import axes from './axes.es6.js';
+let axes = ['x', 'y', 'z'];
 
 export default function(worldPosition, localPosition) {
   let merged = {};
