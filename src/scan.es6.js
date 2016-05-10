@@ -1,6 +1,6 @@
 function scan(max, step = 1) {
   let cachedName = `scan-${max}-${step}`;
-  var cached = false;//window.localStorage.getItem(cachedName);
+  var cached = window.localStorage.getItem(cachedName);
   if (!cached) {
     cached = [];
     let i = 0;
@@ -13,7 +13,7 @@ function scan(max, step = 1) {
         }
       }
     }
-    // window.localStorage.setItem(cachedName, cached);
+    window.localStorage.setItem(cachedName, cached);
   }
 
   return cached;
