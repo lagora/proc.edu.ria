@@ -9,6 +9,7 @@
     "modules": true
   },
   "globals": {
+    "require": true,
     "describe": true,
     "it": true,
     "xdescribe": true,
