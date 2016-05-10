@@ -1,12 +1,6 @@
-var rule = require("../../rules/rule.1.json");
-var axes = ["x", "y", "z"];
-
-function one(subSeed) {}
+// var rule = require("../../rules/rule.1.json");
 
 function all (cfg, callback) {
-  console.time(`\tNULL PASS: rule_1 using version: ${rule.version}`);
-
-  console.timeEnd(`\tEND`);
   if (callback) {
     callback(null, cfg);
   } else {
@@ -14,5 +8,5 @@ function all (cfg, callback) {
   }
 }
 
-export { one, all };
+export { all };
 export default all;

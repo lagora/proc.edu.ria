@@ -5,11 +5,14 @@
     "browser": true
   },
   "extends": "eslint:recommended",
-  "ecmaFeatures": { 
+  "ecmaFeatures": {
     "modules": true
   },
   "globals": {
+    "require": true,
     "describe": true,
-    "it": true
+    "it": true,
+    "xdescribe": true,
+    "xit": true
   }
 }

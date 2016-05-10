@@ -2,9 +2,7 @@ import "babel-polyfill";
 import cfg from "./config.es6.js";
 import THREE from "three";
 import Camera from "./camera.es6.js";
-import { scene, renderer, render } from "./init.es6.js";
-import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from "./light.es6.js";
-import scan from "./scan.es6.js";
+import { scene, renderer } from "./init.es6.js";
 import sceneAdd from "./sceneAdd.es6.js";
 import getCityPilar from "./getCityPilar.es6.js";
 import generator from "./generator.es6.js";
@@ -12,19 +10,11 @@ import putBlock from "./putBlock.es6.js";
 import getCityBlockHelper from "./getCityBlockHelper.es6.js";
 import mergeGeometry from "./mergeGeometry.es6.js";
 
-var renderMethods = {
-  "putBlock": putBlock
-};
+var renderMethods = { putBlock };
 var camera = new Camera();
 
 var update = () => {
   cfg.delta = cfg.clock.getDelta();
-
-  if (cfg.debug) {
-    HemisphereLightHelper.update();
-    DirectionalLightHelper.update();
-  }
-
   camera.update();
   renderer.clear();
   requestAnimationFrame( update );
@@ -41,7 +31,6 @@ sceneAdd(scene, _grid);
 let meshes = [];
 
 generator(cfg, (err, worldData) => {
-  console.log('worldData', worldData.length, JSON.stringify(worldData).length);
   worldData.forEach((levelData) => {
     levelData
     .filter((item) => {

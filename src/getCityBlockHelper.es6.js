@@ -8,7 +8,7 @@ function getCityBlockHelper(cfg) {
 
   var material = new THREE.LineBasicMaterial({color: 0xffffff});
   let geometry = new THREE.Geometry();
-  scan(cfg.size, 1).forEach(({ i, x, y, z }) => {
+  scan(cfg.size, 1).forEach(({ x, y, z }) => {
     geometry.vertices.push(new THREE.Vector3(0, y, z));
     geometry.vertices.push(new THREE.Vector3(cfg.size, y, z));
     geometry.vertices.push(new THREE.Vector3(x, y, 0));

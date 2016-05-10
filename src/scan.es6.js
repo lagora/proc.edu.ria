@@ -1,22 +1,19 @@
+import cfg from './config.es6.js';
+
 function scan(max, step = 1) {
-  let cachedName = `scan-${max}-${step}`;
-  var cached = false;//window.localStorage.getItem(cachedName);
-  if (!cached) {
-    cached = [];
-    let i = 0;
-    for (let x = 0; x < max; x += step) {
-      for (let y = 0; y < max; y += step) {
-        for (let z = 0; z < max; z += step) {
-          // yield { i, x, y, z };
-          cached.push({ i, x, y, z });
-          i++;
-        }
+  let i = 0;
+  let data = [];
+  for (let x = 0; x < max; x += step) {
+    for (let y = 0; y < max; y += step) {
+      for (let z = 0; z < max; z += step) {
+        // yield { i, x, y, z };
+        data.push({ i, x, y, z });
+        i++;
       }
     }
-    // window.localStorage.setItem(cachedName, cached);
   }
 
-  return cached;
-};
+  return data;
+}
 
 export default scan;

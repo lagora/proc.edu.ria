@@ -1,3 +1,4 @@
+import THREE from "three";
 import querystringparser from "../node_modules/querystringparser/js/querystringparser.js";
 import makeSeedHash from "./makeSeedHash.es6.js";
 import scan from "./scan.es6.js";
@@ -14,11 +15,5 @@ cfg.size = parseInt(cfg.size);
 cfg.seedHash = makeSeedHash(cfg);
 cfg.scan = scan(cfg.size);
 cfg.clock = new THREE.Clock();
-
-if (cfg.debug) {
-  // console.log("cfg", cfg);
-  console.info("size", cfg.size);
-  console.info("seed", cfg.seed.length, cfg.seed);
-}
 
 export default cfg;

@@ -1,6 +1,6 @@
 var gulp = require("gulp");
 var nodemon = require("nodemon");
-var browserSync = require('browser-sync');
+var browserSync = require("browser-sync");
 var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
@@ -44,15 +44,14 @@ gulp.task("build", () => {
     .pipe(gulp.dest("dist"));
 });
 
-let getTestFilePath = filepath => filepath.replace('./src/', './test/').replace('.es6', '');
+let getTestFilePath = filepath => filepath.replace("./src/", "./test/").replace(".es6", "");
 gulp.task("build-tests", () => {
   glob.sync("./src/**/*.es6.js")
   .filter((filepath) => {
     return !fs.existsSync(getTestFilePath(filepath));
-  }).forEach((filepath, index) => {
-    if (index > 1) return;
+  }).forEach((filepath) => {
     let filename = path.basename(filepath);
-    let functionName = filename.split('.')[0];
+    let functionName = filename.split(".")[0];
     let testCode = `import "babel-polyfill";
 import ${functionName} from ".${filepath}";
 import assert from "assert";
@@ -82,24 +81,17 @@ gulp.task("watch-src", () => {
     }));
 });
 
-gulp.task('nodemon', function (cb) {
+gulp.task("nodemon", function () {
 	var started = false;
 
 	return nodemon({
-    script: './app.js'
-  , ext: 'js json'
-  , tasks: function (changedFiles) {
-    console.log('changedFiles', changedFiles);
-      var tasks = []
-      changedFiles.forEach(function (file) {
-        if (path.extname(file) === '.js' && !~tasks.indexOf('lint')) tasks.push('lint')
-        if (path.extname(file) === '.css' && !~tasks.indexOf('cssmin')) tasks.push('cssmin')
-      })
-      return tasks;
-    }
-  })
+    script: "./app.js",
+    ext: "js json",
+    tasks: ["rules_build_dist"]
+  });
 });
 
+gulp.task("watch", ["watch-src"]);
 gulp.task("rules_build_dist", ["rules", "dist", "build"]);
 gulp.task("build_dist", ["dist", "build"]);
 gulp.task("dev", ["nodemon"]);
