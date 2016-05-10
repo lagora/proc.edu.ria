@@ -81,7 +81,7 @@ gulp.task("watch-src", () => {
     }));
 });
 
-gulp.task("nodemon", function (cb) {
+gulp.task("nodemon", function () {
 	var started = false;
 
 	return nodemon({
