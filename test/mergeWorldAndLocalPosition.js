@@ -4,6 +4,7 @@ import assert from "assert";
 import jsdom from "mocha-jsdom";
 
 describe("mergeWorldAndLocalPosition.js", () => {
+  jsdom();
   it("is a function", () => {
     assert(typeof mergePositions === "function");
   });
