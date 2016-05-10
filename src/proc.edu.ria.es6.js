@@ -3,8 +3,6 @@ import cfg from "./config.es6.js";
 import THREE from "three";
 import Camera from "./camera.es6.js";
 import { scene, renderer, render } from "./init.es6.js";
-import { HemisphereLight, HemisphereLightHelper, DirectionalLightHelper } from "./light.es6.js";
-import scan from "./scan.es6.js";
 import sceneAdd from "./sceneAdd.es6.js";
 import getCityPilar from "./getCityPilar.es6.js";
 import generator from "./generator.es6.js";
@@ -39,7 +37,6 @@ sceneAdd(scene, _grid);
 let meshes = [];
 
 generator(cfg, (err, worldData) => {
-  console.log('worldData', worldData.length, JSON.stringify(worldData).length);
   worldData.forEach((levelData) => {
     levelData
     .filter((item) => {

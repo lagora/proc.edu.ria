@@ -15,10 +15,4 @@ cfg.seedHash = makeSeedHash(cfg);
 cfg.scan = scan(cfg.size);
 cfg.clock = new THREE.Clock();
 
-if (cfg.debug) {
-  // console.log("cfg", cfg);
-  console.info("size", cfg.size);
-  console.info("seed", cfg.seed.length, cfg.seed);
-}
-
 export default cfg;
