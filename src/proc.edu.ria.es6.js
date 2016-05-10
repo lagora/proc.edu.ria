@@ -12,9 +12,7 @@ import putBlock from "./putBlock.es6.js";
 import getCityBlockHelper from "./getCityBlockHelper.es6.js";
 import mergeGeometry from "./mergeGeometry.es6.js";
 
-var renderMethods = {
-  "putBlock": putBlock
-};
+var renderMethods = { putBlock };
 var camera = new Camera();
 
 var update = () => {

@@ -17,6 +17,6 @@ function scan(max, step = 1) {
   }
 
   return cached;
-};
+}
 
 export default scan;

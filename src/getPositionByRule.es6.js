@@ -7,6 +7,6 @@ function getPositionByRule(ruleData, bit, size) {
   let rawLocalPosition = getLocalPositionByRule(ruleData);
   let localPosition = adjustPositionBySize(rawLocalPosition, size);
   return mergeWorldAndLocalPosition(bit, localPosition);
-};
+}
 
 export default getPositionByRule;

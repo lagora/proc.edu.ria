@@ -39,7 +39,7 @@ function all(cfg, callback) {
   } else {
     return data;
   }
-};
+}
 
 export { all, one };
 export default all;

@@ -16,7 +16,6 @@ function generator (cfg, callback) {
     try {
       data = JSON.parse(data);
     } catch(e) {
-      console.info(e);
       window.localStorage.removeItem(cacheName);
     }
   }
