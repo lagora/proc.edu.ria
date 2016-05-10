@@ -1,6 +1,6 @@
-import 'babel-polyfill';
-import mergePositions from '../src/mergeWorldAndLocalPosition.es6.js';
-import assert from 'assert';
+import "babel-polyfill";
+import mergePositions from ""../src/mergeWorldAndLocalPosition.es6.js";
+import assert from "assert";
 
 describe("mergeWorldAndLocalPosition.js", () => {
   it("is a function", () => {
