@@ -2,15 +2,12 @@ import THREE from "three";
 import getPositionByRule from "../getPositionByRule.es6.js";
 import getSizeByRule from "../getSizeByRule.es6.js";
 import getRuleDataBySubseed from "../getRuleDataBySubseed.es6.js"
-import getRuleMaterialOptions from "../getRuleMaterialOptions.es6.js";
 
 var rule = require("../../rules/rule.0.json");
 
 function one(ruleData, bit) {
   let size = getSizeByRule(ruleData);
   let position = getPositionByRule(ruleData, bit, size);
-  let materialOptions = getRuleMaterialOptions(rule.material.args);
-  let material = new THREE[rule.material.name](materialOptions);
   let data = { position, size };
   return data;
 }
