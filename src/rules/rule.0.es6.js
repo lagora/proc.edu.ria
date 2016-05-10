@@ -1,99 +1,54 @@
-import * as THREE from 'three';
-import waterfall from 'async-waterfall';
-
-import scan from '../scan.es6.js';
-
+import * as methods from '../methods.es6.js';
+var rule = require('../../rules/rule.0.json');
 var axes = ['x', 'y', 'z'];
-var methods = {};
 
-var rule_0 = (cfg, done) => {
+function one(subSeed, bit) {
+  // console.log(`${rule.name} ${subSeed}`);
+  let size = { x: 0, y: 0, z: 0 };
+  if (rule.data[subSeed] && rule.data[subSeed].size) {
+    size = rule.data[subSeed].size;
+  }
+  let position = {};
+  ['x', 'y', 'z'].forEach((axis) => {
+    //world position
+    position[axis] = bit[axis];
 
-  let then = (cfg, done) => {
-    console.info('\tSTART: rule_0', cfg.rule)
-    waterfall([
-      (next) => {
-        let data = scan(cfg.size, 1)
-        next(null, cfg, data)
-      },
-      (cfg, data, next) => {
-        data = data.map((bit) => {
-          let index = bit.i;
-          let type = 'raw';
-          let level = 0;
-          let levelSize = cfg.size;
-          let subSeed = cfg.seed[index];
-          let position = { x: bit.x, y: bit.y, z: bit.z };
-          let size = cfg.rule.data[subSeed].size;
-          axes.forEach((axis) => {
-            position[axis] += cfg.rule.data[subSeed].position[axis]
-          });
-          let raw = { type, level, levelSize, index, subSeed, position, size };
-          let object = {
-            type: 'object'
-          };
-          let geometry = new THREE.BoxGeometry(
-            size.x, size.y, size.z,
-            1, 1, 1
-          );
-          object.material = new THREE.MeshPhongMaterial( {
-            color: 0xdddddd,
-            specular: 0x009900,
-            shininess: 30,
-            fog: true,
-            shading: THREE.FlatShading
-          } );
+    //putBlock position cube using a axial center anchor vertex
+    position[axis] += size[axis] / 2;
 
-          let cube = new THREE.Mesh( geometry, object.material );
-          cube.castShadow = true;
-          cube.receiveShadow = true;
-
-          axes.forEach((axis) => {
-            cube.position[axis] = position[axis]
-          });
-
-          object.vertices = geometry.vertices;
-
-          cfg.db.insert(raw);
-          cfg.ws.sendMessage('one', JSON.stringify(raw), cfg.wsId);
-
-          cfg.db.insert(object);
-          cfg.ws.sendMessage('one', JSON.stringify(object), cfg.wsId);
-
-          // cfg.db.insert({type: 'mesh', mesh: JSON.stringify(cube)});
-          // cfg.db.insert({type: 'mesh', data: JSON.stringify(cube)});
-          // cfg.ws.sendMessage('one', JSON.stringify(cube), cfg.wsId);
-
-          return raw;
-        })
-        next(null, data);
-      },
-    ], (err, data) => {
-      console[err ? 'error':'info']('\t\t'+(err ? 'KO':'OK'), err, 'LVL 0:', data ? `${data.length * 2} entries`:'no entries')
-      console.info('\tEND: rule_0');
-      done(null, data);
-    })
-  };
-
-  var previous = (type, callback, done) => {
-    console.log(`looking for previous rule_0 records using type:${type}, levelSize:${cfg.size}`);
-    cfg.db.find({type: 'object', level:0, levelSize: cfg.size}, (err, items) => {
-      if (err) {
-        callback(cfg, done);
-      } else if (!items || 0 === items.length) {
-        console.log(`no previous ${type} rule_0 data found`);
-        callback(cfg, done);
-      } else {
-        console.info(`found previous ${type} rule_0 data, sending them`);
-        cfg.ws.webSocketOut({type: 'object', data: items}, cfg.wsId);
-        done(null, items);
+    if (rule.data[subSeed].position) {
+      if (rule.data[subSeed].position[axis]) {
+        position[axis] += rule.data[subSeed].position[axis];
       }
-    });
-  };
-
-  previous('object', () => {
-    previous('raw', then, done);
-  }, done);
-
+    }
+  });
+  let data = { position, size };
+  return data;
 }
 
-export default rule_0
+function all(cfg, callback) {
+  console.time(`\tSTART: rule_0 using version: ${rule.version}`, cfg);
+  cfg.scan = cfg.scan || scan(cfg.size, cfg.unit);
+  let data = [];
+  for (var i = 0; i < cfg.cubicSize; i++) {
+    let bit = cfg.scan[i];
+    // console.trace('bit', bit);
+    let index = bit.i;
+    let _one = one(cfg.seedHash[index], bit);
+    _one.type = 'raw';
+    _one.level = 0;
+    _one.levelSize = cfg.size;
+    _one.subSeed = cfg.seedHash[index];
+    _one.renderMethod = rule.renderMethod;
+    data.push(_one);
+  }
+  // console.trace('data', data);
+  console.timeEnd(`\tEND`);
+  window.localStorage.setItem(`rule_0-${cfg.seed}`, data);
+  cfg.data = cfg.data || [];
+  cfg.data.push(data);
+  callback(null, cfg);
+};
+
+export { all, one };
+export default all;

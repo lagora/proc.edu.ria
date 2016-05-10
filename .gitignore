@@ -1,6 +1,5 @@
 node_modules
-dist/*
-client/dist/*
-server/dist/*
-data/*
+dist
+build
+cache
 npm-debug.log

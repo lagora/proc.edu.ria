@@ -1,0 +1,16 @@
+{
+  "version":"0.0",
+  "name":"volumes connexion",
+  "data": {
+    "1yf": {
+      "position": {
+        "y": 0.5
+      },
+      "size": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+      }
+    },
+  }
+}
