@@ -8,7 +8,7 @@ describe("mergeWorldAndLocalPosition.js", () => {
   });
   it("merge and return the world position and local position givent as arguments", () => {
     let result = mergePositions({ x:1, y:2, z:3 }, { x: 4, y:5, z:6 });
-    assert('object' === typeof result);
+    assert("object" === typeof result);
     assert(result.x === 5);
     assert(!isNaN(result.x));
     assert(result.y === 7);
