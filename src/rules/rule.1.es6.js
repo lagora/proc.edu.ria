@@ -1,7 +1,5 @@
 // var rule = require("../../rules/rule.1.json");
 
-function one(subSeed) {}
-
 function all (cfg, callback) {
   if (callback) {
     callback(null, cfg);
@@ -10,5 +8,5 @@ function all (cfg, callback) {
   }
 }
 
-export { one, all };
+export { all };
 export default all;
