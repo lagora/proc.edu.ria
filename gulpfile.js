@@ -49,7 +49,7 @@ gulp.task("build-tests", () => {
   glob.sync("./src/**/*.es6.js")
   .filter((filepath) => {
     return !fs.existsSync(getTestFilePath(filepath));
-  }).forEach((filepath, index) => {
+  }).forEach((filepath) => {
     let filename = path.basename(filepath);
     let functionName = filename.split(".")[0];
     let testCode = `import "babel-polyfill";
