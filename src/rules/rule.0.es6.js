@@ -1,4 +1,3 @@
-import THREE from "three";
 import getPositionByRule from "../getPositionByRule.es6.js";
 import getSizeByRule from "../getSizeByRule.es6.js";
 import getRuleDataBySubseed from "../getRuleDataBySubseed.es6.js"
