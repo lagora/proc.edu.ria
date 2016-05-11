@@ -1,4 +1,4 @@
-import from './getCacheName.es6.js';
+import getCacheName from './getCacheName.es6.js';
 
 function scan(max, step = 1) {
   let cachedName = getCacheName("scan");

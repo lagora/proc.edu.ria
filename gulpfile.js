@@ -85,9 +85,9 @@ gulp.task("nodemon", function () {
 	var started = false;
 
 	return nodemon({
-    script: "./app.js"
-  , ext: "js json"
-  , tasks: function (changedFiles) {
+    script: "./app.js",
+  ext: "js json",
+  tasks: function (changedFiles) {
       var tasks = [];
       changedFiles.forEach(function (file) {
         if (path.extname(file) === ".js" && !~tasks.indexOf("lint")) {
@@ -96,7 +96,7 @@ gulp.task("nodemon", function () {
         if (path.extname(file) === ".css" && !~tasks.indexOf("cssmin")) {
           tasks.push("cssmin");
         }
-      })
+      });
       return tasks;
     }
   });
