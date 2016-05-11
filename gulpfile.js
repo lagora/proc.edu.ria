@@ -88,11 +88,14 @@ gulp.task("nodemon", function () {
     script: "./app.js"
   , ext: "js json"
   , tasks: function (changedFiles) {
-    console.log("changedFiles", changedFiles);
       var tasks = [];
       changedFiles.forEach(function (file) {
-        if (path.extname(file) === ".js" && !~tasks.indexOf("lint")) tasks.push("lint")
-        if (path.extname(file) === ".css" && !~tasks.indexOf("cssmin")) tasks.push("cssmin")
+        if (path.extname(file) === ".js" && !~tasks.indexOf("lint")) {
+          tasks.push("lint");
+        }
+        if (path.extname(file) === ".css" && !~tasks.indexOf("cssmin")) {
+          tasks.push("cssmin");
+        }
       })
       return tasks;
     }
