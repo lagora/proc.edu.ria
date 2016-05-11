@@ -1,6 +1,5 @@
 var gulp = require("gulp");
 var nodemon = require("nodemon");
-var browserSync = require("browser-sync");
 var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
@@ -82,9 +81,7 @@ gulp.task("watch-src", () => {
 });
 
 gulp.task("nodemon", function () {
-	var started = false;
-
-	return nodemon({
+  return nodemon({
     script: "./app.js",
     ext: "js json",
     tasks: ["rules_build_dist"]
