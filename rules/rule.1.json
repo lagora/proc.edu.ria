@@ -1,6 +1,8 @@
 {
   "version":"0.0",
   "name":"volumes connexion",
+  "renderMethod": "putBlock",
+  "renderKey": "raw",
   "data": {
     "1yf": {
       "position": {

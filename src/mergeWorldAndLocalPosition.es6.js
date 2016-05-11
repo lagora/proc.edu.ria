@@ -1,7 +1,9 @@
-export default function(worldPosition, localPosition) {
-  let merged = {};
+function mergeWorldAndLocalPosition (worldPosition, localPosition) {
+  let mergedPosition = {};
   ["x", "y", "z"].forEach((axis) => {
-    merged[axis] = worldPosition[axis] + localPosition[axis];
+    mergedPosition[axis] = worldPosition[axis] + localPosition[axis];
   });
-  return merged;
+  return mergedPosition;
 }
+
+export default mergeWorldAndLocalPosition;
