@@ -1,3 +1,4 @@
+import getCacheName from "./getCacheName.es6.js";
 
 function generator (cfg, callback) {
   let cacheName = getCacheName("generator", cfg);
