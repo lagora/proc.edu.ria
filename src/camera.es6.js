@@ -17,9 +17,6 @@ class Camera {
     if ("orbit" === this.type && this.autoRotate) {
       this.controls.update();
       this.angle += 0.25;
-
-    } else if ("fps" === this.type) {
-
     }
 
     this.camera.lookAt(new THREE.Vector3(cfg.size /2 , cfg.size / 2, cfg.size / 2));
