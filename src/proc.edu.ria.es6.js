@@ -2,7 +2,7 @@ import "babel-polyfill";
 import cfg from "./config.es6.js";
 import THREE from "three";
 import Camera from "./camera.es6.js";
-import { scene, renderer, render } from "./init.es6.js";
+import { scene, renderer } from "./init.es6.js";
 import sceneAdd from "./sceneAdd.es6.js";
 import getCityPilar from "./getCityPilar.es6.js";
 import generator from "./generator.es6.js";
