@@ -1,9 +1,7 @@
-import getCacheName from "./getCacheName.es6.js";
 import cfg from "./config.es6.js";
 import THREE from "three";
 
 function putBlock (data, scene) {
-  let cacheName = getCacheName(`putBlock-${data.i}`, { seed: data.seed, size: data.levelSize });
   let geometry = new THREE.BoxGeometry(
     data.size.x, data.size.y, data.size.z
   );
