@@ -1,17 +1,12 @@
-import *  as methods from '../methods.es6.js';
-var rule = require('../../rules/rule.1.json');
-var axes = ['x', 'y', 'z'];
-
-function one(subSeed) {
-
-};
+// var rule = require("../../rules/rule.1.json");
 
 function all (cfg, callback) {
-  console.time(`\tNULL PASS: rule_1 using version: ${rule.version}`);
+  if (callback) {
+    callback(null, cfg);
+  } else {
+    return [];
+  }
+}
 
-  console.timeEnd(`\tEND`);
-  callback(null, cfg);
-};
-
-export { one, all };
+export { all };
 export default all;
