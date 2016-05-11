@@ -86,19 +86,8 @@ gulp.task("nodemon", function () {
 
 	return nodemon({
     script: "./app.js",
-  ext: "js json",
-  tasks: function (changedFiles) {
-      var tasks = [];
-      changedFiles.forEach(function (file) {
-        if (path.extname(file) === ".js" && !~tasks.indexOf("lint")) {
-          tasks.push("lint");
-        }
-        if (path.extname(file) === ".css" && !~tasks.indexOf("cssmin")) {
-          tasks.push("cssmin");
-        }
-      });
-      return tasks;
-    }
+    ext: "js json",
+    tasks: ["rules_build_dist"]
   });
 });
 
