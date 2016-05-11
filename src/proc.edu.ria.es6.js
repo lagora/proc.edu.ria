@@ -17,8 +17,12 @@ var update = () => {
   cfg.delta = cfg.clock.getDelta();
 
   if (cfg.debug) {
-    HemisphereLightHelper.update();
-    DirectionalLightHelper.update();
+    if (HemisphereLightHelper) {
+      HemisphereLightHelper.update();
+    }
+    if (DirectionalLightHelper) {
+      DirectionalLightHelper.update();
+    }
   }
 
   camera.update();
