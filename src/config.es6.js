@@ -1,3 +1,4 @@
+import THREE from "three";
 import querystringparser from "../node_modules/querystringparser/js/querystringparser.js";
 import makeSeedHash from "./makeSeedHash.es6.js";
 import scan from "./scan.es6.js";
