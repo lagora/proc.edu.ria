@@ -1,5 +1,4 @@
 import THREE from "three";
-import cfg from "./config.es6.js";
 
 function getHelpers(cfg = {}) {
   if (!cfg.debug) {
