@@ -9,6 +9,6 @@ var cache = {
     let name = "temp-name";
     window.localStorage.setItem(name, value);
   }
-}
+};
 
 export default cache;
