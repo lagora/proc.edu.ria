@@ -1,5 +1,4 @@
 var gulp = require("gulp");
-var nodemon = require("nodemon");
 var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
@@ -80,18 +79,6 @@ gulp.task("watch-src", () => {
     }));
 });
 
-gulp.task("nodemon", function () {
-	var started = false;
-
-	return nodemon({
-    script: "./app.js",
-    ext: "js json",
-    tasks: ["rules_build_dist"]
-  });
-});
-
 gulp.task("watch", ["watch-src"]);
 gulp.task("rules_build_dist", ["rules", "dist", "build"]);
 gulp.task("build_dist", ["dist", "build"]);
-gulp.task("dev", ["nodemon"]);
-gulp.task("default", ["nodemon"]);
