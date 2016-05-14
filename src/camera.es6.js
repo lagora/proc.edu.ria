@@ -1,13 +1,14 @@
 import THREE from "three";
 var OrbitControls = require("three-orbit-controls")(THREE);
 import cfg from "./config.es6.js";
+import getPerspectiveCamera from "./getPerspectiveCamera.es6.js";
 import { renderer } from "./init.es6.js";
 
 class Camera {
   constructor() {
     this.type = "orbit";
     this.autoRotate = cfg.autoRotate;
-    this.camera = new THREE.PerspectiveCamera( cfg.fov, cfg.w / cfg.h, cfg.near, cfg.far );
+    this.camera = getPerspectiveCamera(cfg);
     this.angle = 0;
     this.reset();
   }
@@ -19,7 +20,9 @@ class Camera {
       this.angle += 0.25;
     }
 
-    this.camera.lookAt(new THREE.Vector3(cfg.size /2 , cfg.size / 2, cfg.size / 2));
+    let halfSize = cfg.size / 2;
+
+    this.camera.lookAt(new THREE.Vector3(halfSize, halfSize, halfSize));
   }
 
   reset() {
@@ -33,7 +36,7 @@ class Camera {
       this.camera.lookAt( cfg.size, cfg.size, cfg.size);
       this.controls.autoRotate = this.autoRotate;
     }
-  };
+  }
 }
 
 export default Camera;

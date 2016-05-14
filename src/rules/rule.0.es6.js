@@ -1,6 +1,8 @@
 import getPositionByRule from "../getPositionByRule.es6.js";
+import scan from "../scan.es6.js";
+import setMininalRuleItemData from "../setMininalRuleItemData.es6.js";
 import getSizeByRule from "../getSizeByRule.es6.js";
-import getRuleDataBySubseed from "../getRuleDataBySubseed.es6.js"
+import getRuleDataBySubseed from "../getRuleDataBySubseed.es6.js";
 
 var rule = require("../../rules/rule.0.json");
 
@@ -19,15 +21,14 @@ function all(cfg, callback) {
     let index = bit.i;
     let subseed = cfg.seedHash[index];
     let ruleData = getRuleDataBySubseed(rule.data, subseed);
-    let _one = one(ruleData, bit);
+    let { position, size } = one(ruleData, bit);
+    let _one = setMininalRuleItemData(cfg, index, rule);
     _one.type = "raw";
-    _one.level = 0;
-    _one.levelSize = cfg.size;
-    _one.seed = cfg.seed;
-    _one.subseed = cfg.seedHash[index];
-    _one.renderMethod = rule.renderMethod;
+    _one.position = position;
+    _one.size = size;
     data.push(_one);
   }
+
   if (callback) {
     cfg.data = cfg.data || [];
     cfg.data.push(data);

@@ -4,11 +4,7 @@
   "description": "a procedural city",
   "main": "index.html",
   "scripts": {
-    "start": "gulp build && http-server ./dist",
-    "build": "gulp build",
-    "build-tests": "gulp build-test",
-    "dev": "gulp.js dev",
-    "postinstall": "npm build",
+    "start": "./node_modules/nodemon/bin/nodemon.js apps.js",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
   "engines": {
