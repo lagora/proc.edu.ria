@@ -1,6 +1,5 @@
 var gulp = require("gulp");
 var nodemon = require("nodemon");
-var browserSync = require("browser-sync");
 var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
