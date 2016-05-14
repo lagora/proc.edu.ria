@@ -1,5 +1,3 @@
-import cfg from './config.es6.js';
-
 function scan(max, step = 1) {
   let i = 0;
   let data = [];
