@@ -1,4 +1,4 @@
-import getCacheName from "./getCacheName.es6.js";
+// import getCacheName from "./getCacheName.es6.js";
 
 var cache = {
   get: () => {
