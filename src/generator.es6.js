@@ -8,7 +8,9 @@ function generator (cfg, callback) {
     data = Object.values(r).map((rule) => {
       return rule(cfg);
     });
-    window.localStorage.setItem(cacheName, JSON.stringify(data));
+    if (cfg.size <= 16) {
+      window.localStorage.setItem(cacheName, JSON.stringify(data));
+    }
   } else {
     try {
       data = JSON.parse(data);

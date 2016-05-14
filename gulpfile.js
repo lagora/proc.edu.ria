@@ -1,10 +1,7 @@
 var gulp = require("gulp");
-var sourcemaps = require("gulp-sourcemaps");
 var source = require("vinyl-source-stream");
-var buffer = require("vinyl-buffer");
 var browserify = require("browserify");
 var babelify = require("babelify");
-var watchify = require("watchify");
 var watch = require("gulp-watch");
 var fs = require("fs-extra");
 var path = require("path");
@@ -30,19 +27,28 @@ gulp.task("dist", () => {
   fs.copySync("./package.json", "./dist/package.json");
   fs.copySync("./index.html", "./dist/index.html");
   fs.copySync("./node_modules/three/three.js", "./dist/three.js");
-  fs.copySync("./node_modules/three-orbit-controls/index.js", "./dist/three-orbit-controls.js");
+  fs.copySync(
+    "./node_modules/three-orbit-controls/index.js",
+    "./dist/three-orbit-controls.js"
+  );
   return;
 });
 
 gulp.task("build", () => {
-  browserify({entries: "src/proc.edu.ria.es6.js", extensions: [".es6.js"], debug: true})
+  browserify({
+    entries: "src/proc.edu.ria.es6.js",
+    extensions: [".es6.js"],
+    debug: true
+  })
     .transform(babelify, { presets: ["es2015"] })
     .bundle()
     .pipe(source("proc.edu.ria.js"))
     .pipe(gulp.dest("dist"));
 });
 
-let getTestFilePath = filepath => filepath.replace("./src/", "./test/").replace(".es6", "");
+let getTestFilePath = filepath => filepath
+.replace("./src/", "./test/")
+.replace(".es6", "");
 gulp.task("build-tests", () => {
   glob.sync("./src/**/*.es6.js")
   .filter((filepath) => {
