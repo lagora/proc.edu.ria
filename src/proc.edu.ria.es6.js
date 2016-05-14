@@ -1,4 +1,3 @@
-import "babel-polyfill";
 import cfg from "./config.es6.js";
 import THREE from "three";
 import Camera from "./camera.es6.js";
