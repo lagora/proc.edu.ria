@@ -2,7 +2,7 @@ import THREE from "three";
 import cycleCheck from "./cycleCheck.es6.js";
 
 function getPerspectiveCamera(cfg) {
-  if (cfg === undefined || typeof cfg === "undefined") {
+  if (typeof cfg === "undefined") {
     throw new Error("no cfg");
   }
 
