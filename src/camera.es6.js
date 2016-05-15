@@ -10,7 +10,6 @@ class Camera {
     this.autoRotate = cfg.autoRotate;
     this.camera = getPerspectiveCamera(cfg);
     this.angle = 0;
-    this.reset();
   }
 
   update() {
