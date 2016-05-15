@@ -4,7 +4,7 @@
   "description": "a procedural city",
   "main": "index.html",
   "scripts": {
-    "build": "browserify ./src/proc.edu.ria.es6.js -o ./dist/proc.edu.ria.js -t [ babelify -- presets [ es2015 ] ]",
+    "build": "./node_modules/browserify/bin/cmd.js ./src/proc.edu.ria.es6.js -o ./dist/proc.edu.ria.js -t [ babelify --presets [ es2015 ] ]",
     "start": "./node_modules/nodemon/bin/nodemon.js app.js",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
