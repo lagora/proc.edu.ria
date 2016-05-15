@@ -12,9 +12,23 @@ Usage:
 - `npm install`: Install dependencies
 - `npm start`: Start a local web server, accessible at `localhost:XXXX` where XXXX is an random port (check the console)
 
-URL QueryString options: 
+URL QueryString options:
 
 - default: `localhost:8080?size=4&seed=proc.edu.ria&size=4`
 - `size=4`: use a grid size of 4 (4^3) to build the city
 - `debug=true`: show various debug visual helpers
-- `seeed=proc.edu.ria`: the seed used to build the city 
+- `seeed=proc.edu.ria`: the seed used to build the city
+
+Done:
+
+
+Next:
+- [ ] vertical surfaces list
+- [ ] FPS camera
+- [ ] rule_1
+- [ ] config settings form
+- [ ] day/night cycle (with light and stuff)
+- [ ] pure functions
+- [ ] in memory db based data caching
+- [ ] unit testing
+- [ ] skybox
