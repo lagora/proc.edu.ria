@@ -1,7 +1,6 @@
 import cfg from "./config.es6.js";
 import THREE from "three";
-import Camera from "./camera.es6.js";
-import { scene, renderer } from "./init.es6.js";
+import { scene, renderer, camera } from "./init.es6.js";
 import sceneAdd from "./sceneAdd.es6.js";
 import getCityPilar from "./getCityPilar.es6.js";
 import generator from "./generator.es6.js";
@@ -10,7 +9,7 @@ import getCityBlockHelper from "./getCityBlockHelper.es6.js";
 import mergeGeometry from "./mergeGeometry.es6.js";
 
 var renderMethods = { putBlock };
-var camera = new Camera();
+camera.reset();
 
 var update = () => {
   cfg.delta = cfg.clock.getDelta();
