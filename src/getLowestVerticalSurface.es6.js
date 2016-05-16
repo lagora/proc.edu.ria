@@ -11,3 +11,4 @@ export default function getLowestVerticalSurface(verticalSurfacesList) {
 
   return lowest[0];
 }
+  
