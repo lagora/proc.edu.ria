@@ -12,7 +12,7 @@ Object.keys(cfg).forEach((key) => {
 });
 cfg.cubicSize = Math.pow(cfg.size, 3);
 cfg.size = parseInt(cfg.size);
-cfg.seedHash = makeSeedHash(cfg);
+cfg.hash = makeSeedHash(cfg);
 cfg.scan = scan(cfg.size);
 cfg.clock = new THREE.Clock();
 
