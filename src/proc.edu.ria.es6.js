@@ -28,8 +28,8 @@ let _grid = getCityBlockHelper(cfg.size);
 sceneAdd(scene, _grid);
 let meshes = [];
 
-generator(cfg, (err, worldData) => {
-  worldData.forEach((levelData) => {
+generator(cfg, (err, levelData) => {
+  // worldData.forEach((levelData) => {
     levelData
     .filter((item) => {
       return !!item.renderMethod;
@@ -48,5 +48,5 @@ generator(cfg, (err, worldData) => {
     mesh.castShadow = cfg.shadows || true;
     mesh.receiveShadow = cfg.shadows || true;
     sceneAdd(scene, mesh);
-  });
+  // });
 });
