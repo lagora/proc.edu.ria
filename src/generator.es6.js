@@ -1,7 +1,7 @@
 import getCacheName from "./getCacheName.es6.js";
 import * as r from "./rules.es6.js"
 
-function generator (cfg, callback) {
+export default function generator (cfg, callback) {
   let cacheName = getCacheName("generator", cfg);
   let data = window.localStorage.getItem(cacheName);
   if (!data) {
@@ -20,5 +20,3 @@ function generator (cfg, callback) {
   }
   callback(null, data);
 }
-
-export default generator;
