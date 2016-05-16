@@ -1,5 +1,4 @@
-var rule = require("../../rules/rule.1.json");
-
+// var rule = require("../../rules/rule.1.json");
 
 function all (cfg, callback) {
   if (callback) {
