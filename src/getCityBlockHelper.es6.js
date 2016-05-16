@@ -1,7 +1,7 @@
 import THREE from "three";
 import scan from "./scan.es6.js";
 
-function getCityBlockHelper(cfg) {
+export default function getCityBlockHelper(cfg) {
   if (!cfg.debug) {
     return;
   }
@@ -19,5 +19,3 @@ function getCityBlockHelper(cfg) {
 
   return new THREE.LineSegments(geometry, material);
 }
-
-export default getCityBlockHelper;

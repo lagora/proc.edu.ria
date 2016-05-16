@@ -1,5 +1,3 @@
-function getBlock(args) {
-  
-}
+export default function getBlock(args) {
 
-export default getBlock;
+}

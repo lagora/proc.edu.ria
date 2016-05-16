@@ -1,5 +1,3 @@
-function getCacheName(functionName, cfg) {
+export default function getCacheName(functionName, cfg) {
   return `${functionName}-${cfg.seed}-${cfg.size}`;
 }
-
-export default getCacheName;
