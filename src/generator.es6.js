@@ -32,5 +32,3 @@ function generator (cfg, callback) {
   // }
   callback(null, data);
 }
-
-export default generator;
