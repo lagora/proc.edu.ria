@@ -13,7 +13,7 @@ export default function generator (cfg, callback) {
     let hex = getHexFromHash({ hash, index });
     let ruleArgs = { hex, index, hash, block, size, cubicSize };
     data.push(rules.rule0(ruleArgs));
-    data.push(rules.rule1(ruleArgs));
+    // data.push(rules.rule1(ruleArgs));
   });
 
   data = data.filter(item => false !== item);
