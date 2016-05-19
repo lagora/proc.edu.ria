@@ -10,7 +10,7 @@
   "near": 0.001,
   "far": 1000,
   "zoom": 2,
-  "levelMax": 0,
+  "levelMax": 1,
   "cameraType": "orbit",
   "cameraTypes": ["orbit", "fps"],
   "size": 4,

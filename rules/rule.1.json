@@ -4,15 +4,12 @@
   "renderMethod": "putBlock",
   "renderKey": "raw",
   "data": {
-    "1yf": {
-      "position": {
-        "y": 0.5
-      },
+    "8x8": {
       "size": {
-        "x": 0.5,
-        "y": 0.5,
+        "x": 1,
+        "y": 0.01,
         "z": 0.5
       }
-    },
+    }
   }
 }

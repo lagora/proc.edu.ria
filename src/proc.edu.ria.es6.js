@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import cfg from "./config.es6.js";
 import THREE from "three";
 import { scene, renderer, camera } from "./init.es6.js";
@@ -28,14 +29,28 @@ let _grid = getCityBlockHelper(cfg.size);
 sceneAdd(scene, _grid);
 let meshes = [];
 
-generator(cfg, (err, levelData) => {
+var generatorCallback = (err, levelData) => {
   // worldData.forEach((levelData) => {
+  if (err || !levelData) {
+    console.log("no levelData");
+    return;
+  }
+
+  // if (Array.isArray(levelData)) {
+  //   for (let eachLevelData in levelData) {
+  //     generatorCallback(null, eachLevelData);
+  //   }
+  //   return;
+  // }
+  console.log("levelData", levelData);
     levelData
-    .filter((item) => {
-      return !!item.renderMethod;
-    }).forEach((item) => {
+    // .filter((item) => {
+    //   return !!item.renderMethod;
+    // })
+    .forEach((item) => {
       meshes.push(renderMethods[item.renderMethod](item));
     });
+
     let material = new THREE.MeshPhongMaterial({
       color: 0xdddddd,
       specular: 0x009900,
@@ -49,4 +64,6 @@ generator(cfg, (err, levelData) => {
     mesh.receiveShadow = cfg.shadows || true;
     sceneAdd(scene, mesh);
   // });
-});
+};
+
+generator(cfg, generatorCallback);
