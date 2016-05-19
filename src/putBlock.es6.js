@@ -1,13 +1,14 @@
 import cfg from "./config.es6.js";
 import THREE from "three";
 
-function putBlock (data, scene) {
+export default function putBlock(data, scene) {
+  if (data.ruleNumber > 0)  console.log("data", data);
   let geometry = new THREE.BoxGeometry(
     data.size.x, data.size.y, data.size.z
   );
   data.material = new THREE.MeshPhongMaterial(
     {
-      color: 0xdddddd,
+      color: data.color || 0xdddddd,
       specular: 0x009900,
       shininess: 30,
       fog: true,
@@ -26,5 +27,3 @@ function putBlock (data, scene) {
     return mesh;
   }
 };
-
-export default putBlock;
