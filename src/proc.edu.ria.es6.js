@@ -7,6 +7,7 @@ import getCityPilar from "./getCityPilar.es6.js";
 import generator from "./generator.es6.js";
 import putBlock from "./putBlock.es6.js";
 import getCityBlockHelper from "./getCityBlockHelper.es6.js";
+import getSkyMap from "./getSkyMap.es6.js";
 import mergeGeometry from "./mergeGeometry.es6.js";
 
 var renderMethods = { putBlock };
@@ -27,6 +28,10 @@ sceneAdd(scene, pilar);
 
 let _grid = getCityBlockHelper(cfg.size);
 sceneAdd(scene, _grid);
+
+let _skymap = getSkyMap(cfg);
+sceneAdd(scene, _skymap);
+
 let meshes = [];
 
 var generatorCallback = (err, levelData) => {

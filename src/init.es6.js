@@ -10,7 +10,9 @@ var scene = new THREE.Scene();
 var renderer = new THREE.WebGLRenderer();
 
 renderer.shadowMap.enabled = true;
+renderer.setClearColor( 0xccccff, 1 );
 scene.up = new THREE.Vector3(0, 0, 1);
+scene.fog = new THREE.FogExp2(0xffffff, 0.05);
 
 Object.keys(lights).forEach((lightType) => {
   if (cfg.debug) {
