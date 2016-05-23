@@ -28,7 +28,5 @@ export default function generator (cfg, callback) {
     }
   });
 
-  console.log("finalData", finalData);
-
   callback(null, finalData);
 }

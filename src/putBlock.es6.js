@@ -6,17 +6,19 @@ export default function putBlock(data, scene) {
   let geometry = new THREE.BoxGeometry(
     data.size.x, data.size.y, data.size.z
   );
-  data.material = new THREE.MeshPhongMaterial(
-    {
-      color: data.color || 0xdddddd,
-      specular: 0x009900,
-      shininess: 30,
-      fog: true,
-      wireframe: cfg.wireframe
-      // shading: THREE.FlatShading
-    }
-  );
-  let mesh = new THREE.Mesh( geometry, data.material );
+  let material = new THREE.MeshPhongMaterial({
+    color: data.color || 0xdddddd,
+    specular: 0x009900,
+    shininess: 60,
+    fog: true,
+    wireframe: cfg.wireframe
+    // shading: THREE.FlatShading
+  });
+  // var material = new THREE.ShaderMaterial( {
+  //   vertexShader: document.getElementById( 'vertexShader' ).textContent,
+  //   fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+  // });
+  let mesh = new THREE.Mesh( geometry, material );
   mesh.castShadow = true;
   mesh.receiveShadow = true;
   mesh.position.set(data.position.x, data.position.y, data.position.z);

@@ -9,7 +9,7 @@
     "args": {
       "color": "0xdddddd",
       "specular": "0x009900",
-      "shininess": 30,
+      "shininess": 60,
       "fog": true,
       "wireframe": false,
       "shading": "FlatShading"
