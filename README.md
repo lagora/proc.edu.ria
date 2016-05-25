@@ -32,3 +32,7 @@ Next:
 - [ ] in memory db based data caching
 - [ ] unit testing
 - [ ] skybox
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lagora/proc.edu.ria/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
