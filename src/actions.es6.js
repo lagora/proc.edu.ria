@@ -1,6 +1,15 @@
 import THREE from 'three';
 import store from './store.es6.js';
 
+const defaultMaterial = new THREE.MeshPhongMaterial({
+  color: 0xdddddd,
+  specular: 0x009900,
+  shininess: 30,
+  fog: true,
+  // wireframe: cfg.wireframe,
+  shading: THREE.FlatShading
+});
+
 export function setSceneUp() {
   return (new Promise(resolve => {
     store.dispatch({ type: 'SET_SCENE_UP' });
@@ -78,9 +87,51 @@ export function removeHemisphereLight(name) {
   }));
 }
 
+export function addDirectionalLight(hex = 0xffffbb, intensity = 0.5) {
+  return (new Promise(resolve => {
+    store.dispatch({ type: 'ADD_DIRECTIONAL_LIGHT', hex, intensity })
+    resolve();
+  }));
+}
+
+export function removeDirectionalLight(name) {
+  return (new Promise(resolve => {
+    store.dispatch({ type: 'REMOVE_DIRECTIONAL_LIGHT', name});
+    resolve();
+  }));
+}
+
+export function addSpotLight(
+  color = 0xffffff,
+  intensity,
+  distance,
+  angle,
+  penumbra,
+  decay
+) {
+  return (new Promise(resolve => {
+    store.dispatch({
+      type: 'ADD_SPOT_LIGHT',
+      color, intensity, distance, angle, penumbra, decay
+    });
+    resolve();
+  }));
+}
+
+export function removeSpotLight(name) {
+  store.dispatch({ type: 'REMOVE_SPOT_LIGHT', name});
+  resolve();
+}
+
 export function initLights() {
   return (new Promise(resolve => {
-    addHemisphereLight().then(resolve);
+    addHemisphereLight()
+    // .then(addHemisphereLightHelper)
+    .then(addDirectionalLight)
+    // .then(addDirectionalLightHelper)
+    .then(addSpotLight)
+    // .then(addSpotLightHelper)
+    .then(resolve);
   }));
 }
 
@@ -166,6 +217,20 @@ export function updateCamera() {
     // })
     .then(resolve);
   }))
+}
+
+export function mergeGometry(meshes) {
+  return (new Promise(resolve => {
+    store.dispatch({ type: 'MERGE_GEOMETRY', meshes });
+    resolve();
+  }));
+}
+
+export function addMeshes(meshes, material = defaultMaterial) {
+  return (new Promise(resolve => {
+    store.dispatch({ type: 'ADD_MESH', mesh, material });
+    resolve();
+  }));
 }
 
 export function testCube() {

@@ -21,17 +21,12 @@ import {
 
   testCube,
 } from './actions.es6.js';
-// import cfg from './config.es6.js';
 
-// import { renderer, camera } from './init.es6.js';
-// import sceneAdd from './sceneAdd.es6.js';
+import rule_0 from './rule.0.es6.js';
+
 // import getCityPilar from './getCityPilar.es6.js';
-// import generator from './generator.es6.js';
 // import putBlock from './putBlock.es6.js';
 // import getCityBlockHelper from './getCityBlockHelper.es6.js';
-// import mergeGeometry from './mergeGeometry.es6.js';
-
-// var renderMethods = { putBlock };
 
 function update() {
   // cfg.delta = cfg.clock.getDelta();
@@ -52,10 +47,16 @@ initScene()
 .then(attachRendererToDom)
 .then(initCamera)
 .then(initCameraControls)
-.then(testCube)
+// .then(testCube)
+.then(rule_0)
 .then(update)
 .catch(err => console.error(err))
 ;
+
+// rule_0()
+// // .then(rule_1)
+// ;
+
 // update();
 //
 // // let pilar = getCityPilar(cfg.size);

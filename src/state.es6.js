@@ -26,6 +26,8 @@ defaultState.cameraLookAt = null;
 defaultState.lights = [];
 defaultState.helpers = [];
 defaultState.data = [];
+defaultState.combinedMeshes = {};
+defaultState.meshes = [];
 
 window.state = defaultState;
 
