@@ -29,7 +29,8 @@
     "querystringparser": "^0.1.1",
     "redux": "^3.5.2",
     "three": "^0.76.1",
-    "three-orbit-controls": "^72.0.0"
+    "three-orbit-controls": "^72.0.0",
+    "uuid": "^2.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
