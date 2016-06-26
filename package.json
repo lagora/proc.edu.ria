@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "./node_modules/browserify/bin/cmd.js ./src/proc.edu.ria.es6.js -o ./dist/proc.edu.ria.js -d -t [ babelify --presets [ es2015 ] ]",
-    "start": "./node_modules/nodemon/bin/nodemon.js app.js",
+    "start": "http-server -p 1337 ./",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
   "engines": {
@@ -27,6 +27,7 @@
     "fs-extra": "^0.30.0",
     "md5": "^2.1.0",
     "querystringparser": "^0.1.1",
+    "redux": "^3.5.2",
     "three": "^0.76.1",
     "three-orbit-controls": "^72.0.0"
   },
