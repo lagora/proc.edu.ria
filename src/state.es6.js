@@ -28,6 +28,7 @@ defaultState.helpers = [];
 defaultState.data = [];
 defaultState.combinedMeshes = {};
 defaultState.meshes = [];
+defaultState.running = true;
 
 window.state = defaultState;
 

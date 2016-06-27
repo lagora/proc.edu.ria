@@ -7,7 +7,7 @@ import {
   initCamera,
 } from './actions.es6.js';
 
-import * as lights from "./light.es6.js";
+import * as lights from "./Light.es6.js";
 import getHelpers from "./getHelpers.es6.js";
 import getLightHelper from "./getLightHelper.es6.js";
 import sceneAdd from "./sceneAdd.es6.js";

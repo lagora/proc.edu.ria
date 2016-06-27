@@ -1,56 +1,42 @@
 import 'babel-polyfill';
 // import THREE from 'three';
 import state from './state.es6.js';
-import {
-  initScene,
 
-  initRenderer,
-  setRendererSize,
-  enableRendererShadowMap,
-  attachRendererToDom,
-  clearRenderer,
-  render,
-
-  initLights,
-  initHelpers,
-
-  initCamera,
-  initCameraControls,
-  cameraLookAt,
-  updateCamera,
-
-  testCube,
-} from './actions.es6.js';
-
-import rule_0 from './rule.0.es6.js';
+import * as scene from './actions/Scene.es6.js';
+import * as light from './actions/Light.es6.js';
+import * as helpers from './actions/Helpers.es6.js';
+import * as renderer from './actions/Renderer.es6.js';
+import * as camera from './actions/Camera.es6.js';
+import * as test from './actions/testCube.es6.js';
 
 // import getCityPilar from './getCityPilar.es6.js';
 // import putBlock from './putBlock.es6.js';
 // import getCityBlockHelper from './getCityBlockHelper.es6.js';
 
 function update() {
-  // cfg.delta = cfg.clock.getDelta();
-  updateCamera()
-  .then(clearRenderer)
+  // // cfg.delta = cfg.clock.getDelta();
+  camera.update()
+  .then(renderer.clear)
   .then(() => {
     requestAnimationFrame( update );
-    render();
+    renderer.render();
   });
 }
 
-initScene()
-.then(initRenderer)
-.then(enableRendererShadowMap)
-.then(setRendererSize)
-.then(initLights)
-.then(initHelpers)
-.then(attachRendererToDom)
-.then(initCamera)
-.then(initCameraControls)
-// .then(testCube)
-.then(rule_0)
+scene.init()
+.then(renderer.init)
+.then(renderer.enableShadowMap)
+.then(renderer.resize)
+.then(light.init)
+.then(helpers.init)
+.then(renderer.attach)
+.then(camera.addPerspectiveCamera)
+// .then(camera.setCurrent)
+.then(camera.initControls)
+.then(test.cube)
+// .then(rule_0)
 .then(update)
-.catch(err => console.error(err))
+.catch(err => console.trace(err))
 ;
 
 // rule_0()

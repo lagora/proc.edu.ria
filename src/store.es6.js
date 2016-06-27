@@ -1,6 +1,10 @@
 import { createStore } from 'redux';
-import stateUpdater from './reducers/stateUpdater.es6.js';
+import reducer from './reducer.es6.js';
 
-let store = createStore(stateUpdater);
+let store = createStore(reducer);
+
+// store.subscribe(() =>
+//   console.log(store.getState())
+// );
 
 export default store;
