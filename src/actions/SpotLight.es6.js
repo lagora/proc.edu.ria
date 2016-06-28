@@ -8,11 +8,8 @@ export function add(
   penumbra,
   decay
 ) {
-  return (new Promise(resolve => {
-    store.dispatch({
-      type: 'ADD_SPOT_LIGHT',
-      color, intensity, distance, angle, penumbra, decay
-    });
-    resolve();
-  }));
+  store.dispatch({
+    type: 'ADD_SPOT_LIGHT',
+    color, intensity, distance, angle, penumbra, decay
+  });
 }

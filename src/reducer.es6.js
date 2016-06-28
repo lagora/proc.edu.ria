@@ -12,8 +12,8 @@ import * as camera from './reducers/Camera.es6.js';
 import * as helpers from './reducers/Helpers.es6.js';
 import * as mesh from './reducers/Mesh.es6.js';
 
-import { rule_0 } from './reducers/rule.0.es6.js';
-// import { rule_1 } from './reducers/rule.1.es6.js';
+import rule_0 from './reducers/rule.0.es6.js';
+// import rule_1 from './reducers/rule.1.es6.js';
 
 const actions = {
   scene, renderer

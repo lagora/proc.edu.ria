@@ -1,4 +1,4 @@
-export function rule_0(newState, action) {
+export default function rule_0(newState, action) {
   let position = Object.assign({}, action);
   let size = { x: 1, y: 1, z: 1};
 

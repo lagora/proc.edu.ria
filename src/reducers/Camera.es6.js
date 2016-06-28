@@ -3,7 +3,6 @@ var OrbitControls = require('three-orbit-controls')(THREE);
 import uuid from 'uuid';
 
 function addPerspectiveCamera(newState, action) {
-  const cameras = newState.cameras.slice();
   const name = uuid.v4();
   const camera = new THREE.PerspectiveCamera(
     90,
@@ -16,10 +15,8 @@ function addPerspectiveCamera(newState, action) {
   camera.position.x = distance;
   camera.position.y = distance;
   camera.position.z = distance;
-  cameras.push(camera);
-  return Object.assign({}, newState, {
-    camera: Object.assign({}, newState.cameras, cameras)
-  });
+  newState.cameras.push(camera);
+  return newState;
 }
 
 function setCurrent(newState, action) {

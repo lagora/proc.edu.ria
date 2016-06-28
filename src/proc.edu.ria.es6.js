@@ -9,39 +9,34 @@ import * as renderer from './actions/Renderer.es6.js';
 import * as camera from './actions/Camera.es6.js';
 import * as test from './actions/testCube.es6.js';
 
+import rule_0 from './actions/rule.0.es6.js';
+
 // import getCityPilar from './getCityPilar.es6.js';
 // import putBlock from './putBlock.es6.js';
 // import getCityBlockHelper from './getCityBlockHelper.es6.js';
 
 function update() {
   // // cfg.delta = cfg.clock.getDelta();
-  camera.update()
-  .then(renderer.clear)
-  .then(() => {
+  if (state.running) {
+    camera.update()
+    renderer.clear();
     requestAnimationFrame( update );
     renderer.render();
-  });
+  }
 }
 
-scene.init()
-.then(renderer.init)
-.then(renderer.enableShadowMap)
-.then(renderer.resize)
-.then(light.init)
-.then(helpers.init)
-.then(renderer.attach)
-.then(camera.addPerspectiveCamera)
-// .then(camera.setCurrent)
-.then(camera.initControls)
-.then(test.cube)
-// .then(rule_0)
-.then(update)
-.catch(err => console.trace(err))
-;
-
-// rule_0()
-// // .then(rule_1)
-// ;
+scene.init();
+renderer.init()
+renderer.enableShadowMap();
+renderer.resize();
+light.init();
+helpers.init();
+renderer.attach();
+camera.init();
+test.cube();
+rule_0();
+update();
+// rule_1();
 
 // update();
 //

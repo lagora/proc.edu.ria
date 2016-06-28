@@ -3,48 +3,30 @@ import store from '../store.es6.js';
 import state from '../state.es6.js';
 
 function enableShadowMap() {
-  return (new Promise(resolve => {
-    store.dispatch({
-      type: 'ENABLE_RENDERER_SHADOW_MAP'
-    });
-    resolve();
-  }));
+  store.dispatch({
+    type: 'ENABLE_RENDERER_SHADOW_MAP'
+  });
 }
 
 function resize() {
-  return (new Promise(resolve => {
-    store.dispatch({ type: 'RENDERER_RESIZE'});
-    resolve();
-  }));
+  store.dispatch({ type: 'RENDERER_RESIZE'});
 }
 
 function init() {
-  return (new Promise(resolve => {
-    let renderer = new THREE.WebGLRenderer();
-    store.dispatch({ type: 'RENDERER_INIT', renderer });
-    resolve();
-  }));
+  let renderer = new THREE.WebGLRenderer();
+  store.dispatch({ type: 'RENDERER_INIT', renderer });
 }
 
 function attach() {
-  return (new Promise(resolve => {
-    store.dispatch({ type: 'RENDERER_ATTACH' });
-    resolve();
-  }));
+  store.dispatch({ type: 'RENDERER_ATTACH' });
 }
 
 function clear() {
-  return (new Promise(resolve => {
-    store.dispatch({ type: 'RENDERER_CLEAR'});
-    resolve();
-  }));
+  store.dispatch({ type: 'RENDERER_CLEAR'});
 }
 
 function render() {
-  return (new Promise((resolve, reject) => {
-    store.dispatch({ type: 'RENDERER_RENDER' });
-    resolve();
-  }));
+  store.dispatch({ type: 'RENDERER_RENDER' });
 }
 
 export { init, enableShadowMap, resize, attach, clear, render};
