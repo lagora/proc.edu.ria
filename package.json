@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "./node_modules/browserify/bin/cmd.js ./src/proc.edu.ria.es6.js -o ./dist/proc.edu.ria.js -d -t [ babelify --presets [ es2015 ] ]",
+    "build-global": "browserify ./src/proc.edu.ria.es6.js -o ./dist/proc.edu.ria.js -d -t [ babelify --presets [ es2015 ] ]",
     "start": "http-server -p 1337 ./",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
