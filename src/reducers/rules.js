@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import * as actions from '../actions/rules';
 // import * as rules from '../rules';
+import { rule as rule0 } from '../rules/rule.0';
 
 const rulesIndex = ['0', '1'];
 
@@ -46,11 +47,12 @@ export default function reduce(state, action) {
     const defaultPosition = { x: 0, y: 0, z: 0 };
     rules.forEach(ruleIndex => {
       state.hashRange.forEach(hex => {
+        // const position = state.data[ruleIndex][hex].position || defaultPosition;
         let tmpMesh = new THREE.Mesh(
           state.geometry[ruleIndex],
           state.material[ruleIndex]
         );
-        tmpMesh.position.set(position.x, position.y, position.z);
+        // tmpMesh.position.set(position.x, position.y, position.z);
         // geometry.position.x = position.x;
         // geometry.position.y = position.y;
         // geometry.position.z = position.z;
@@ -59,6 +61,8 @@ export default function reduce(state, action) {
     });
 
     return { ...state, mesh };
+  } else if (action.type === actions.RULE_0) {
+    rule0(state);
   }
 
   return state;

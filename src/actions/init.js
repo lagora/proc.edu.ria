@@ -23,8 +23,9 @@ export const init = () => {
     procEduRia.generateHashRange(),
     rules.loadRules(),
     rules.generateData(),
-    rules.generateGeometry(),
-    rules.generateMaterial(),
-    rules.generateMesh(),
+    // rules.generateGeometry(),
+    // rules.generateMaterial(),
+    // rules.generateMesh(),
+    rules.rule0(),
   ];
 }
