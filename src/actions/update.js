@@ -1,6 +1,6 @@
-import * as deltaActions from './delta';
+import * as fpsAction from './fps';
 
-export const update = delta => {
-  delta.setDelta(delta);
-  console.log('update');
+export const update = elapsed => {
+  // fps.setDelta(clock.getDelta());
+  // fps.setElapsed(elapsed);
 }

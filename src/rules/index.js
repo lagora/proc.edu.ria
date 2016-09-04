@@ -1,0 +1,16 @@
+export { rule as rule0, mesh as mesh0 } from './rule.0';
+// export { rule as rule1, mesh as mesh1 } from './rule.1';
+// export { rule as rule2, mesh as mesh2 } from './rule.2';
+// export { rule as rule3, mesh as mesh3 } from './rule.3';
+// export { rule as rule4, mesh as mesh4 } from './rule.4';
+// export { rule as rule5, mesh as mesh5 } from './rule.5';
+// export { rule as rule6, mesh as mesh6 } from './rule.6';
+// export { rule as rule7, mesh as mesh7 } from './rule.7';
+// export { rule as rule8, mesh as mesh8 } from './rule.8';
+// export { rule as rule9, mesh as mesh9 } from './rule.9';
+// export { rule as rulea, mesh as mesha } from './rule.a';
+// export { rule as ruleb, mesh as meshb } from './rule.b';
+// export { rule as rulec, mesh as meshc } from './rule.c';
+// export { rule as ruled, mesh as meshd } from './rule.d';
+// export { rule as rulee, mesh as meshe } from './rule.e';
+// export { rule as rulef, mesh as meshf } from './rule.f';

@@ -20,6 +20,6 @@ export const initCamera = () => {
     setPosition(position, position, position),
     // setLookAt(size, size, size),
     setLookAt(0, 0, 0),
-    // // camera.setControls(constants.CAMERA_TYPE_ORBITAL),
+    setControls(constants.CAMERA_TYPE_ORBITAL),
   ];
 }
