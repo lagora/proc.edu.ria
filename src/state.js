@@ -10,7 +10,7 @@ export const initialState = {
   faces: [],
   far: 1000,
   fov: 75,
-  geometry: {},
+  geometry: null,
   hash: null,
   hashRange: [],
   height: 360,

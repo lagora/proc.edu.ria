@@ -16,15 +16,17 @@ export default function reduce(state, action) {
 
     return { ...state, renderer };
   } else if (action.type === actions.INIT_HELPERS) {
-    const gridHelper = new THREE.GridHelper( state.size * 2 , 1 );
-    gridHelper.position.x = state.size / 2;
-    gridHelper.position.z = state.size / 2;
+    const gridHelper = new THREE.GridHelper( state.size + 1 , 1 );
+    // gridHelper.position.x = (state.size / 2) + 1;
+    // gridHelper.position.z = (state.size / 2) + 1;
     state.scene.add(gridHelper);
 
     const axisHelper = new THREE.AxisHelper( state.size * 2 );
-    axisHelper.position.x = state.size / 2;
-    axisHelper.position.z = state.size / 2;
+    // axisHelper.position.x = state.size / 2;
+    // axisHelper.position.z = state.size / 2;
     state.scene.add(axisHelper);
+  } else if (action.type === actions.INIT_BUFFER_GEOMETRY) {
+    return { ...state, geometry: new THREE.BufferGeometry() };
   }
 
   return state;

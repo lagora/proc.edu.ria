@@ -1,4 +1,4 @@
-export { rule as rule0, mesh as mesh0 } from './rule.0';
+export { rule as rule0, mesh as mesh0 } from './rule.0.js';
 // export { rule as rule1, mesh as mesh1 } from './rule.1';
 // export { rule as rule2, mesh as mesh2 } from './rule.2';
 // export { rule as rule3, mesh as mesh3 } from './rule.3';

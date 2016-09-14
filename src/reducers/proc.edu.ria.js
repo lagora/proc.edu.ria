@@ -9,7 +9,7 @@ export default function reduce(state, action) {
     const squareSize = Math.pow(+state.size, 2);
     return { ...state, squareSize };
   } else if (action.type === actions.MAKE_HASH_FROM_SEED) {
-    return { ...state, hash: helpers.hashPadding(action.seed, state.squareSize) };
+    return { ...state, hash: helpers.hashPadding(action.seed, state.cubicSize) };
   } else if (action.type === actions.GENERATE_HASH_RANGE) {
     const hashRange = [];
     for (let i = 0; i < state.hash.length; i++) {

@@ -15,6 +15,12 @@ export const hashPadding = (seed, size) => {
   return seedHash;
 }
 
+export const generateCubeVertices = (position, size) => {
+  let vertices = [];
+
+  return vertices;
+}
+
 export const cube = size => {
   const geometry = new THREE.BoxGeometry( size, size, size );
   const material = new THREE.MeshBasicMaterial({ color: 0xdddddd });
