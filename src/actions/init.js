@@ -3,6 +3,7 @@ import { initCamera } from './camera';
 import * as canvas from './canvas';
 import * as constants from '../constants';
 import * as demo from './demo';
+import * as lights from './lights';
 import * as three from './three';
 import * as procEduRia from './proc.edu.ria';
 import * as rules from './rules';
@@ -14,24 +15,32 @@ export const parseUrlParams = () => store.dispatch({ type: PARSE_URL_PARAMS });
 
 export const init = () => {
   const state = store.getState();
-  return [
+  const stack = [
     parseUrlParams(),
     three.initScene(),
     three.initRenderer(),
     render.setRatio(),
     initCamera(),
-    three.initHelpers(),
+    lights.addHemisphereLight(),
+    lights.addDirectionalLight(),
+    lights.addSpotLight(),
     three.initBufferGometry(),
-    // demo.cube(),
     procEduRia.setSquareSize(state.size),
     procEduRia.setCubicSize(state.size),
     procEduRia.makeHashFromSeed(state.seed),
     procEduRia.generateHashRange(),
     rules.loadRules(),
     rules.generateData(),
-    // rules.generateGeometry(),
-    // rules.generateMaterial(),
-    // rules.generateMesh(),
+    procEduRia.makeCityPilar(),
     rules.rule0(),
   ];
+  if (state.debug === true) {
+    return stack.concat([
+      three.initHemisphereLightsHelpers(),
+      three.initDirectionalLightsHelpers(),
+      three.initSpotLightsHelpers(),
+      three.initHelpers(),
+    ]);
+  }
+  return stack;
 }

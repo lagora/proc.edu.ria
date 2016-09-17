@@ -6,11 +6,13 @@ export const SET_SQUARE_SIZE = 'SET_SQUARE_SIZE';
 export const SET_CUBIC_SIZE = 'SET_CUBIC_SIZE';
 export const MAKE_HASH_FROM_SEED = 'MAKE_HASH_FROM_SEED';
 export const GENERATE_HASH_RANGE = 'GENERATE_HASH_RANGE';
+export const MAKE_CITY_PILAR = 'MAKE_CITY_PILAR';
 
 export const setSquareSize = () => store.dispatch({ type: SET_SQUARE_SIZE });
 export const setCubicSize = () => store.dispatch({ type: SET_CUBIC_SIZE });
 export const makeHashFromSeed = seed => store.dispatch({ type: MAKE_HASH_FROM_SEED, seed });
 export const generateHashRange = seed => store.dispatch({ type: GENERATE_HASH_RANGE });
+export const makeCityPilar = () => store.dispatch({ type: MAKE_CITY_PILAR });
 
 // export const GENERATE_PILAR = 'GENERATE_PILAR';
 // export const GENERATE_SKYBOX = 'GENERATE_SKYBOX';

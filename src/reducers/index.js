@@ -4,7 +4,7 @@ import canvasReducer from './canvas';
 import demoReducer from './demo';
 import cameraReducer from './camera';
 import fpsReducer from './fps';
-// import lightsReducer from './lights';
+import lightsReducer from './lights';
 import procEduRiaReducer from './proc.edu.ria';
 import renderReducer from './render';
 import rulesReducer from './rules';
@@ -39,7 +39,7 @@ export default function reduce(
   state = canvasReducer(state, action);
   state = demoReducer(state, action);
   state = fpsReducer(state, action);
-  // state = lightsReducer(state, action);
+  state = lightsReducer(state, action);
   state = procEduRiaReducer(state, action);
   state = renderReducer(state, action);
   state = rulesReducer(state, action);

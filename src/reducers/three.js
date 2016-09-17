@@ -16,15 +16,35 @@ export default function reduce(state, action) {
 
     return { ...state, renderer };
   } else if (action.type === actions.INIT_HELPERS) {
-    const gridHelper = new THREE.GridHelper( state.size + 1 , 1 );
-    // gridHelper.position.x = (state.size / 2) + 1;
-    // gridHelper.position.z = (state.size / 2) + 1;
+    const oddSize = state.size % 2 !== 0;
+    const gridSize = state.size;
+    const gridHelper = new THREE.GridHelper( gridSize , 1 );
+    gridHelper.position.x = gridSize / (oddSize ? 1 : 2);
+    gridHelper.position.z = gridSize / (oddSize ? 1 : 2);
     state.scene.add(gridHelper);
 
     const axisHelper = new THREE.AxisHelper( state.size * 2 );
-    // axisHelper.position.x = state.size / 2;
-    // axisHelper.position.z = state.size / 2;
+    axisHelper.position.x = gridSize / 2;
+    axisHelper.position.z = gridSize / 2;
     state.scene.add(axisHelper);
+  } else if (action.type === actions.INIT_HEMISPHERE_LIGHTS_HELPERS) {
+    state.scene.children
+    .filter(object => object.type === 'HemisphereLight')
+    .forEach(light => {
+      state.scene.add(new THREE.HemisphereLightHelper(light, 4));
+    });
+  } else if (action.type === actions.INIT_DIRECTIONAL_LIGHTS_HELPERS) {
+    state.scene.children
+    .filter(object => object.type === 'DirectionalLight')
+    .forEach(light => {
+      state.scene.add(new THREE.DirectionalLightHelper(light, state.size + 1));
+    });
+  } else if (action.type === actions.INIT_SPOT_LIGHTS_HELPERS) {
+    state.scene.children
+    .filter(object => object.type === 'SpotLight')
+    .forEach(light => {
+      state.scene.add(new THREE.SpotLightHelper(light));
+    });
   } else if (action.type === actions.INIT_BUFFER_GEOMETRY) {
     return { ...state, geometry: new THREE.BufferGeometry() };
   }

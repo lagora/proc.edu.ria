@@ -1,5 +1,6 @@
 import * as actions from '../actions';
 import * as helpers from '../helpers';
+import THREE from 'three';
 
 export default function reduce(state, action) {
   if (action.type === actions.SET_CUBIC_SIZE) {
@@ -20,6 +21,23 @@ export default function reduce(state, action) {
       }
     }
     return { ...state, hashRange: hashRange.sort() };
+  } else if (action.type === actions.MAKE_CITY_PILAR) {
+    const position = { x: state.size / 2, y: -50, z: state.size / 2};
+    const geometry = new THREE.BoxBufferGeometry(state.size, 100, state.size);
+    const materialArgs = {
+      color: 0xdddddd,
+      specular: 0x009900,
+      shininess: 30,
+      fog: true,
+      wireframe: false,
+      shading: "FlatShading",
+    };
+    const material = new THREE.MeshPhongMaterial(materialArgs);
+    const mesh = new THREE.Mesh( geometry, material );
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.position.set(position.x, position.y, position.z);
+    state.scene.add(mesh);
   }
 
   return state;

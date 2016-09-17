@@ -24,27 +24,25 @@ spotLight.shadow.camera.fov = cfg.fov / 2;
 
 */
 
-export const addHemisphereLight = (state, action) => {
-  const HemisphereLight = new THREE.HemisphereLight( 0x777777, 0xcccccc, 0.5 );
-  add(HemisphereLight).to(scene);
-  // return helpers.addToScene()
-};
-
-export const addSpotLight = (state, action) => {
-
-};
-
-export const addDirectionalLight = (state, action) => {
-
-};
-
 export default function reduce(state, action) {
   if (action.type === actions.ADD_HEMISPHERE_LIGHT) {
-    return addHemisphereLight(state, action);
+    const HemisphereLight = new THREE.HemisphereLight( 0x777777, 0xcccccc, 0.5 );
+    state.scene.add(HemisphereLight);
   } else if (action.type === actions.ADD_SPOT_LIGHT) {
-    return addSpotLight(state, action);
+    var spotLight = new THREE.SpotLight( 0xffffff );
+    spotLight.position.set( 10, state.size * 2, state.size );
+    spotLight.castShadow = true;
+    const shadowMapSize = 4096;
+    spotLight.shadow.mapSize.width = shadowMapSize;
+    spotLight.shadow.mapSize.height = shadowMapSize;
+    spotLight.shadow.camera.near = state.near;
+    spotLight.shadow.camera.far = state.far;
+    spotLight.shadow.camera.fov = state.fov / 2;
+    state.scene.add(spotLight);
   } else if (action.type === actions.ADD_DIRECTIONAL_LIGHT) {
-    return addDirectionalLight(state, action);
+    var directionalLight = new THREE.DirectionalLight( 0xffffbb, 0.5 );
+    directionalLight.position.set( 0, 1, 0.75 );
+    state.scene.add(directionalLight);
   }
 
   return state;
