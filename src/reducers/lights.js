@@ -29,7 +29,7 @@ export default function reduce(state, action) {
     state.scene.add(HemisphereLight);
   } else if (action.type === actions.ADD_SPOT_LIGHT) {
     var spotLight = new THREE.SpotLight( 0xffffff );
-    spotLight.position.set( 10, state.size * 2, state.size );
+    spotLight.position.set( 0, state.size * 2, state.size );
     spotLight.castShadow = true;
     const shadowMapSize = 4096;
     spotLight.shadow.mapSize.width = shadowMapSize;
@@ -42,6 +42,10 @@ export default function reduce(state, action) {
     var directionalLight = new THREE.DirectionalLight( 0xffffbb, 0.5 );
     directionalLight.position.set( 0, 1, 0.75 );
     state.scene.add(directionalLight);
+  } else if (action.type === actions.UPDATE_LIGHT_POSITION) {
+    state.scene.children.map(object => {
+      if (object.type === action.)
+    });
   }
 
   return state;

@@ -17,6 +17,7 @@ export const init = () => {
   const state = store.getState();
   const stack = [
     parseUrlParams(),
+    three.initClock(),
     three.initScene(),
     three.initRenderer(),
     render.setRatio(),
@@ -25,6 +26,8 @@ export const init = () => {
     lights.addDirectionalLight(),
     lights.addSpotLight(),
     three.initBufferGometry(),
+    three.initShadowMap(),
+    three.initFog(),
     procEduRia.setSquareSize(state.size),
     procEduRia.setCubicSize(state.size),
     procEduRia.makeHashFromSeed(state.seed),

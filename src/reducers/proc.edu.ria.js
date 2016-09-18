@@ -38,6 +38,8 @@ export default function reduce(state, action) {
     mesh.receiveShadow = true;
     mesh.position.set(position.x, position.y, position.z);
     state.scene.add(mesh);
+  } else if (action.type === actions.UPDATE_SUN_ANGLE) {
+    return { ...state, sun: { ...sun, angle: action.angle } };
   }
 
   return state;

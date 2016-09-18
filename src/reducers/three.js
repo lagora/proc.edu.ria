@@ -4,7 +4,10 @@ import * as actions from '../actions/three';
 import * as helpers from '../helpers';
 
 export default function reduce(state, action) {
-  if (action.type === actions.INIT_SCENE) {
+  if (action.type === actions.INIT_CLOCK) {
+    const clock = THREE.Clock();
+    return { ...state, clock };
+  } else if (action.type === actions.INIT_SCENE) {
     const scene = new THREE.Scene();
     scene.up = new THREE.Vector3(0, 0, 1);
 
@@ -47,6 +50,10 @@ export default function reduce(state, action) {
     });
   } else if (action.type === actions.INIT_BUFFER_GEOMETRY) {
     return { ...state, geometry: new THREE.BufferGeometry() };
+  } else if (action.type === actions.INIT_SHADOW_MAP) {
+    state.renderer.shadowMapEnabled = true;
+  } else if (action.type === actions.INIT_FOG) {
+    state.scene.fog = new THREE.Fog(0xffffff, state.near, state.far);
   }
 
   return state;

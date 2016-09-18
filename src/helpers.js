@@ -58,3 +58,12 @@ export const addToScene = (scene, object) => {
   newScene.add(object);
   return newScene;
 }
+
+export const rotateSun = (cx, cy, x, y, angle) => {
+  const radians = (Math.PI / 180) * angle;
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  const nx = (cos * (x - cx)) + (sin * (y - cy)) + cx;
+  const ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+  return { nx, ny };
+}
