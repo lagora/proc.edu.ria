@@ -6,59 +6,62 @@ hex:
   9-e: half-block
   f: full block
 */
-const setPosition = (hex, x, y, z) => {
-  if (hex === '0') {
+export const setPosition = (hex) => {
+  let x = 0;
+  let y = 0;
+  let z = 0;
+  if (hex === '0' || hex === 'f') {
     return { x, y, z };
   }
   const _int = parseInt(hex, 16);
   if (_int > 0 && _int < 9) {
-    x += 0.25;
-    y += 0.25;
-    z += 0.25;
+    x = 0.25;
+    y = 0.25;
+    z = 0.25;
   }
   if (_int > 4 && _int < 9) {
-    z += 0.5;
+    z = 0.5;
   }
   if (hex === '2' || hex === '6') {
-    x += 0.5;
+    x = 0.5;
   }
   if (hex === '4' || hex === '8') {
-    y += 0.5;
+    y = 0.5;
   }
   if (hex === '9' || hex === 'a') {
-    x += 0.25;
-    y += 0.5;
-    z += 0.5;
+    x = 0.25;
+    y = 0.5;
+    z = 0.5;
   }
   if (hex === 'a') {
-    x += 0.5;
+    x = 0.5;
   }
   if (hex === 'b' || hex === 'c') {
-    x += 0.5;
-    y += 0.25;
-    z += 0.5;
+    x = 0.5;
+    y = 0.25;
+    z = 0.5;
   }
   if (hex === 'c') {
-    y += 0.5;
+    y = 0.5;
   }
   if (hex === 'd' || hex === 'e') {
-    x += 0.5;
-    y += 0.5;
-    z += 0.25;
+    x = 0.5;
+    y = 0.5;
+    z = 0.25;
   }
   if (hex === 'e') {
-    z += 0.5;
+    z = 0.5;
   }
   if (hex === 'f') {
-    x += 0.5;
-    y += 0.5;
-    z += 0.5;
+    x = 0.5;
+    y = 0.5;
+    z = 0.5;
   }
 
   return { x, y, z };
 }
 
-const setSize = hex => {
+export const setSize = hex => {
   let size = { x: 0.5, y: 0.5, z: 0.5 };
   if (['b', 'c', 'd', 'e', 'f'].indexOf(hex) > -1) {
     size.x = 1;
@@ -68,6 +71,9 @@ const setSize = hex => {
   }
   if (['9', 'a', 'b', 'c', 'f'].indexOf(hex) > -1) {
     size.z = 1;
+  }
+  if ('0' === hex) {
+    size.x = size.y = size.z = 0;
   }
   return size;
 };
@@ -82,7 +88,14 @@ export const rule = state => {
         const hex = hash[i];
         if (hex !== '0') {
           const data = datas[hex] || {};
-          const position = setPosition(hex, x, y, z);
+          const worldPosition = { x, y, z };
+          const localPosition = setPosition(hex);
+          // const position = setPosition(hex, x, y, z);
+          const position = {
+            x: worldPosition.x + localPosition.x,
+            y: worldPosition.y + localPosition.y,
+            z: worldPosition.z + localPosition.z,
+          };
           const cubeSize = setSize(hex);
           const geometry = new THREE.BoxBufferGeometry(cubeSize.x, cubeSize.y, cubeSize.z);
           const materialArgs = {

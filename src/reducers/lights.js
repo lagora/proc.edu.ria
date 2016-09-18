@@ -21,7 +21,6 @@ spotLight.shadow.mapSize.height = shadowMapSize;
 spotLight.shadow.camera.near = cfg.near;
 spotLight.shadow.camera.far = cfg.far;
 spotLight.shadow.camera.fov = cfg.fov / 2;
-
 */
 
 export default function reduce(state, action) {

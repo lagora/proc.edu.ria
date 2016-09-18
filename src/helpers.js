@@ -21,6 +21,19 @@ export const generateCubeVertices = (position, size) => {
   return vertices;
 }
 
+export const scan = (hash, size, callback) => {
+  let i = 0;
+  for (let x = 0; x < size; x++) {
+    for (let z = 0; z < size; z++) {
+      for (let y = 0; y < size; y++) {
+        const hex = hash[i];
+        callback(hex, x, y, z);
+        i++;
+      }
+    }
+  }
+}
+
 export const cube = size => {
   const geometry = new THREE.BoxGeometry( size, size, size );
   const material = new THREE.MeshBasicMaterial({ color: 0xdddddd });

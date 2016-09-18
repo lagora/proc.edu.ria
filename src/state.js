@@ -4,7 +4,7 @@ export const initialState = {
   cameracontrols: null,
   cameraType: "orbit",
   cubicSize: -1,
-  debug: false,
+  debug: true,
   delta: -1,
   elasped: -1,
   faces: [],

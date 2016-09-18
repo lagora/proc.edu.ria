@@ -69,6 +69,7 @@
     "concurrently": "^0.1.1",
     "css-loader": "^0.23.1",
     "enzyme": "^2.3.0",
+    "expect": "^1.20.2",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",

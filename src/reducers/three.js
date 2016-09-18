@@ -19,8 +19,8 @@ export default function reduce(state, action) {
     const oddSize = state.size % 2 !== 0;
     const gridSize = state.size;
     const gridHelper = new THREE.GridHelper( gridSize , 1 );
-    gridHelper.position.x = gridSize / (oddSize ? 1 : 2);
-    gridHelper.position.z = gridSize / (oddSize ? 1 : 2);
+    gridHelper.position.x = gridSize / 2;
+    gridHelper.position.z = gridSize / 2;
     state.scene.add(gridHelper);
 
     const axisHelper = new THREE.AxisHelper( state.size * 2 );
