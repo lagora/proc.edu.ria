@@ -43,9 +43,9 @@ export default function reduce(state, action) {
     directionalLight.position.set( 0, 1, 0.75 );
     state.scene.add(directionalLight);
   } else if (action.type === actions.UPDATE_LIGHT_POSITION) {
-    state.scene.children.map(object => {
-      if (object.type === action.)
-    });
+    // state.scene.children.map(object => {
+    //   // if (object.type === action.)
+    // });
   }
 
   return state;
