@@ -2,15 +2,13 @@ import * as fpsAction from './fps';
 import store from '../store';
 import { setLookAt } from './camera';
 import {
-  updateSunAngle,
   updateSunPosition,
 } from './proc.edu.ria';
 
 export const update = elapsed => {
   const state = store.getState();
   if (state.clock) {
-    updateSunAngle(state.clock.getDelta());
-    updateSunPosition();
+    updateSunPosition(state.clock.getDelta());
   }
 
   if (state.cameraAutoRotate) {
