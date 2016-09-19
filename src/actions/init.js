@@ -10,8 +10,10 @@ import * as rules from './rules';
 import * as render from './render';
 
 export const PARSE_URL_PARAMS = 'PARSE_URL_PARAMS';
+export const INIT_REACT_INTERFACE = 'INIT_REACT_INTERFACE';
 
 export const parseUrlParams = () => store.dispatch({ type: PARSE_URL_PARAMS });
+export const initRectInterface = () => store.dispatch({ type: INIT_REACT_INTERFACE });
 
 export const init = () => {
   const state = store.getState();
@@ -21,6 +23,7 @@ export const init = () => {
     three.initScene(),
     three.initRenderer(),
     render.setRatio(),
+    initRectInterface(),
     initCamera(),
     lights.addHemisphereLight(),
     lights.addDirectionalLight(),

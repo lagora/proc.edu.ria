@@ -3,7 +3,11 @@ import * as helpers from '../helpers';
 import THREE from 'three';
 
 export default function reduce(state, action) {
-  if (action.type === actions.SET_CUBIC_SIZE) {
+  if (action.type === actions.INIT_REACT_INTERFACE) {
+    let div = document.createElement('div');
+    div.setAttribute('id', 'react-interface');
+    document.body.appendChild(div);
+  } else if (action.type === actions.SET_CUBIC_SIZE) {
     const cubicSize = Math.pow(+state.size, 3);
     return { ...state, cubicSize };
   } else if (action.type === actions.SET_SQUARE_SIZE) {
