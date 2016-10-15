@@ -5,8 +5,10 @@ import { clear, render } from './render';
 
 export const loop = elapsed => {
   const state = store.getState();
-  update(elapsed);
-  clear(state);
-  window.requestAnimationFrame(loop);
-  render(state);
+  if (state.renderer) {
+    update(elapsed);
+    clear(state);
+    window.requestAnimationFrame(loop);
+    render(state);
+  }
 }

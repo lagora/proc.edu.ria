@@ -4,9 +4,14 @@
   "description": "a procedural city",
   "main": "index.html",
   "scripts": {
-    "build": "./node_modules/browserify/bin/cmd.js ./src/proc.edu.ria.es6.js -o ./dist/proc.edu.ria.js -d -t [ babelify --presets [ es2015 ] ]",
     "start": "./node_modules/.bin/webpack-dev-server --inline",
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
+    "build": "NODE_ENV=production webpack --progress && babel src/middleware -d ./dist/middleware && babel src/client -d ./dist/client && cp src/client/index.html ./dist/client/",
+    "build-and-optimize": "NODE_ENV=production webpack --progress --optimize-minimize --optimize-occurence-order",
+    "build-middleware": "babel src/middleware -d ./dist/middleware",
+    "test:dev": "NODE_ENV=production mocha --colors --compilers js:babel-core/register --reporter dot --require ./test/config.js 'test/**/*.@(js|jsx)'",
+    "test:spec": "NODE_ENV=production mocha --colors --compilers js:babel-core/register --reporter spec --require ./test/config.js 'test/**/*.@(js|jsx)'",
+    "test": "NODE_ENV=production mocha --colors --compilers js:babel-core/register --require ./test/config.js 'test/**/*.@(js|jsx)' -R xunit > mocha-reports.xml",
+    "test:watch": "npm run test:dev -- --watch --watch-extensions js"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -23,16 +28,16 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.8.0",
-    "fs-extra": "^0.30.0",
-    "md5": "^2.1.0",
-    "querystringparser": "^0.1.1",
     "express": "^4.13.4",
+    "fs-extra": "^0.30.0",
     "humps": "^0.6.0",
     "isomorphic-fetch": "^2.1.1",
     "lodash": "^4.13.1",
+    "md5": "^2.1.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.19",
     "normalizr": "^2.0.0",
+    "querystringparser": "^0.1.1",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.5",
     "react-dom": "^15.1.0",

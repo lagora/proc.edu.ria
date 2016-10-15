@@ -1,7 +1,6 @@
 import THREE from 'three';
 import * as crypto from 'crypto';
 
-
 const md5 = data => crypto.createHash('md5').update(data + '').digest('hex');
 
 export const hashPadding = (seed, size) => {

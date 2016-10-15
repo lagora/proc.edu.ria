@@ -1,5 +1,4 @@
 import store from '../store';
-import { updateLightPosition } from './lights';
 import { rotateSun } from '../helpers';
 
 export const SET_SQUARE_SIZE = 'SET_SQUARE_SIZE';
@@ -9,11 +8,11 @@ export const GENERATE_HASH_RANGE = 'GENERATE_HASH_RANGE';
 export const MAKE_CITY_PILAR = 'MAKE_CITY_PILAR';
 export const UPDATE_SUN_ANGLE = 'UPDATE_SUN_ANGLE';
 
-export const setSquareSize = () => store.dispatch({ type: SET_SQUARE_SIZE });
-export const setCubicSize = () => store.dispatch({ type: SET_CUBIC_SIZE });
-export const makeHashFromSeed = seed => store.dispatch({ type: MAKE_HASH_FROM_SEED, seed });
-export const generateHashRange = seed => store.dispatch({ type: GENERATE_HASH_RANGE });
-export const makeCityPilar = () => store.dispatch({ type: MAKE_CITY_PILAR });
+export const setSquareSize = () => dispatch => dispatch({ type: SET_SQUARE_SIZE });
+export const setCubicSize = () => dispatch => dispatch({ type: SET_CUBIC_SIZE });
+export const makeHashFromSeed = seed => dispatch => dispatch({ type: MAKE_HASH_FROM_SEED, seed });
+export const generateHashRange = seed => dispatch => dispatch({ type: GENERATE_HASH_RANGE });
+export const makeCityPilar = () => dispatch => dispatch({ type: MAKE_CITY_PILAR });
 
 export const updateSunPosition = () => {
   const lightType = 'SpotLight';

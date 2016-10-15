@@ -1,16 +1,18 @@
 import store from './store';
-import { init, loop } from './actions';
-import {
-  setPosition as setCameraPosition,
-} from './actions/camera';
+import { loop } from './actions';
+import { init } from './actions/init';
+// import {
+//   setPosition as setCameraPosition,
+// } from './actions/camera';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  init();
+  console.info('DOMContentLoaded');
+  store.dispatch(init());
   loop();
-  document.querySelector('canvas').addEventListener('mouseup', event => {
-    const state = store.getState();
-    const { x, y, z } = store.getState().camera.position;
-    setCameraPosition(x, y, z);
-  });
+  // document.querySelector('canvas').addEventListener('mouseup', event => {
+  //   const state = store.getState();
+  //   const { x, y, z } = store.getState().camera.position;
+  //   setCameraPosition(x, y, z);
+  // });
 });
