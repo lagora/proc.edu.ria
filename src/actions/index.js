@@ -6,6 +6,6 @@ export * from './init';
 export * from './loop';
 export * from './proc.edu.ria';
 export * from './render';
-export * from './rules';
+// export * from './rules';
 export * from './three';
 export * from './update';

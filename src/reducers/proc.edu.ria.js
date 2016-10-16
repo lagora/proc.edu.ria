@@ -1,10 +1,12 @@
 import {
   INIT_PROCEDURIA,
+  LOAD_RULES,
   GENERATE_POSITIONS,
   GENERATE_DATA,
 } from '../constants';
 import * as helpers from '../helpers';
 import { makeCityPilar } from '../helpers/proc.edu.ria';
+import { rule as rule0 } from '../rules/rule.0';
 import THREE from 'three';
 
 export default function reduce(state, action) {
@@ -32,12 +34,20 @@ export default function reduce(state, action) {
     return { ...state, seed, size, hash, hashRange, squareSize, cubicSize };
   }
 
+  // if (type === LOAD_RULES) {
+  //   let rules = {};
+  //   ['0'].forEach(hex => {
+  //     rules[hex] = require(`../rules/rule.${hex}.json`);
+  //   });
+  //   return { ...state, rules };
+  // }
+
   if (type === GENERATE_POSITIONS) {
     const { size, hash } = state;
     const positions = [];
     let i = 0;
     function getHeight(elevation) {
-      console.log('getHeight', elevation, elevation % 3);
+      // console.log('getHeight', elevation, elevation % 3);
       if (elevation % 4 === 0) {
         return elevation / 2;
       }
@@ -52,14 +62,28 @@ export default function reduce(state, action) {
           const symbol = hash[i];
           const elevation = y + 1;
           const height = getHeight(y + 1);
-          console.log(`i:${i}, x:${x}, y:${y}, z:${z}, symbol:${symbol}, elevation:${elevation}, height:${height}`);
+          // console.log(`i:${i}, x:${x}, y:${y}, z:${z}, symbol:${symbol}, elevation:${elevation}, height:${height}`);
           const position = { i, x, y, z, hash, symbol, height };
           positions.push(position);
           i++;
         }
       }
     }
+
     return { ...state, positions };
+  }
+
+  if (type === GENERATE_DATA) {
+    state.positions.forEach(position => {
+      // console.log('............', 'position', position);
+      const { symbol, x, y, z, height } = position;
+      const mesh = rule0(THREE).from(symbol).withHeight(height).at(x, y, z);
+      // console.log('............', 'mesh', mesh);
+      if (mesh) {
+        state.scene.add(mesh);
+      }
+      // console.log('............', 'rule0', rule0);
+    });
   }
 
   // if (type === actions.SET_CUBIC_SIZE) {

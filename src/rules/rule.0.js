@@ -1,120 +1,158 @@
-import * as THREE from 'three';
+// import * as THREE from 'three';
 /*
-hex:
+symbol:
   0: empty block
   1-8: quarter block
   9-e: half-block
   f: full block
 */
-export const setPosition = (hex) => {
-  let x = 0;
-  let y = 0;
-  let z = 0;
-  if (hex === '0' || hex === 'f') {
-    return { x, y, z };
-  }
-  const _int = parseInt(hex, 16);
-  if (_int > 0 && _int < 9) {
-    x = 0.25;
-    y = 0.25;
-    z = 0.25;
-  }
-  if (_int > 4 && _int < 9) {
-    z = 0.5;
-  }
-  if (hex === '2' || hex === '6') {
-    x = 0.5;
-  }
-  if (hex === '4' || hex === '8') {
-    y = 0.5;
-  }
-  if (hex === '9' || hex === 'a') {
-    x = 0.25;
-    y = 0.5;
-    z = 0.5;
-  }
-  if (hex === 'a') {
-    x = 0.5;
-  }
-  if (hex === 'b' || hex === 'c') {
-    x = 0.5;
-    y = 0.25;
-    z = 0.5;
-  }
-  if (hex === 'c') {
-    y = 0.5;
-  }
-  if (hex === 'd' || hex === 'e') {
-    x = 0.5;
-    y = 0.5;
-    z = 0.25;
-  }
-  if (hex === 'e') {
-    z = 0.5;
-  }
-  if (hex === 'f') {
-    x = 0.5;
-    y = 0.5;
-    z = 0.5;
-  }
+export const setPosition = symbol => {
+  return {
+    with: size => {
+      let x = 0;
+      let y = 0;
+      let z = 0;
 
-  return { x, y, z };
+      if (symbol === '0') {
+        return { x, y, z };
+      }
+
+      if (symbol === 'f') {
+        return { x: size.x / 2, y: size.y / 2, z: size.z / 2 };
+      }
+
+      const _int = parseInt(symbol, 16);
+
+      if (0 < _int && _int < 5) {
+        y = 0.25;
+      } else if (4 < _int && _int < 9) {
+        y = 0.75;
+      }
+
+      if (_int === 1 || _int === 5) {
+        x = 0.25;
+      } else if (_int === 2 || _int === 6) {
+        x = 0.75;
+      }
+
+      if (_int === 3 || _int === 7) {
+        y = 0.25;
+      } else if (_int === 4 || _int === 8) {
+        y = 0.75;
+      }
+
+      if (symbol === '9') {
+        x = 0.25;
+        y = size.y / 2;
+        z = size.z / 2;
+      }
+
+      if (symbol === 'a') {
+        x = 0.75;
+        y = size.y / 2;
+        z = size.z / 2;
+      }
+
+      if (symbol === 'b') {
+        x = size.x / 2;
+        y = 0.25;
+        z = size.z / 2;
+      }
+
+      if (symbol === 'c') {
+        x = size.x / 2;
+        y = 0.75;
+        z = size.z / 2;
+      }
+
+      if (symbol === 'd') {
+        x = size.x / 2;
+        y = size.y / 2;
+        z = 0.25;
+      }
+
+      if (symbol === 'e') {
+        x = size.x / 2;
+        y = size.y / 2;
+        z = 0.75;
+      }
+
+      return { x, y, z };
+    }
+  }
 }
 
-export const setSize = hex => {
+export const setSize = symbol => {
   let size = { x: 0.5, y: 0.5, z: 0.5 };
-  if (['b', 'c', 'd', 'e', 'f'].indexOf(hex) > -1) {
+  if (['b', 'c', 'd', 'e', 'f'].indexOf(symbol) > -1) {
     size.x = 1;
   }
-  if (['9', 'a', 'd', 'e', 'f'].indexOf(hex) > -1) {
+  if (['9', 'a', 'd', 'e', 'f'].indexOf(symbol) > -1) {
     size.y = 1;
   }
-  if (['9', 'a', 'b', 'c', 'f'].indexOf(hex) > -1) {
+  if (['9', 'a', 'b', 'c', 'f'].indexOf(symbol) > -1) {
     size.z = 1;
   }
-  if ('0' === hex) {
+  if ('0' === symbol) {
     size.x = size.y = size.z = 0;
   }
   return size;
 };
 
-export const rule = state => {
-  const { hash, size } = state;
-  const datas = state.data[0];
-  let i = 0;
-  for (let x = 0; x < size; x++) {
-    for (let z = 0; z < size; z++) {
-      for (let y = 0; y < size; y++) {
-        const hex = hash[i];
-        if (hex !== '0') {
-          const data = datas[hex] || {};
-          const worldPosition = { x, y, z };
-          const localPosition = setPosition(hex);
-          // const position = setPosition(hex, x, y, z);
-          const position = {
-            x: worldPosition.x + localPosition.x,
-            y: worldPosition.y + localPosition.y,
-            z: worldPosition.z + localPosition.z,
-          };
-          const cubeSize = setSize(hex);
-          const geometry = new THREE.BoxBufferGeometry(cubeSize.x, cubeSize.y, cubeSize.z);
-          const materialArgs = {
-            color: 0xdddddd,
-            specular: 0x009900,
-            shininess: 30,
-            fog: true,
-            wireframe: false,
-            shading: "FlatShading",
-          };
-          const material = new THREE.MeshPhongMaterial(materialArgs);
-          const mesh = new THREE.Mesh( geometry, material );
-          mesh.castShadow = true;
-          mesh.receiveShadow = true;
-          mesh.position.set(position.x, position.y, position.z);
-          state.scene.add(mesh);
+export const rule = THREE => {
+  return {
+    from: (symbol) => {
+      return {
+        withHeight: (height) => {
+          return {
+            at: (x, y, z) => {
+              const debug = [
+                // '1', '2', '3', '4',
+                // '5', '6', '7', '8',
+
+                // '1', '5',
+
+                '9', 'a',
+                'b', 'c',
+                'd', 'e',
+
+                'f',
+              ];
+              if (symbol !== '0' && debug.indexOf(symbol) > -1) {
+                const size = setSize(symbol);
+                // size.y = height;
+                const worldPosition = { x, y, z };
+                const localPosition = setPosition(symbol).with(size);
+                const position = {
+                  x: worldPosition.x + localPosition.x,
+                  y: worldPosition.y + localPosition.y,
+                  z: worldPosition.z + localPosition.z,
+                };
+                const geometry = new THREE.BoxBufferGeometry(
+                  size.x,
+                  size.y,
+                  size.z
+                );
+                const materialArgs = {
+                  color: 0xdddddd,
+                  specular: 0x009900,
+                  shininess: 30,
+                  fog: true,
+                  wireframe: false,
+                  shading: "FlatShading",
+                };
+                const material = new THREE.MeshPhongMaterial(materialArgs);
+                const mesh = new THREE.Mesh( geometry, material );
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.position.set(position.x, position.y, position.z);
+                // state.scene.add(mesh);
+                return mesh;
+              }
+            }
+          }
         }
-        i++;
       }
     }
   }
-}
+};

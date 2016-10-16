@@ -9,7 +9,6 @@ import demoReducer from './demo';
 import fpsReducer from './fps';
 import procEduRiaReducer from './proc.edu.ria';
 import renderReducer from './render';
-import rulesReducer from './rules';
 
 export default function reduce(state = initialState, action) {
   if (!action) {
@@ -47,7 +46,6 @@ export default function reduce(state = initialState, action) {
   state = fpsReducer(state, action);
   state = procEduRiaReducer(state, action);
   state = renderReducer(state, action);
-  state = rulesReducer(state, action);
 
   if (type === INIT_THREE) {
     Object.keys(action).filter(key => key !== 'type').forEach(key => {
