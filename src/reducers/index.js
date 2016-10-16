@@ -1,4 +1,8 @@
-import * as actions from '../actions';
+// import * as actions from '../actions';
+import {
+  INIT_THREE,
+  INIT_PROCEDURIA,
+} from '../constants';
 import { initialState } from '../state';
 import canvasReducer from './canvas';
 import demoReducer from './demo';
@@ -7,11 +11,18 @@ import procEduRiaReducer from './proc.edu.ria';
 import renderReducer from './render';
 import rulesReducer from './rules';
 
-export default function reduce(
-  state = initialState,
-  action = { type: actions.NULL_ACTION }
-) {
-  if (action.type === 'PARSE_URL_PARAMS') {
+export default function reduce(state = initialState, action) {
+  if (!action) {
+    return state;
+  }
+
+  const { type } = action;
+
+  if (!type) {
+    return state;
+  }
+
+  if (type === 'PARSE_URL_PARAMS') {
     const search = window.location.search;
     const newState = { ...state };
     if ( search.length > 0 ) {
@@ -37,6 +48,12 @@ export default function reduce(
   state = procEduRiaReducer(state, action);
   state = renderReducer(state, action);
   state = rulesReducer(state, action);
+
+  if (type === INIT_THREE) {
+    Object.keys(action).filter(key => key !== 'type').forEach(key => {
+      state = { ...state, [key]: action[key] };
+    });
+  }
 
   return state;
 }

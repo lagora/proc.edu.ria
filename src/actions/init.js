@@ -3,6 +3,9 @@ import {
   INIT_THREE,
   INIT_PROCEDURIA,
   LOAD_RULES,
+  GENERATE_POSITIONS,
+  // GENERATE_DATA_FROM_RULE_FOR_EACH_POSITION,
+  // GENERATE_DATA,
   RULE_0,
 } from '../constants';
 // import { initCamera } from './camera';
@@ -26,7 +29,10 @@ export function init() {
     { type: INIT_THREE },
     { type: INIT_PROCEDURIA },
     { type: LOAD_RULES },
-    // { type: RULE_0 },
+    { type: GENERATE_POSITIONS },
+    // { type: GENERATE_DATA_FROM_RULE_FOR_EACH_POSITION },
+    // { type: GENERATE_DATA },
+    { type: RULE_0 },
   ];
 }
 // export const init = () => {

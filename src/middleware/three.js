@@ -30,8 +30,7 @@ export default store => next => action => {
     const fpsCameraPosition = { x: 0, y: 0.1, z: 0};
     const cameraPosition = orbitCamera ? orbitCameraPosition : fpsCameraPosition;
 
-    store.getState().ratio = ratio;
-    store.getState().clock = initClock(T);
+    const clock = initClock(THREE);
     store.getState().scene = initScene(T);
     store.getState().renderer = getRenderer(T)(width)(height)(zoom);
     store.getState().camera = setCameraLookAt(T)(
@@ -41,8 +40,6 @@ export default store => next => action => {
     )(0)(0)(0);
     const cameraControls = new OrbitControls(store.getState().camera, state.canvas);
     cameraControls.autoRotate = store.getState().cameraAutoRotate;
-    store.getState().cameraControls = cameraControls;
-
 
     store.getState().scene.add(getHemisphereLight(T));
     store.getState().scene.add(getDirectionalLight(T));
@@ -62,9 +59,15 @@ export default store => next => action => {
       store.getState().scene.add(getAxisHelper(T)(size));
     }
 
-    store.getState().geometry = getBufferGeometry(T);
+    const geometry = getBufferGeometry(T);
     store.getState().renderer.shadowMapEnabled = true;
     // store.getState().scene.fog = addFog(state);
+
+    return next({
+      ...action,
+      ratio, clock, geometry,
+      cameraType, cameraControls, cameraPosition
+    });
   }
 
 

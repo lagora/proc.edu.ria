@@ -9,6 +9,8 @@ import reducer from './reducers';
 import thunk from 'redux-thunk';
 import promiseMiddleware from 'redux-promise';
 import three from './middleware/three';
+import procEduRia from './middleware/proc.edu.ria';
+import rule from './middleware/rule';
 import createLogger from 'redux-logger';
 import multi from 'redux-multi'
 // import * as middleware from './middleware';
@@ -21,6 +23,8 @@ const store = initialState.debug ? createStore(
       thunk,
       promiseMiddleware,
       three,
+      procEduRia,
+      rule,
       createLogger(),
       multi
     )
@@ -34,6 +38,8 @@ const store = initialState.debug ? createStore(
       thunk,
       promiseMiddleware,
       three,
+      procEduRia,
+      rule,
       multi
     )
   )

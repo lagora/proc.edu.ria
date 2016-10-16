@@ -11,7 +11,7 @@
   "far": 1000,
   "zoom": 2,
   "levelMax": 1,
-  "cameraType": "fps",
+  "cameraType": "orbit",
   "cameraTypes": ["orbit", "fps"],
   "size": 4,
   "seed": "proc.edu.ria"

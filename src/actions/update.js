@@ -7,9 +7,9 @@ import {
 
 export const update = elapsed => {
   const state = store.getState();
-  if (state.clock) {
-    updateSunPosition(state.clock.getDelta());
-  }
+  // if (state.clock) {
+  //   updateSunPosition(state.clock.getDelta());
+  // }
 
   if (state.cameraAutoRotate) {
     const { size } = state;

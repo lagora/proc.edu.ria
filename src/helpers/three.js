@@ -1,5 +1,5 @@
 export const getRatio = width => height => width / height;
-export const initClock = THREE => THREE.Clock();
+export const initClock = THREE => new THREE.Clock();
 export const initScene = (THREE) => {
   const scene = new THREE.Scene();
   scene.up = new THREE.Vector3(0, 0, 1);
