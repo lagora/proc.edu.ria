@@ -6,11 +6,7 @@ var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 var config = {
     entry:
     {
-        // api: SRC_DIR + '/api.js',
-        // rules: SRC_DIR + '/rules.js',
-        index: SRC_DIR + '/index.js',
-        proceduria: SRC_DIR + '/proceduria.js',
-        edit: SRC_DIR + '/edit.js'
+        index: SRC_DIR + '/index.js'
     },
     output: {
         path: DIST_DIR,
