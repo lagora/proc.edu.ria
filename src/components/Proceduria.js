@@ -5,6 +5,8 @@ import actions from '../redux/actions';
 
 import Pillar from './Pillar';
 import District from './District';
+import Sector from './Sector';
+import Area from './Area';
 import Player from './Player';
 
 export class Proceduria extends Component {
@@ -19,7 +21,7 @@ export class Proceduria extends Component {
     // }
     render() {
         // const {mixins} = this.props;
-        console.info('render', this.props);
+        const {player} = this.props;
         return (
             <a-scene
                 proceduria
@@ -28,8 +30,10 @@ export class Proceduria extends Component {
                     {mixins && mixins.map(mixin => <a-mixins key={mixin.id} {...mixin}/>)}
                 </a-assets>*/}
                 <Pillar {...this.props.pillar}/>
+                <Player {...player}/>
                 {this.props.district.data.map(District)}
-                <Player {...this.props.player}/>
+                {this.props.sector.data.map(Sector)}
+                {this.props.area.data.map(Area)}
                 <a-sky
                     color="#eeeeff"
                 />

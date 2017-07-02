@@ -3,6 +3,7 @@ import {actions as pillarActions} from './pillar';
 import {actions as playerActions} from './player';
 import {actions as proceduriaActions} from './proceduria';
 import {actions as sectorActions} from './sector';
+import {actions as areaActions} from './area';
 
 const merge = (a, b) => ({...a, ...b});
 
@@ -12,4 +13,5 @@ export default [
     playerActions,
     proceduriaActions,
     sectorActions,
+    areaActions,
 ].reduce(merge, {});

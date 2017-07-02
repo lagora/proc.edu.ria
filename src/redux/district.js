@@ -1,5 +1,5 @@
 import {SCALES} from '../constant';
-import {contain, reducer} from '../utils';
+import {getPlayerPositionByScale, mkBlock, mkId, reducer} from '../utils';
 
 // proceduria.js
 
@@ -17,28 +17,16 @@ export const updateDistrictData = ({position, size}) => (dispatch, getState) => 
     size = size || state.proceduria.size;
     position = position || state.player.position;
     const scale = SCALES[0];
-    const data = [];
-    let i = 0;
-    for (let y = 0; y < size * scale; y += scale) {
-        for (let z = 0; z < size * scale; z += scale) {
-            for (let x = 0; x < size * scale; x += scale) {
-                const position = {x, y, z};
-                const id = `district-${i}`;
-                const width = scale;
-                const height = scale;
-                const depth = scale;
-                const props = {
-                    id, key: id,
-                    position: `${position.x} ${position.y} ${position.z}`,
-                    width, height, depth, material: `wireframe: true`
-                };
-                const block = {i, width, height, depth, x, y, z, props};
-                data.push(block);
-                i++;
-            }
-        }
-    }
+    let blockPosition = getPlayerPositionByScale(true)(scale)(position);
+    blockPosition.x = (blockPosition.x * blockPosition.scale);
+    blockPosition.y = (blockPosition.y * blockPosition.scale);
+    blockPosition.z = (blockPosition.z * blockPosition.scale);
+    const id = mkId('district')(blockPosition);
+    // console.info('updateDistrictData', 'blockPosition', blockPosition);
+
+    const data = [mkBlock(blockPosition, 'side: back', id)];
     dispatch({type: UPDATE_DISTRICT_DATA, data});
+    return Promise.resolve(data);
 };
 
 export const actions = {updateDistrictData};
