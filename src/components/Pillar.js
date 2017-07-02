@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Pillar = ({pillar}) => <a-box {...pillar}/>
+export const Pillar = props => <a-box {...props}/>;
 
 export default Pillar;
