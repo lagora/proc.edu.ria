@@ -24,7 +24,7 @@ export const updateSectorData = ({position}) => (dispatch, getState) => {
     const id = mkId('sector')(blockPosition);
     // console.info('updateSectorData', 'blockPosition', blockPosition);
 
-    const data = [mkBlock(blockPosition, 'side: back', id)];
+    const data = [mkBlock(blockPosition, 'side: double', id)];
     dispatch({type: UPDATE_SECTOR_DATA, data});
     return Promise.resolve(data);
 };

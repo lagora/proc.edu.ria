@@ -7,21 +7,7 @@ import {getHash, makeHashes, merge, reducer} from '../utils';
 // Initial State
 
 const initialState = {
-    hash: {
-        value: undefined,
-        x: {
-            offset: undefined,
-            size: undefined
-        },
-        y: {
-            offset: undefined,
-            size: undefined
-        },
-        z: {
-            offset: undefined,
-            size: undefined
-        }
-    },
+    hash: undefined,
     props: {},
     seed: undefined,
     size: undefined,
@@ -37,8 +23,9 @@ const HASH_FROM_SEED = 'HASH_FROM_SEED';
 export const setSeed = (seed = DEFAULT_SEED) => dispatch => dispatch({type: SET_SEED, seed}) && Promise.resolve(seed);// hashFromSeed(seed)(dispatch);
 export const setSize = (size = 1) => dispatch => dispatch({type: SET_SIZE, size}) && Promise.resolve(size);
 export const hashFromSeed = seed => dispatch => {
-    const hash = {...makeHashes(AXES)(md5.hash(seed))(md5.hash), value: md5.hash(seed)}
+    const hash = md5.hash(seed);
     dispatch({type: HASH_FROM_SEED, hash});
+    console.info('hash', hash);
     return Promise.resolve(hash);
 };
 

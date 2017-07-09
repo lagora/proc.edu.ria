@@ -22,6 +22,7 @@ export class Proceduria extends Component {
     render() {
         // const {mixins} = this.props;
         const {player} = this.props;
+        console.info(this.props.district);
         return (
             <a-scene
                 proceduria
@@ -32,8 +33,8 @@ export class Proceduria extends Component {
                 <Pillar {...this.props.pillar}/>
                 <Player {...player}/>
                 {this.props.district.data.map(District)}
-                {this.props.sector.data.map(Sector)}
-                {this.props.area.data.map(Area)}
+                {/*{this.props.sector.data.map(Sector)}
+                {this.props.area.data.map(Area)}*/}
                 <a-sky
                     color="#eeeeff"
                 />

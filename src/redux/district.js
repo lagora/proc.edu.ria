@@ -10,6 +10,7 @@ const initialState = {
 
 // Types
 const UPDATE_DISTRICT_DATA = 'UPDATE_DISTRICT_DATA';
+const SET_DISTRICT_DATA = 'SET_DISTRICT_DATA';
 
 // Actions
 export const updateDistrictData = ({position, size}) => (dispatch, getState) => {
@@ -24,16 +25,21 @@ export const updateDistrictData = ({position, size}) => (dispatch, getState) => 
     const id = mkId('district')(blockPosition);
     // console.info('updateDistrictData', 'blockPosition', blockPosition);
 
-    const data = [mkBlock(blockPosition, 'side: back', id)];
+    const data = [mkBlock(blockPosition, 'side: double', id)];
     dispatch({type: UPDATE_DISTRICT_DATA, data});
     return Promise.resolve(data);
 };
 
-export const actions = {updateDistrictData};
+export const setDistrictData = data => dispatch => {
+    return dispatch({type: SET_DISTRICT_DATA, data}) && Promise.resolve(data);
+}
+
+export const actions = {updateDistrictData, setDistrictData};
 
 // Reducer
 const reducerMapping = {
     [UPDATE_DISTRICT_DATA]: (state, {data}) => ({...state, data}),
+    [SET_DISTRICT_DATA]: (state, {data}) => ({...state, data}),
 };
 
 export default reducer(initialState)(reducerMapping);

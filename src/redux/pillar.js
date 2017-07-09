@@ -17,9 +17,9 @@ export const setPillarProps = size => (dispatch, getState) => {
     const height = scale * 100;
     const depth = size * scale;
     const even = size % 2 === 0;
-    const x = even ? (scale / 2) : (width / 2) - (scale / 2);
+    const x = even ? (width / 2) : (width / 2) - (scale / 2);
     const y = ((height / 2) * -1) - (scale / 2);
-    const z = even ? (scale / 2) : (depth / 2) - (scale / 2);
+    const z = even ? (depth / 2) : (depth / 2) - (scale / 2);
     const position = `${x} ${y} ${z}`;
     const props = {id: 'pillar', position, width, height, depth, x, y, z};
     dispatch({type: SET_PILLAR_PROPS, props});
