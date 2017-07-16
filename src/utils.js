@@ -1,6 +1,11 @@
+import SIMD from 'simd';
 import * as constants from './constant';
 import md5 from 'spark-md5';
-import district from '../../../../../../Users/Lagora/dev/proc.edu.ria/src/redux/district';
+// import district from '../../../../../../Users/Lagora/dev/proc.edu.ria/src/redux/district';
+
+export const addDimensions = a => b => ({...b, ...constants.AXES.map(axis => ({[axis]: a[axis] + b[axis]})).reduce(merge, {})});
+
+export const addHex = hash => (a, i) => ({...a, i, hex: getHash(hash)(i)});
 
 export const adjustYAsHalfHeight = a => ({...a, y : a.y + (a.height / 2)});
 
@@ -11,8 +16,8 @@ export const alignAXES = axes => a => a && axes.length && ({...a, ...axes.map(k 
 // export const alignY = a => a && ({...a, y: (a.y * a.scale) + (a.scale / 2)});
 export const alignY = a => alignAXES(['y'])(a);// a && ({...a, y: (a.y * a.scale) + (a.scale / 2)});
 
-export const alignXZ = a => a && ({...a, x: (a.x * a.scale) + (a.scale / 2), z: (a.z * a.scale) + (a.scale / 2)});
-// export const alignXZ = a => alignAXES(['x', 'z'])(a);//a && ({...a, x: (a.x * a.scale) + (a.scale / 2), z: (a.z * a.scale) + (a.scale / 2)});
+// export const alignXZ = step => a => a && ({...a, x: (a.x * step.x) + (a. / 2), z: (a.z * a.scale) + (a.scale / 2)});
+export const alignXZ = a => alignAXES(['x', 'z'])(a);//a && ({...a, x: (a.x * a.scale) + (a.scale / 2), z: (a.z * a.scale) + (a.scale / 2)});
 
 export const concat = (a, b) => a.concat(b);
 
@@ -46,6 +51,8 @@ export const distance = a => b => {
 
 export const encapsulate = key => data => ({[key]: data});
 
+export const filterY = axis => axis !== 'y';
+
 export const getPlayerPositionByScale = center => scale => position => {
     return constants.AXES.map(axis => {
         return {scale, [axis]: Math.round((position[axis] / scale) - (center ? 0 : (scale / 2))) };
@@ -68,77 +75,97 @@ export const mkBlock = (a, material = {wireframe: true}) => {
     return a && {i: a.i, id, props, scale, x, y, z, sub: a.sub || []};
 };
 
-export const mkDistrict = ({hash, position, scale, size}) => {
-    const result =
-    rangeXZ({size, scale, hash})
-    .filter(({hex}) => hex !== '0')
-    .map(a => ({...a, width: a.scale, height: a.scale, depth: a.scale}))
-    .map(a => ({...a, y: a.y - a.height / 2}))
-    .map(heightFromHex(0.25))
-    .map(adjustYAsHalfHeight)
-    // .map(a => ({...a, inside: contain(position)(a)}))
-    .map(a => ({...a, inside: distance(position)(a) < a.scale}))
-    .map(a => {
-        if (a.inside)   console.info('district', a.inside, position, a);
-        const sub = a.inside ? mkSector({hash: md5.hash(`${a.hex}${a.i}${hash}`), position, scale: scale / 10, size: 10})
-        .map(b => ({...b, x: b.x - (a.width / 2), y: b.y - a.height / 2, z: b.z - (a.depth / 2)}))
-        // .map(b => ({...b, inside: contain(position)(b)}))
-        .map(b => ({...b, inside: distance(position)(b) < b.scale}))
-        .map(b => {
-            if (b.inside) console.info('sector', b.inside, position, b);
-            return b;
-        })
-        .map(b => mkBlock({...b, id: mkId('sector')(b)}, `wireframe: ${b.inside}; color: ${b.inside ? '#0f0' : '#fff'}`))
-        .map(b => ({...b, key: b.id}))
-        : false;
+export const divideByTen = a => constants.AXES.map(axis => ({[axis]: a[axis] / 10})).reduce(merge, {});
 
-        return sub ? {...a, sub} : a;
-    })
-    .map(a => mkBlock({...a, id: mkId('district')(a)}, `wireframe: ${a.inside}; color: ${a.inside ? '#f00' : '#fff'}`))
-    .map(a => ({...a, key: a.id}))
+export const mapHex = hash => list => list.map(addHex(hash));
 
-    return result;
-};
+export const mkPosition = ({x, y, z}) => `${x} ${y} ${z}`;
 
-export const mkSector = ({hash, position, scale, size}) => {
-    const result =
-    rangeXZ({size, scale, hash})
-    .filter(({hex}) => hex !== '0')
-    .map(a => ({...a, width: a.scale, height: a.scale, depth: a.scale}))
-    .map(heightFromHex(0.25))
-    .map(adjustYAsHalfHeight)
-    .map(a => {
-        const sub = a.inside ? mkArea({hash: md5.hash(`${a.hex}${a.i}${hash}`), position, scale: scale / 4, size: 4})
-        .map(b => ({...b, x: b.x - (a.width / 2), y: b.y - a.height / 2, z: b.z - (a.depth / 2)}))
-        // .map(b => ({...b, inside: contain(position)(b)}))
-        .map(b => ({...b, inside: distance(position)(b) < b.scale}))
-        .map(b => {
-            if (b.inside) console.info('area', b.inside, position, b);
-            return b;
-        })
-        .map(b => mkBlock({...b, id: mkId('area')(b)}, `wireframe: ${b.inside}; color: ${b.inside ? '#00f' : '#fff'}`))
-        .map(b => ({...b, key: b.id}))
-        : false;
+// export const mkVolume = ({hash, position, step}) => a => {
+//     const result = {
+//         ...a,
+//         volume: {
+//             hash,
+//             position: {...position, x: position.x - step.x, y: position.y + step.y, z: position.z - step.z},
+//             size: {...step, y: a.height},
+//             step: divideByTen(step)
+//         }
+//     };
+//     console.info('mkVolume', {...result.volume}, {...position}, {...a});
+//     return result;
+// };
 
-        return sub ? {...a, sub} : a;
-    })
+// export const mkSurface = ({hash, start, stop, size}, fullRendering) => rangeXZ({hash, start, stop, size});
 
-    return result;
-};
+export const mkDistrict = ({hash, start, stop, size}, fullRendering) => {
+    console.info('mkDistrict', hash, start, stop, size);
+    let u = -1;
 
-export const mkArea = ({hash, position, scale, size}) => {
-    const result =
-    rangeXZ({size, scale, hash})
-    .filter(({hex}) => hex !== '0')
-    .map(a => ({...a, width: a.scale, height: a.scale, depth: a.scale}))
-    .map(heightFromHex(0.25))
-    .map(adjustYAsHalfHeight)
+    const adjustPosition = a => b => axes => {
+        const result = 
+        axes
+        .filter(k => k !== 'y')
+        .map(axis => ({[axis]: start[axis] + (a[axis] * a.size[axis]) + (b[axis] * b.size[axis])}))
+        // .map(axis => ({[axis]: (a[axis] * a.size[axis])}))
+        .reduce(merge, {});
+        console.info('adjustPosition', {...a}, {...b}, result)
+        return result;
+    }
 
-    return result;
+    const adjustHeight = coef => a => {
+        const size_y = a.size.y * (parseInt(a.hex, 16) * coef);
+        const result = { ...a, y: start.y + (size_y / 2), size: {...a.size, y: size_y}};
+        console.info('adjustHeight', {...a}, result)
+        return result;
+    }
+
+    return new Promise(resolve => {
+        const districts = rangeXZ({hash, start, stop, size});
+        console.warn('districts', districts);
+        resolve(
+            districts
+            .filter(({hex}) => hex !== '0')
+            .map(district => ({...district, ...adjustHeight(0.35)(district)}))
+            .map((district, i) => {
+                if (fullRendering) {
+                    return {
+                        ...district,
+                        sub: rangeXZ({
+                            hash: md5.hash(`district:${i}`),
+                            start,
+                            stop: constants.AXES.map(axis => ({[axis]: start[axis] + district.size[axis]})).reduce(merge, {}),
+                            size: constants.AXES.filter(filterY).map(axis => ({[axis]: size[axis] / 10})).reduce(merge, {y: district.size.y}),
+                        })
+                        .filter(({hex}) => hex !== '0')
+                        // .map(district => ({...district, ...adjustHeight(district)}))
+                        .map(sector => ({...sector, ...adjustHeight(0.25)({...sector, size: {...sector.size, y: district.size.y / 16}})}))
+                        // .map(sector => ({...sector, ...adjustHeight(sector)}))
+                        .map(sector => {
+                            u++;
+                            return {
+                                u,
+                                ...sector,
+                                ...adjustPosition(district)(sector)(constants.AXES)
+                            }
+                        })
+                    };
+                }
+                return district;
+            })
+        );
+    });
 };
 
 // export const mkId = prefix => a => a && `${prefix}-i-${a.i}-${a.hex ? 'h-' + a.hex : ''}-${a.x.toString(16)}${a.y.toString(16)}${a.z.toString(16)}-s-${a.scale}`;
-export const mkId = prefix => a => a && `${prefix}-i-${a.i}-${a.hex ? 'h-' + a.hex : ''}-s-${a.scale}`;
+export const mkId = prefix => a => a && `${prefix}-i-${a.i}-${a.hex ? 'h-' + a.hex : ''}`;
+
+export const mkInterleave = axis => start => stop => i => i + start[axis] / stop[axis];
+
+export const mkMax = axis => stop => size => stop[axis] / size[axis];
+
+export const mkRange = size => start => stop => axis => range(mkMax(axis)(stop)(size))()
+.map(mkInterleave(axis)(start)(stop))
+.map(encapsulate(axis))
 
 export const merge = (a, b) => ({...a, ...b});
 
@@ -149,7 +176,7 @@ export const reducer = initialState => mapping => (state = initialState, action)
     return state;
 };
 
-export const range = max => (a = []) => a.length < max ? range(max)(a.concat([a.length])) : a;
+export const range = max => (a = []) => a.length < max ? range(max)(a.concat([a.length])) : a.map((b, i) => i);
 
 export const rangeElevation = ({size, scale}) => {
     let i = 0;
@@ -160,33 +187,10 @@ export const rangeElevation = ({size, scale}) => {
     return result;
 };
 
-export const rangeXZ = ({size, scale, hash}) => {
-    let i = -1;
-    const result = range(size)().map(z => {
-        return range(size)().map(x => {
-            i++
-            return {i, x, y: 0, z, scale, hex: getHash(hash)(i)};
-        }).reduce(concat, []);
-    }).reduce(concat, [])
-    .filter(a => a.hex !== '0')
-    .map(alignXZ)
-    ;
-    return result;
-};
-
-export const rangeXYZ = ({size, scale, hash}) => {
-    let i = 0;
-    const result = range(size)().map((y) => {
-        return range(size)().map((z) => {
-            return range(size)().map(x => {
-                return {i: i++, x, y, z, scale, hex: getHash(hash)(i)};
-            }).reduce(concat, []);
-        }).reduce(concat, []);
-    }).reduce(concat, [])
-    .filter(a => a.hex !== '0')
-    .map(alignToGround)
-    .map(alignXZ)
-    ;
-    // console.info('rangeXYZ', result);
-    return result;
-};
+export const rangeXZ = ({hash, start, stop, size}) =>
+constants.AXES
+.filter(filterY)
+.map(mkRange(size)(start)(stop))
+.reduce((all, a, i) => i === 0 ? a : all.map(({x}) => a.map(({z}) => ({x, z}))))
+.reduce((all, a, i) => i === 0 ? a : all.concat(a))
+.map((a, i) => ({...a, y: 0, i, stop, size, hex: getHash(hash)(i)}))

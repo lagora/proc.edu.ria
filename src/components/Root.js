@@ -22,17 +22,21 @@ const {dispatch, getState} = store;
 
 AFRAME.registerSystem('proceduria', {
   init: function() {
-    const size = 8;
+    const size = 4;
     actions.setSize(size)(dispatch).then(size => {
       actions.setPillarProps(size)(dispatch, getState);
       actions.setSeed('proc.edu.ria')(dispatch, getState).then(seed => {
         actions.hashFromSeed(seed)(dispatch, getState)
         .then(hash => {
           actions.setPlayerPosition({position: {x: 0, y: (SCALES[0] / 2) * -1, z: 0}})(dispatch, getState)
-          .then(position => {
-            actions.setDistrictData(
-              mkDistrict({hash, scale: SCALES[0], position, size})
-            )(dispatch, getState);
+          .then(start => {
+            mkDistrict({
+              hash,
+              start, 
+              stop: {x: size * SCALES[0], y: size * SCALES[0], z: size * SCALES[0]},
+              size: {x: SCALES[0], y: SCALES[0], z: SCALES[0]}
+            }, true)
+            .then(districts => actions.setDistrictData(districts)(dispatch, getState));
           });
         })
       });
