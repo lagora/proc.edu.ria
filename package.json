@@ -24,7 +24,7 @@
   "dependencies": {
     "async-waterfall": "^0.1.5",
     "babel-polyfill": "^6.8.0",
-    "fs-extra": "^0.30.0",
+    "fs-extra": "^1.0.0",
     "md5": "^2.1.0",
     "querystringparser": "^0.1.1",
     "three": "^0.76.1",
